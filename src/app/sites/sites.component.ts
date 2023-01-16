@@ -12,4 +12,8 @@ export class SitesComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public routeToSite(){
+    window.location.replace("sites/details");
+  }
+
 }
