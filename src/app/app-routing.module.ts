@@ -6,7 +6,7 @@ import { SiteDetailComponent } from './site-detail/site-detail.component';
 import { SitesComponent } from './sites/sites.component';
 
 const routes: Routes = [
-  {path: '', component: AppComponent},
+  {path: '', component: HomeComponent},
   {path: 'sites', component: SitesComponent},
   {path: 'sites/details', component: SiteDetailComponent}
 
