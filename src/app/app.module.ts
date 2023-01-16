@@ -9,6 +9,7 @@ import { SiteDetailComponent } from './site-detail/site-detail.component';
 import { PumpComponent } from './pump/pump.component';
 import { PumpDetailComponent } from './pump-detail/pump-detail.component';
 import { LogComponent } from './log/log.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LogComponent } from './log/log.component';
     SiteDetailComponent,
     PumpComponent,
     PumpDetailComponent,
-    LogComponent
+    LogComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
