@@ -10,6 +10,7 @@ import { PumpComponent } from './pump/pump.component';
 import { PumpDetailComponent } from './pump-detail/pump-detail.component';
 import { LogComponent } from './log/log.component';
 import { HomeComponent } from './home/home.component';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HomeComponent } from './home/home.component';
     PumpComponent,
     PumpDetailComponent,
     LogComponent,
-    HomeComponent
+    HomeComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
