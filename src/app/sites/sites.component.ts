@@ -31,8 +31,4 @@ export class SitesComponent implements OnInit {
     this.toggleModal = !this.toggleModal;
   }
 
-  public routeToSite() {
-    window.location.replace("sites/details");
-  }
-
 }

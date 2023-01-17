@@ -24,7 +24,7 @@ export class SiteService {
   }
 
   getSiteById(id: number): Observable<Site> {
-    return this.httpClient.get<Site>("this.url" + id);
+    return this.httpClient.get<Site>(this.url + id);
   }
 
   postSite(site: Site): Observable<Site> {
