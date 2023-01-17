@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SiteService } from '../site.service';
-import { Site } from '../site';
+import { Site } from '../models/site';
 import { Observable } from 'rxjs';
 
 @Component({
