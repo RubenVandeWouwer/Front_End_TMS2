@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SiteService } from '../site.service';
 import { Site } from '../site';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-sites',
@@ -11,10 +12,10 @@ export class SitesComponent implements OnInit {
 
   constructor(private siteService: SiteService) { }
 
-  sites: Site[] = [];
+  site$: Observable<Site[]> = new Observable<Site[]>();
 
   ngOnInit(): void {
-    this.sites = this.siteService.getSites();
+    this.site$ = this.siteService.getSites();
   }
 
   public routeToSite(){
