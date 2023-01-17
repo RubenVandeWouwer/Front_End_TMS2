@@ -1,51 +1,100 @@
-<!-- <div class="h-full gradient-form bg-gray-200 md:h-screen">
-    <div class="flex justify-between mx-16 mb-10">
-        <h1 class="text-3xl">Sites overview</h1>
-        <a href="" class="text-center w-1/3 m-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Add site</a>
-    </div>
-    <app-site *ngFor="let site of sites" [site]="site"></app-site>
-
-</div> -->
-
 <section class="h-full gradient-form bg-gray-200 md:h-screen">
-  <!-- <div class="container py-12 px-6 ">
-    <div class="flex justify-center items-center flex-wrap h-full g-6 text-gray-800"> -->
-      <!-- <div class="xl:w-10/12"> -->
-        <div class="block bg-grey shadow-lg rounded-lg">
-          <div class="lg:flex lg:flex-wrap g-0">
-            <div class="lg:w-6/12 px-4 md:px-0">
-              <div class="md:p-12 md:mx-6">
-                <div class="h-full gradient-form bg-gray-200 md:h-screen">
-                  <div class="flex justify-between mx-16 mb-10">
-                      <h1 class="text-3xl">Sites overview</h1>
-                      <a href="" class="text-center w-1/3 m-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2  dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Add site</a>
-                  </div>
-                  <app-site *ngFor="let site of (site$ | async)" [site]="site"></app-site>
+  <div class="block bg-grey shadow-lg rounded-lg">
+    <div class="lg:flex lg:flex-wrap g-0">
+      <div class="lg:w-6/12 px-4 md:px-0">
+        <div class="md:p-12 md:mx-6">
+          <div class="h-full gradient-form bg-gray-200 md:h-screen">
+            <div class="flex justify-between mx-16 mb-10">
+              <h1 class="text-3xl">Sites overview</h1>
+              <button
+                class="text-center w-1/3 m-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2  dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                type="button" data-modal-toggle="games-modal" (click)="toggleModal = !toggleModal">
+                Add site
+              </button>
+            </div>
+            <app-site *ngFor="let site of (site$ | async)" [site]="site"></app-site>
 
-              </div>
-              </div>
-            </div>
-            <div
-              class="lg:w-6/12 flex items-center lg:rounded-r-lg rounded-b-lg lg:rounded-bl-none"
-              style="
-                background-image: url(../../assets/images/pexels-kawser-hamid-176342.jpg);
-                background-position: bottom;;
-              "
-            >
-              <!-- <div class="text-white px-4 py-6 md:p-12 md:mx-6">
-                <h4 class="text-xl font-semibold mb-6">We are more than just a company</h4>
-                <p class="text-sm">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                  consequat.
-                </p>
-              </div> -->
-            </div>
           </div>
         </div>
-      <!-- </div>
-    </div> -->
-  <!-- </div> -->
+      </div>
+      <div
+        class="lg:w-6/12 flex items-center lg:rounded-r-lg rounded-b-lg lg:rounded-bl-none"
+        style="
+                background-image: url(../../assets/images/pexels-kawser-hamid-176342.jpg);
+                background-position: bottom;;
+              ">
+      </div>
+    </div>
+  </div>
 </section>
 
+
+<!-- Main modal -->
+<div class="flex justify-center">
+  <div id="authentication-modal" tabindex="-1" aria-hidden="true"
+       class="flex justify-center fixed top-0 left-0 z-100 w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+       [ngClass]="toggleModal ? 'block' : 'hidden'">
+    <div class="relative w-full h-full max-w-md md:h-auto">
+      <!-- Modal content -->
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <button type="button"
+                class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                data-modal-hide="authentication-modal" (click)="toggleModal = !toggleModal">
+          <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+               xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clip-rule="evenodd"></path>
+          </svg>
+          <span class="sr-only">Close modal</span>
+        </button>
+        <div class="px-6 py-6 lg:px-8">
+          <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Add site</h3>
+          <form class="space-y-6" action="#">
+            <div>
+              <label for="siteName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Site name</label>
+              <input name="siteName" id="siteName" [(ngModel)]="form.siteName"
+                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                     placeholder="site name" required>
+            </div>
+            <div>
+              <label for="siteAddress" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Site
+                address</label>
+              <input name="siteAddress" id="siteAddress" [(ngModel)]="form.siteAddress"
+                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                     placeholder="site address" required>
+            </div>
+            <div>
+              <label for="siteManager" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Site
+                address</label>
+              <input name="siteManager" id="siteManager" [(ngModel)]="form.siteManager"
+                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                     placeholder="site manager" required>
+            </div>
+            <div>
+              <label for="siteManagerNbr" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Site
+                address</label>
+              <input name="siteManagerNbr" id="siteManagerNbr" [(ngModel)]="form.siteManagerNbr"
+                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                     placeholder="manager number" required>
+            </div>
+            <!--            <div>-->
+            <!--              <label for="sports" class="block mb-2 text-sm font-medium text-white">Select Sport</label>-->
+            <!--              <select id="sports" [(ngModel)]="form.sportId" name="sports"-->
+            <!--                      class="mb-3 bg-zinc-700 border border-zinc-500 focus:outline-zinc-300 focus:border-zinc-300 focus:outline text-sm rounded-lg block w-full p-2.5 text-white">-->
+            <!--                <option [ngValue]="sport.id" *ngFor="let sport of ($sports | async)">-->
+            <!--                  {{ sport.name }}-->
+            <!--                </option>-->
+            <!--              </select>-->
+            <!--            </div>-->
+
+            <button type="submit" (click)="addSite()"
+                    class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+              Create site
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

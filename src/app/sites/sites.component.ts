@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { SiteService } from '../site.service';
-import { Site } from '../models/site';
-import { Observable } from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {SiteService} from '../site.service';
+import {Site} from '../models/site';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-sites',
@@ -9,8 +9,17 @@ import { Observable } from 'rxjs';
   styleUrls: ['./sites.component.css']
 })
 export class SitesComponent implements OnInit {
+  toggleModal!: boolean;
 
-  constructor(private siteService: SiteService) { }
+  form: any = {
+    siteName: null,
+    siteAddress: null,
+    siteManager: null,
+    siteManagerNbr: null,
+  };
+
+  constructor(private siteService: SiteService) {
+  }
 
   site$: Observable<Site[]> = new Observable<Site[]>();
 
@@ -18,7 +27,11 @@ export class SitesComponent implements OnInit {
     this.site$ = this.siteService.getSites();
   }
 
-  public routeToSite(){
+  addSite() {
+    this.toggleModal = !this.toggleModal;
+  }
+
+  public routeToSite() {
     window.location.replace("sites/details");
   }
 
