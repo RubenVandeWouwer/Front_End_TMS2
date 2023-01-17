@@ -8,7 +8,8 @@ import { SitesComponent } from './sites/sites.component';
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'sites', component: SitesComponent},
-  {path: 'sites/details', component: SiteDetailComponent}
+  {path: 'sites/details', component: SiteDetailComponent},
+  { path: 'site/:id', component: SiteDetailComponent }
 
 ];
 
