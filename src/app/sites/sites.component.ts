@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SiteService } from '../site.service';
+import { Site } from '../site';
 
 @Component({
   selector: 'app-sites',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SitesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private siteService: SiteService) { }
+
+  sites: Site[] = [];
 
   ngOnInit(): void {
+    this.sites = this.siteService.getSites();
   }
 
   public routeToSite(){
