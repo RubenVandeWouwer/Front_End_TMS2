@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Site } from './site';
-import { HttpClient } from '@angular/common/http';
+import { Site } from './models/site';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,47 +8,40 @@ import { Observable } from 'rxjs';
 })
 export class SiteService {
 
+  HTTPOptions = {
+    headers: new HttpHeaders({
+      'Content-type': 'application/json; charset=UTF-8',
+    }),
+  };
+
+  url: string = "https://hooyberghs-api.azurewebsites.net/api/site/"
+
   constructor(private httpClient: HttpClient) {
   }
 
   getSites(): Observable<Site[]> {
-    return this.httpClient.get<Site[]>("http://localhost:3000/articles");
+    return this.httpClient.get<Site[]>(this.url);
   }
 
-  // getSites(): Site[] {
-  //   let sites: Site[] = [];
+  getSiteById(id: number): Observable<Site> {
+    return this.httpClient.get<Site>("this.url" + id);
+  }
 
-  //   let site1: Site = {
-  //     id: 1,
-  //     name: "Woonzorgcentrum",
-  //     address: "Kaai 5 Antwerpen",
-  //     siteManager: "Mostmans Frederik",
-  //     siteManagerNbr: 4,
-  //     sensorDepth: "Heel Diep",
-  //     drainageDepth: "Ook heel diep"
-  //   };
-  //   let site2: Site = {
-  //     id: 1,
-  //     name: "Fabriek",
-  //     address: "Gooilaan 65 Brussel",
-  //     siteManager: "Mostmans Frederik",
-  //     siteManagerNbr: 4,
-  //     sensorDepth: "Heel Diep",
-  //     drainageDepth: "Ook heel diep"
-  //   };
-  //   let site3: Site = {
-  //     id: 1,
-  //     name: "Appartementsblok",
-  //     address: "Dorpstraat 8 Geel",
-  //     siteManager: "Mostmans Frederik",
-  //     siteManagerNbr: 4,
-  //     sensorDepth: "Heel Diep",
-  //     drainageDepth: "Ook heel diep"
-  //   };
+  postSite(site: Site): Observable<Site> {
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json; charset=utf-8');
 
-  //   sites.push(site1);
-  //   sites.push(site2);
-  //   sites.push(site3);
-  //   return sites;
-  // }
+    return this.httpClient.post<Site>("this.url", site, this.HTTPOptions);
+  }
+
+  putSite(id:number, site: Site): Observable<Site> {
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+
+    return this.httpClient.put<Site>("this.url" + id, site, this.HTTPOptions);
+  }
+
+  deleteSite(id: number): Observable<Site> {
+    return this.httpClient.delete<Site>("this.url" + id);
+  }
 }
