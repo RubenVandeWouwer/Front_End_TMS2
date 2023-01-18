@@ -6,13 +6,15 @@ import {SiteDetailComponent} from "./site-detail/site-detail.component";
 import {SharedModule} from "../shared/shared.module";
 import {RouterLink} from "@angular/router";
 import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
+import {PumpDetailComponent} from "../pump-detail/pump-detail.component";
+import {PumpComponent} from "../pump/pump.component";
 
 
 
 @NgModule({
   declarations: [SitesComponent,
     SiteComponent,
-    SiteDetailComponent],
+    SiteDetailComponent, PumpDetailComponent, PumpComponent],
   imports: [
     CommonModule, SharedModule, RouterLink, NgMultiSelectDropDownModule
   ],
