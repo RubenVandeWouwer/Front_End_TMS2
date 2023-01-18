@@ -2,3 +2,13 @@
   <h1 class="text-3xl mb-5">PumpId = {{pump.id}}</h1>
 </div>
 
+<div *ngIf="pump; else notassigned" class="flex justify-start py-1">
+  <div class="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
+    <h4>Pomp {{pump.id}}</h4>
+    <br>
+
+  </div>
+</div>
+
+<ng-template #notassigned><div>Error: This Pump Does Not Exist</div></ng-template>
+
