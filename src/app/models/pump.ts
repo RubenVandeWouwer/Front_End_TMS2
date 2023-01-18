@@ -1,5 +1,6 @@
 export interface Pump {
   id: number;
+  name: String
   siteId: number;
   inputValue: number;
   outputValue: number;
