@@ -16,8 +16,6 @@ import {SitesModule} from "./sites/sites.module";
 @NgModule({
   declarations: [
     AppComponent,
-    PumpComponent,
-    PumpDetailComponent,
     LogComponent,
     HomeComponent,
     MenuComponent
