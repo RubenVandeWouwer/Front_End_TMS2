@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {SiteService} from '../../services/site.service';
 import {Site} from '../../models/site';
 import {Observable} from 'rxjs';
+import {IDropdownSettings,} from 'ng-multiselect-dropdown';
+import {SensorService} from "../../services/sensor.service";
+import {Sensor} from "../../models/sensor";
 
 @Component({
   selector: 'app-sites',
@@ -11,7 +14,11 @@ import {Observable} from 'rxjs';
 export class SitesComponent implements OnInit {
   toggleModal!: boolean;
   site = {} as Site;
-  $sites!: Observable<Site[]>
+  sites$!: Observable<Site[]>
+  dropdownListPump = [];
+  dropdownListSensor!: Sensor[];
+  dropdownSettingsSensor: IDropdownSettings = {};
+  dropdownSettingsPump: IDropdownSettings = {};
 
   form: any = {
     siteName: null,
@@ -20,13 +27,26 @@ export class SitesComponent implements OnInit {
     siteManagerNbr: null,
   };
 
-  constructor(private siteService: SiteService) {
+  constructor(private siteService: SiteService, private sensorService: SensorService) {
   }
 
   site$: Observable<Site[]> = new Observable<Site[]>();
 
   ngOnInit(): void {
-    this.$sites = this.siteService.getSites();
+    this.sites$ = this.siteService.getSites();
+    this.sensorService.getSensors().subscribe((x) => {
+        this.dropdownListSensor = x.filter((x) => x.siteId == null)
+        console.log(x.filter((x) => x.siteId == null))
+      }
+    )
+    this.dropdownSettingsSensor = {
+      idField: 'id',
+      textField: `name`,
+    };
+    this.dropdownSettingsPump = {
+      idField: 'id',
+      textField: `name`,
+    };
   }
 
   addSite() {
@@ -40,7 +60,7 @@ export class SitesComponent implements OnInit {
     this.siteService.createSite(this.site).subscribe(() => {
       this.toggleModal = !this.toggleModal;
       this.form = {};
-      this.$sites = this.siteService.getSites();
+      this.sites$ = this.siteService.getSites();
     })
 
   }
