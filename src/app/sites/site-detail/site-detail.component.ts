@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Site } from '../../models/site';
-import { SiteService } from '../../services/site.service';
+import {Component, Input, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
+import {Site} from '../../models/site';
+import {SiteService} from '../../services/site.service';
 
 @Component({
   selector: 'app-site-detail',
@@ -15,7 +15,8 @@ export class SiteDetailComponent implements OnInit {
   constructor(
     private siteService: SiteService,
     private route: ActivatedRoute
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     const siteId = this.route.snapshot.paramMap.get('id');

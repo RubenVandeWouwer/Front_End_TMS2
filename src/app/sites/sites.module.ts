@@ -4,6 +4,9 @@ import {SitesComponent} from "./sites/sites.component";
 import {SiteComponent} from "./site/site.component";
 import {SiteDetailComponent} from "./site-detail/site-detail.component";
 import {SharedModule} from "../shared/shared.module";
+import {RouterLink} from "@angular/router";
+import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
+
 
 
 @NgModule({
@@ -11,7 +14,7 @@ import {SharedModule} from "../shared/shared.module";
     SiteComponent,
     SiteDetailComponent],
   imports: [
-    CommonModule, SharedModule
+    CommonModule, SharedModule, RouterLink, NgMultiSelectDropDownModule
   ],
   exports: [SitesComponent,
     SiteComponent,
