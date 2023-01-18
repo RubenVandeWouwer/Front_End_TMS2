@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Pump } from '../models/pump';
 import { Site } from '../models/site';
+import {Sensor} from "../models/sensor";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,9 @@ export class PumpService {
   url: string = "https://hooyberghs-api.azurewebsites.net/api/pump/"
 
   constructor(private httpClient: HttpClient) {
+  }
+  getPumps(): Observable<Pump[]> {
+    return this.httpClient.get<Pump[]>(this.url);
   }
 
   getPumpById(id: number): Observable<Pump> {
