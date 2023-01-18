@@ -6,7 +6,7 @@ export interface Site {
   name: string;
   address: string;
   siteManager: string;
-  siteManagerNbr: number;
+  siteManagerNbr: string;
   drainageDepth: number;
   sensorDepth: number;
   sensors: Sensor[];

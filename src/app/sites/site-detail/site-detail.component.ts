@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Site } from '../models/site';
-import { SiteService } from '../site.service';
+import { Site } from '../../models/site';
+import { SiteService } from '../../services/site.service';
 
 @Component({
   selector: 'app-site-detail',
