@@ -7,6 +7,8 @@ import {SensorService} from "../../services/sensor.service";
 import {Sensor} from "../../models/sensor";
 import {Pump} from "../../models/pump";
 import {PumpService} from "../../services/pump.service";
+import {OldPumpService} from "../../services/old-pump.service";
+import {OldPump} from "../../models/oldPump";
 
 @Component({
   selector: 'app-sites',
@@ -18,11 +20,14 @@ export class SitesComponent implements OnInit {
   site = {} as Site;
   sites$!: Observable<Site[]>
   dropdownListPump!: Pump[];
+  dropdownListOldPump!: OldPump[];
   dropdownListSensor!: Sensor[];
   dropdownSettingsSensor: IDropdownSettings = {};
   dropdownSettingsPump: IDropdownSettings = {};
+  dropdownSettingsOldPump: IDropdownSettings = {};
   sensors = [] as Sensor[];
   pumps = [] as Pump[];
+  oldPumps = [] as OldPump[];
 
   form: any = {
     siteName: null,
@@ -31,7 +36,7 @@ export class SitesComponent implements OnInit {
     siteManagerNbr: null,
   };
 
-  constructor(private siteService: SiteService, private sensorService: SensorService, private pumpService: PumpService) {
+  constructor(private siteService: SiteService, private sensorService: SensorService, private pumpService: PumpService, private oldPumpService: OldPumpService) {
   }
 
   site$: Observable<Site[]> = new Observable<Site[]>();
@@ -46,11 +51,19 @@ export class SitesComponent implements OnInit {
         this.dropdownListPump = x.filter((x) => x.siteId == null)
       }
     )
+    this.oldPumpService.getOldPumps().subscribe((x) => {
+        this.dropdownListOldPump = x.filter((x) => x.siteId == null)
+      }
+    )
     this.dropdownSettingsSensor = {
       idField: 'id',
       textField: `name`,
     };
     this.dropdownSettingsPump = {
+      idField: 'id',
+      textField: `name`,
+    };
+    this.dropdownSettingsOldPump = {
       idField: 'id',
       textField: `name`,
     };
@@ -83,12 +96,35 @@ export class SitesComponent implements OnInit {
 
   onPumpSelect(item: any) {
     this.pumpService.getPumpById(item.id).subscribe((x) => {
-      this.pumps.push(x)
+      this.oldPumps.push(x)
     })
 
   }
 
   onPumpDeSelect(item: any) {
+    this.oldPumps = this.oldPumps.filter((x) => x.id != item.id)
+  }
+
+  onSelectAllOldPumps(items: any) {
+    items.map((x: Sensor) => {
+      this.oldPumpService.getOldPumpById(x.id).subscribe((x) => {
+        this.oldPumps.push(x)
+      })
+    })
+  }
+
+  onUnSelectAllOldPumps() {
+    this.oldPumps = [];
+  }
+
+  onOldPumpSelect(item: any) {
+    this.oldPumpService.getOldPumpById(item.id).subscribe((x) => {
+      this.pumps.push(x)
+    })
+
+  }
+
+  onOldPumpDeSelect(item: any) {
     this.pumps = this.pumps.filter((x) => x.id != item.id)
   }
 
@@ -117,6 +153,12 @@ export class SitesComponent implements OnInit {
         this.pumps.map((p) => {
           p.siteId = x.id;
           this.pumpService.updatePump(p.id, p).subscribe();
+        })
+      }
+      if (this.oldPumps != []) {
+        this.oldPumps.map((p) => {
+          p.siteId = x.id;
+          this.oldPumpService.updateOldPump(p.id, p).subscribe();
         })
       }
       if (this.sensors != []) {
