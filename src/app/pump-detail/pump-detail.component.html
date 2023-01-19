@@ -1,19 +1,21 @@
-<section class="h-full gradient-form bg-gray-200 md:h-full">
-  <div class="block bg-grey shadow-lg rounded-lg">
+<section class="h-full gradient-form md:h-full mt-20 flex justify-center">
+  <div class="block  rounded-lg">
     <div class="lg:flex lg:flex-wrap g-0">
-      <div class="lg:w-6/12 px-4 md:px-0">
-        <div class="md:p-12 md:mx-6 bg-gray-200">
-          <div class="h-full gradient-form bg-gray-200 md:h-screen">
+      <div class="px-4 md:px-0">
+        <div class="md:mx-6 ">
+          <div class="gradient-form">
             <div class="flex justify-between mx-16 mb-10">
               <div *ngIf="pump; else notassigned" class="w-full mx-5">
                 <h1 class="text-3xl mb-5">{{ pump.name }}</h1>
                 <br />
+
                 <div id="chart">
                   <apx-chart
                     [series]="series"
                     [chart]="chart"
                     [title]="title"
                   ></apx-chart>
+
                 </div>
                 <div class="grid grid-cols-2 items-center mb-3">
                   <div>
@@ -87,13 +89,6 @@
           </div>
         </div>
       </div>
-      <div
-        class="lg:w-1/2 flex items-center"
-        style="
-          background-image: url(../../../assets/images/pexels-kawser-hamid-176342.jpg);
-          background-position: bottom; ;
-        "
-      ></div>
     </div>
   </div>
 </section>

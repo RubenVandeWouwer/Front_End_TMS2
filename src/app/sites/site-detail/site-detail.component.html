@@ -1,9 +1,9 @@
-<section class="h-full gradient-form bg-gray-200 md:h-full">
-  <div class="block bg-grey shadow-lg rounded-lg">
+<section class="flex justify-center gradient-form mt-20">
+  <div class="block rounded-lg">
     <div class="lg:flex lg:flex-wrap g-0">
-      <div class="lg:w-6/12 px-4 md:px-0">
-        <div class="md:p-12 md:mx-6 bg-gray-200">
-          <div class="h-full gradient-form bg-gray-200 md:h-screen">
+      <div class="px-4 md:px-0">
+        <div class="md:mx-6">
+          <div class="h-full gradient-form">
             <div class="flex justify-between mx-16 mb-10">
               <div *ngIf="site" class="w-full mx-5">
                 <h1 class="text-3xl mb-5">{{ site.name }}</h1>
@@ -11,7 +11,7 @@
                 <p>Address: {{ site.address }}</p>
                 <br />
                 <div
-                  class="border-2 border-gray-700 bg-gray-200 w-5/6 h-40 mb-5"
+                  class="border-2 border-gray-700 w-5/6 h-40 mb-5"
                 >
                   graph goes here
                 </div>
@@ -68,8 +68,7 @@
                     >
                   </div>
                 </div>
-                <div class="justify-start">
-                  <h4>Pumps:</h4>
+                <div class="flex justify-start">
                   <app-pump
                       *ngFor="let pump of site.pumps"
                       [pump]="pump"
@@ -81,13 +80,7 @@
           </div>
         </div>
       </div>
-      <div
-        class="lg:w-1/2 flex items-center"
-        style="
-          background-image: url(../../../assets/images/pexels-kawser-hamid-176342.jpg);
-          background-position: bottom; ;
-        "
-      ></div>
+
     </div>
   </div>
 </section>

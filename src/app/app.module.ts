@@ -10,7 +10,10 @@ import {MenuComponent} from './menu/menu.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SitesModule} from "./sites/sites.module";
+
+import { BackgroundComponent } from './background/background.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
+
 
 @NgModule({
   declarations: [
@@ -18,6 +21,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     LogComponent,
     HomeComponent,
     MenuComponent,
+    BackgroundComponent
   ],
   imports: [
     BrowserModule,
