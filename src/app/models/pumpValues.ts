@@ -1,4 +1,4 @@
-export interface pumpValues {
+export interface PumpValues {
   id: number;
   pumpId: number;
   value: number;

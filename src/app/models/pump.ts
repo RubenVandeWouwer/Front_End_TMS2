@@ -1,11 +1,11 @@
-import { pumpValues } from "./pumpValues";
+import { PumpValues } from "./pumpValues";
 
 export interface Pump {
   id: number;
   name: String
   siteId: number;
   inputValue: number;
-  pumpValues: pumpValues[];
+  pumpValues: PumpValues[];
   outputValue: number;
   flowRate: number;
   date: Date;
