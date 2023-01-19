@@ -105,6 +105,18 @@ export class SitesComponent implements OnInit {
     this.oldPumps = this.oldPumps.filter((x) => x.id != item.id)
   }
 
+  onSelectAllPumps(items: any) {
+    items.map((x: Sensor) => {
+      this.pumpService.getPumpById(x.id).subscribe((x) => {
+        this.pumps.push(x)
+      })
+    })
+  }
+
+  onUnSelectAllPumps() {
+    this.pumps = [];
+  }
+
   onSelectAllOldPumps(items: any) {
     items.map((x: Sensor) => {
       this.oldPumpService.getOldPumpById(x.id).subscribe((x) => {
@@ -119,26 +131,15 @@ export class SitesComponent implements OnInit {
 
   onOldPumpSelect(item: any) {
     this.oldPumpService.getOldPumpById(item.id).subscribe((x) => {
-      this.pumps.push(x)
+      this.oldPumps.push(x)
     })
 
   }
 
   onOldPumpDeSelect(item: any) {
-    this.pumps = this.pumps.filter((x) => x.id != item.id)
+    this.oldPumps = this.oldPumps.filter((x) => x.id != item.id)
   }
 
-  onSelectAllPumps(items: any) {
-    items.map((x: Sensor) => {
-      this.pumpService.getPumpById(x.id).subscribe((x) => {
-        this.pumps.push(x)
-      })
-    })
-  }
-
-  onUnSelectAllPumps() {
-    this.pumps = [];
-  }
 
   addSite() {
     this.site.name = this.form.siteName;
