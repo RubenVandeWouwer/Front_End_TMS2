@@ -8,7 +8,7 @@ import {RouterLink} from "@angular/router";
 import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import {PumpDetailComponent} from "../pump-detail/pump-detail.component";
 import {PumpComponent} from "../pump/pump.component";
-
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 
 @NgModule({
@@ -16,7 +16,7 @@ import {PumpComponent} from "../pump/pump.component";
     SiteComponent,
     SiteDetailComponent, PumpDetailComponent, PumpComponent],
   imports: [
-    CommonModule, SharedModule, RouterLink, NgMultiSelectDropDownModule
+    CommonModule, SharedModule, RouterLink, NgMultiSelectDropDownModule, NgApexchartsModule
   ],
   exports: [SitesComponent,
     SiteComponent,

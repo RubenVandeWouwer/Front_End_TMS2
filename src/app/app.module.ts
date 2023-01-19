@@ -10,7 +10,6 @@ import {MenuComponent} from './menu/menu.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SitesModule} from "./sites/sites.module";
-import { PumpchartComponent } from './pumpchart/pumpchart.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
@@ -18,8 +17,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     AppComponent,
     LogComponent,
     HomeComponent,
-    PumpchartComponent,
-    MenuComponent
+    MenuComponent,
   ],
   imports: [
     BrowserModule,

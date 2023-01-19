@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Pump } from '../models/pump';
 import { PumpService } from '../services/pump.service';
 import { SiteService } from '../services/site.service';
+import * as apex from 'ng-apexcharts';
 
 @Component({
   selector: 'app-pump-detail',
@@ -12,6 +13,9 @@ import { SiteService } from '../services/site.service';
 export class PumpDetailComponent implements OnInit {
   pump!: Pump;
   pumpChart= [] as number[];
+  series!: apex.ApexAxisChartSeries;
+  chart!: apex.ApexChart;
+  title!: apex.ApexTitleSubtitle;
 
   constructor(
     private pumpService: PumpService,
@@ -29,6 +33,9 @@ export class PumpDetailComponent implements OnInit {
         });
         console.log(this.pumpChart);
       });
+      this.title = {text: "Pump"};
+      this.series = [{name: 'Ampere', data: this.pumpChart}];
+      this.chart = {type:'line'}
     }
   }
 }
