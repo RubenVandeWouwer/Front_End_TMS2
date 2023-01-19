@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
 import {Site} from '../../models/site';
 import {SiteService} from '../../services/site.service';
+import * as apex from 'ng-apexcharts';
 
 @Component({
   selector: 'app-site-detail',
@@ -11,6 +12,10 @@ import {SiteService} from '../../services/site.service';
 })
 export class SiteDetailComponent implements OnInit {
   site!: Site;
+  series!: apex.ApexAxisChartSeries;
+  chart!: apex.ApexChart;
+  title!: apex.ApexTitleSubtitle;
+  sensorChart=  [] as number[];
 
   constructor(
     private siteService: SiteService,
@@ -25,6 +30,10 @@ export class SiteDetailComponent implements OnInit {
       this.siteService
         .getSiteById(+siteId)
         .subscribe((result) => (this.site = result));
+        
     }
+    this.title = {text: "Water level"};
+      this.series = [{name: 'Sensor1 Meters', data: [50,40,30,80,17,45,10].reverse()}, {name: 'Ampere', data: [50,40,30,80,17,45,10]}];
+      this.chart = {type:'line'}
   }
 }
