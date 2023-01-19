@@ -11,6 +11,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {SitesModule} from "./sites/sites.module";
+import { BackgroundComponent } from './background/background.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import {SitesModule} from "./sites/sites.module";
     AppComponent,
     LogComponent,
     HomeComponent,
-    MenuComponent
+    MenuComponent,
+    BackgroundComponent
   ],
   imports: [
     BrowserModule,
