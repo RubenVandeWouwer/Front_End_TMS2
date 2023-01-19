@@ -9,9 +9,10 @@ import {HomeComponent} from './home/home.component';
 import {MenuComponent} from './menu/menu.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-
 import {SitesModule} from "./sites/sites.module";
+
 import { BackgroundComponent } from './background/background.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { BackgroundComponent } from './background/background.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    SitesModule
+    SitesModule,
+    NgApexchartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
