@@ -9,15 +9,16 @@ import {HomeComponent} from './home/home.component';
 import {MenuComponent} from './menu/menu.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-
 import {SitesModule} from "./sites/sites.module";
-
+import { PumpchartComponent } from './pumpchart/pumpchart.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
     AppComponent,
     LogComponent,
     HomeComponent,
+    PumpchartComponent,
     MenuComponent
   ],
   imports: [
@@ -26,7 +27,8 @@ import {SitesModule} from "./sites/sites.module";
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    SitesModule
+    SitesModule,
+    NgApexchartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,10 +7,11 @@ import { SiteService } from '../services/site.service';
 @Component({
   selector: 'app-pump-detail',
   templateUrl: './pump-detail.component.html',
-  styleUrls: ['./pump-detail.component.css']
+  styleUrls: ['./pump-detail.component.css'],
 })
 export class PumpDetailComponent implements OnInit {
   pump!: Pump;
+  pumpChart= [] as number[];
 
   constructor(
     private pumpService: PumpService,
@@ -21,9 +22,13 @@ export class PumpDetailComponent implements OnInit {
     const pumpId = this.route.snapshot.paramMap.get('id');
     console.log(pumpId);
     if (pumpId != null) {
-      this.pumpService
-        .getPumpById(+pumpId)
-        .subscribe((result) => (this.pump = result));
+      this.pumpService.getPumpById(+pumpId).subscribe((result) => {
+        this.pump = result;
+        result.pumpValues.map((x) => {
+          this.pumpChart.push(x.value);
+        });
+        console.log(this.pumpChart);
+      });
     }
   }
 }
