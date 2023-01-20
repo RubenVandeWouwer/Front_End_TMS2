@@ -140,6 +140,37 @@ export class SitesComponent implements OnInit {
     this.oldPumps = this.oldPumps.filter((x) => x.id != item.id)
   }
 
+  onDeleteSite(site: Site) {
+    if (site.sensors != []) {
+      console.log(1)
+      site.sensors.map((x) => {
+        x.siteId = null;
+        this.sensorService.updateSensor(x.id, x).subscribe();
+        console.log(1)
+      })
+    }
+    if (site.pumps != []) {
+      console.log(2)
+      site.pumps.map((x) => {
+        x.siteId = null;
+        console.log(x.siteId)
+        this.pumpService.updatePump(x.id, x).subscribe();
+        console.log(2)
+      })
+    }
+    if (site.oldPumps != []) {
+      console.log(3)
+      site.oldPumps.map((x) => {
+        x.siteId = null;
+        this.oldPumpService.updateOldPump(x.id, x).subscribe();
+        console.log(3)
+      })
+    }
+    this.siteService.deleteSite(site.id).subscribe(() => {
+      this.sites$ = this.siteService.getSites();
+    })
+  }
+
 
   addSite() {
     this.site.name = this.form.siteName;

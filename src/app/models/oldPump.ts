@@ -1,7 +1,7 @@
 export interface OldPump {
   id: number;
   name: String
-  siteId: number;
+  siteId: any;
   inputValue: number;
   outputValue: number;
   flowRate: number;
