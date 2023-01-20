@@ -23,6 +23,7 @@ export class SiteDetailComponent implements OnInit {
   datalist = [] as DataList[];
   dataItem!: DataList;
   valuelist = [] as number[];
+  text!: string;
 
   constructor(
     private siteService: SiteService,
@@ -31,6 +32,7 @@ export class SiteDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.text = "tekst";
     const siteId = this.route.snapshot.paramMap.get('id');
     console.log(siteId);
     if (siteId != null) {
@@ -49,20 +51,18 @@ export class SiteDetailComponent implements OnInit {
             this.datalist.push(this.dataItem);
             // valuelist leegmaken voor de volgende iteratie
             this.valuelist = [];
-            // this.series.push({name: this.dataItem.name.toString(), data: this.dataItem.data},);
             console.log(this.datalist);
             console.log(this.dataItem);
-            // this.series.push(this.dataItem);
           });
         });
-        this.series!= this.datalist;
+        this.title = { text: this.site.name };
+        console.log(this.datalist)
+        this.datalist.map((x) => {
+          this.series.push(x);
+        });
+        this.series = this.datalist;
       });
     }
-    this.title = { text: 'Water level' };
-    this.series = [
-      { name: 'Sensor1', data: [50, 40, 30, 20, 15, 13, 10] },
-      { name: 'Sensor 2', data: [55, 43, 34, 19, 12, 10, 9] },
-    ];
     this.chart = { type: 'line' };
   }
 }

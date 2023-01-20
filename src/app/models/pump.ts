@@ -2,7 +2,7 @@ import {PumpValues} from "./pumpValues";
 
 export interface Pump {
   id: number;
-  name: String;
+  name: string;
   siteId?: any;
   inputValue: number;
   pumpValues: PumpValues[];

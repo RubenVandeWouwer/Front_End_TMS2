@@ -6,9 +6,6 @@
           <div class="gradient-form">
             <div class="flex justify-between mx-16 mb-10">
               <div *ngIf="pump; else notassigned" class="w-full mx-5">
-                <h1 class="text-3xl mb-5">{{ pump.name }}</h1>
-                <br />
-
                 <div id="chart">
                   <apx-chart
                     [series]="series"

@@ -1,4 +1,4 @@
 export interface DataList {
-  name: String;
+  name: string;
   data: number[];
 }

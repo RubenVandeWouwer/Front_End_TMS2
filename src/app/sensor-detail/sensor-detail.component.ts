@@ -30,8 +30,8 @@ export class SensorDetailComponent implements OnInit {
           this.sensorChart.push(x.value);
         });
         console.log(this.sensorChart);
+        this.title = {text: this.sensor.name};
       });
-      this.title = {text: "Sensor"};
       this.series = [{name: 'Pressure', data: this.sensorChart}];
       this.chart = {type:'line'}
     }
