@@ -39,7 +39,7 @@ export class PumpDetailComponent implements OnInit {
       this.chart = {type:'line'}
       this.xaxis = {
         categories: [
-          "taart",
+          "text",
         ]
       }
     }
