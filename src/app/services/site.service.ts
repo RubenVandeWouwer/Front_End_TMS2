@@ -35,7 +35,7 @@ export class SiteService {
     return this.httpClient.put<Site>(`${this.url}${id}`, JSON.stringify(site), this.HTTPOptions);
   }
 
-  deleteSite(id: number): Observable<Site> {
+  deleteSite(id: number) {
     return this.httpClient.delete<Site>(`${this.url}${id}`);
   }
 }

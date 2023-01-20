@@ -1,5 +1,6 @@
-import { Pump } from "./pump";
-import { Sensor } from "./sensor";
+import {Pump} from "./pump";
+import {Sensor} from "./sensor";
+import {OldPump} from "./oldPump";
 
 export interface Site {
   id: number;
@@ -11,4 +12,5 @@ export interface Site {
   sensorDepth: number;
   sensors: Sensor[];
   pumps: Pump[];
+  oldPumps: OldPump[];
 }
