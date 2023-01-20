@@ -20,7 +20,7 @@ export class SiteDetailComponent implements OnInit {
   title!: apex.ApexTitleSubtitle;
   sensors!: Sensor[];
   sensor!: Sensor;
-  datalist = [] as DataList[];
+  datalist=  [] as DataList[];
   dataItem!: DataList;
   valuelist = [] as number[];
 
@@ -38,32 +38,37 @@ export class SiteDetailComponent implements OnInit {
         this.site = result;
         result.sensors.map((x) => {
           this.sensorService.getSensorById(x.id).subscribe((s) => {
-            console.log('sensorvalues:' + s.sensorValues);
+            // console.log('sensorvalues:' + s.sensorValues);
             this.sensor = s;
-            console.log('sensorname:' + x.name);
+            // console.log('sensorname:' + x.name);
             // alle waarden in de valuelist steken
             s.sensorValues?.map((x) => {
               this.valuelist.push(x.value);
             });
-            console.log('valuelist ' + this.valuelist);
+            // console.log('valuelist ' + this.valuelist);
             //object maken
-            this.dataItem = [x.name, this.valuelist]
-            // this.datalist.push(x.name, this.valuelist)
-
+            this.dataItem = {name: x.name, data: this.valuelist}
             //object in de lijst plaatsen
             this.datalist.push(this.dataItem)
-
             // valuelist leegmaken voor de volgende iteratie
             this.valuelist = [];
+            // this.series.push({name: this.dataItem.name.toString(), data: this.dataItem.data},);
+            console.log(this.datalist)
+
+            console.log(this.dataItem)
+            // this.series.push(this.dataItem);
           });
+
         });
+        this.series!= this.datalist;
       });
     }
     this.title = { text: 'Water level' };
     this.series = [
-      { name: 'Sensor1 Meters', data: [50, 40, 30, 80, 17, 45, 10].reverse() },
-      { name: 'Sensor 2 Meters', data: [50, 40, 30, 80, 17, 45, 10] },
+      { name: 'Sensor1', data: [50, 40, 30, 20, 15, 13, 10] },
+      { name: 'Sensor 2', data: [55, 43, 34, 19, 12, 10, 9] },
     ];
+
     this.chart = { type: 'line' };
   }
 }
