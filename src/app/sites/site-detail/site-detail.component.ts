@@ -24,8 +24,6 @@ export class SiteDetailComponent implements OnInit {
   dataItem!: DataList;
   valuelist = [] as number[];
   text!: string;
-  // series = [];
-
 
   constructor(
     private siteService: SiteService,
@@ -53,10 +51,8 @@ export class SiteDetailComponent implements OnInit {
             this.datalist.push(this.dataItem);
             // valuelist leegmaken voor de volgende iteratie
             this.valuelist = [];
-            // this.series.push({name: this.dataItem.name.toString(), data: this.dataItem.data},);
             console.log(this.datalist);
             console.log(this.dataItem);
-            // this.series=this.dataItem);
           });
         });
         this.title = { text: this.site.name };
