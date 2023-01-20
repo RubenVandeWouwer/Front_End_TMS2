@@ -16,6 +16,7 @@ export class PumpDetailComponent implements OnInit {
   series!: apex.ApexAxisChartSeries;
   chart!: apex.ApexChart;
   title!: apex.ApexTitleSubtitle;
+  xaxis!: apex.ApexXAxis
 
   constructor(
     private pumpService: PumpService,
@@ -36,6 +37,11 @@ export class PumpDetailComponent implements OnInit {
       this.title = {text: "Pump"};
       this.series = [{name: 'Ampere', data: this.pumpChart}];
       this.chart = {type:'line'}
+      this.xaxis = {
+        categories: [
+          "taart",
+        ]
+      }
     }
   }
 }

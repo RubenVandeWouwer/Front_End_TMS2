@@ -9,18 +9,21 @@ import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import {PumpDetailComponent} from "../pump-detail/pump-detail.component";
 import {PumpComponent} from "../pump/pump.component";
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { SensorComponent } from '../sensor/sensor.component';
+import { SensorDetailComponent } from '../sensor-detail/sensor-detail.component';
+
 
 
 @NgModule({
-  declarations: [SitesComponent,
-    SiteComponent,
-    SiteDetailComponent, PumpDetailComponent, PumpComponent],
-  imports: [
-    CommonModule, SharedModule, RouterLink, NgMultiSelectDropDownModule, NgApexchartsModule
-  ],
-  exports: [SitesComponent,
-    SiteComponent,
-    SiteDetailComponent]
+    declarations: [SitesComponent,
+        SiteComponent,
+        SiteDetailComponent, PumpDetailComponent, PumpComponent, SensorComponent, SensorDetailComponent],
+    exports: [SitesComponent,
+        SiteComponent,
+        SiteDetailComponent],
+    imports: [
+        CommonModule, SharedModule, RouterLink, NgMultiSelectDropDownModule, NgApexchartsModule,
+    ]
 })
 export class SitesModule {
 }
