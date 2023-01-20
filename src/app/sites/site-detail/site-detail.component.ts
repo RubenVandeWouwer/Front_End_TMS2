@@ -55,7 +55,7 @@ export class SiteDetailComponent implements OnInit {
             // this.series.push(this.dataItem);
           });
         });
-        this.series != this.datalist;
+        this.series!= this.datalist;
       });
     }
     this.title = { text: 'Water level' };
