@@ -33,8 +33,9 @@ export class PumpDetailComponent implements OnInit {
           this.pumpChart.push(x.value);
         });
         console.log(this.pumpChart);
+        this.title= {text: this.pump.name}
       });
-      this.title = {text: "Pump"};
+      // this.title = {text: this.pump.name};
       this.series = [{name: 'Ampere', data: this.pumpChart}];
       this.chart = {type:'line'}
       this.xaxis = {
