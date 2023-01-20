@@ -96,13 +96,13 @@ export class SitesComponent implements OnInit {
 
   onPumpSelect(item: any) {
     this.pumpService.getPumpById(item.id).subscribe((x) => {
-      this.oldPumps.push(x)
+      this.pumps.push(x)
     })
 
   }
 
   onPumpDeSelect(item: any) {
-    this.oldPumps = this.oldPumps.filter((x) => x.id != item.id)
+    this.pumps = this.pumps.filter((x) => x.id != item.id)
   }
 
   onSelectAllPumps(items: any) {
@@ -141,34 +141,30 @@ export class SitesComponent implements OnInit {
   }
 
   onDeleteSite(site: Site) {
-    if (site.sensors != []) {
-      console.log(1)
-      site.sensors.map((x) => {
-        x.siteId = null;
-        this.sensorService.updateSensor(x.id, x).subscribe();
-        console.log(1)
-      })
-    }
-    if (site.pumps != []) {
-      console.log(2)
-      site.pumps.map((x) => {
-        x.siteId = null;
-        console.log(x.siteId)
-        this.pumpService.updatePump(x.id, x).subscribe();
-        console.log(2)
-      })
-    }
-    if (site.oldPumps != []) {
-      console.log(3)
-      site.oldPumps.map((x) => {
-        x.siteId = null;
-        this.oldPumpService.updateOldPump(x.id, x).subscribe();
-        console.log(3)
-      })
-    }
-    this.siteService.deleteSite(site.id).subscribe(() => {
-      this.sites$ = this.siteService.getSites();
+
+    site.sensors.map((x) => {
+      console.log(x, 1)
+      x.siteId = null;
+      this.sensorService.updateSensor(x.id, x).subscribe();
     })
+
+    site.pumps.map((x) => {
+      console.log(x, 2)
+      x.siteId = null;
+      this.pumpService.updatePump(x.id, x).subscribe()
+    })
+    site.oldPumps.map((x) => {
+      x.siteId = null;
+      this.oldPumpService.updateOldPump(x.id, x).subscribe()
+    })
+
+    setTimeout(() => {
+      this.siteService.deleteSite(site.id).subscribe(() => {
+        this.sites$ = this.siteService.getSites();
+      })
+    }, 700)
+
+
   }
 
 

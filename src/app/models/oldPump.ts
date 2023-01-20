@@ -1,13 +1,13 @@
+import {OldPumpValues} from "./oldPumpValues";
+
 export interface OldPump {
   id: number;
-  name: String
-  siteId: any;
+  name: String;
+  siteId?: any;
   inputValue: number;
-  outputValue: number;
-  flowRate: number;
-  date: Date;
+  oldPumpValues: OldPumpValues[];
   isDefective: Boolean;
-  pumplogs?: number;
+  pumpLogs?: number;
 }
 
 

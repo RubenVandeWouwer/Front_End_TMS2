@@ -21,15 +21,15 @@ export class OldPumpService {
   }
 
   getOldPumps(): Observable<OldPump[]> {
-    return this.httpClient.get<Pump[]>(this.url);
+    return this.httpClient.get<OldPump[]>(this.url);
   }
 
   getOldPumpById(id: number): Observable<OldPump> {
-    return this.httpClient.get<Pump>(`${this.url}${id}`);
+    return this.httpClient.get<OldPump>(`${this.url}${id}`);
   }
 
   createOldPump(oldPump: OldPump): Observable<OldPump> {
-    return this.httpClient.post<Pump>(`${this.url}`, JSON.stringify(oldPump), this.HTTPOptions);
+    return this.httpClient.post<OldPump>(`${this.url}`, JSON.stringify(oldPump), this.HTTPOptions);
   }
 
   updateOldPump(id: number, oldPump: OldPump): Observable<OldPump> {
