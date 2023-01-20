@@ -5,7 +5,7 @@ export interface Sensor {
   name: string;
   siteId: any;
   date: Date;
-  sensorValues?: SensorValues[];
+  sensorValues: SensorValues[];
   isDefective: Boolean;
-  sensorLogs?: number;
+  sensorLogs: number;
 }

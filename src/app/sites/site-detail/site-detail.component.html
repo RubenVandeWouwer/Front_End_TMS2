@@ -12,10 +12,10 @@
                 <br />
 
                 <apx-chart
-                [series]="series"
-                [chart]="chart"
-                [title]="title"
-              ></apx-chart>
+                  [series]="series"
+                  [chart]="chart"
+                  [title]="title"
+                ></apx-chart>
 
                 <div class="grid grid-cols-2 items-center mb-3">
                   <div>
@@ -72,17 +72,21 @@
                 </div>
                 <div class="flex justify-start">
                   <app-pump
-                      *ngFor="let pump of site.pumps"
-                      [pump]="pump"
-                    ></app-pump
-                  >
+                    *ngFor="let pump of site.pumps"
+                    [pump]="pump"
+                  ></app-pump>
+                </div>
+                <div class="flex justify-start">
+                  <app-sensor
+                    *ngFor="let sensor of site.sensors"
+                    [sensor]="sensor"
+                  ></app-sensor>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
