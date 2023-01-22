@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Pump } from '../models/pump';
-import { Router } from '@angular/router';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Pump} from '../models/pump';
+import {Router} from '@angular/router';
+import {OldPump} from "../models/oldPump";
 
 @Component({
   selector: 'app-pump',
@@ -9,8 +10,11 @@ import { Router } from '@angular/router';
 })
 export class PumpComponent implements OnInit {
   @Input() pump!: Pump;
+  @Input() oldPump!: OldPump;
+  @Output() onDeletePump: EventEmitter<void> = new EventEmitter();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+  }
 
   ngOnInit(): void {
 
@@ -18,6 +22,10 @@ export class PumpComponent implements OnInit {
 
   detail(id: number) {
     this.router.navigate(['/pump', id]);
+  }
+
+  deletePump() {
+    this.onDeletePump.emit();
   }
 
 }

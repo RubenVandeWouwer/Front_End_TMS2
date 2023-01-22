@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Sensor } from '../models/sensor';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Router} from '@angular/router';
+import {Sensor} from '../models/sensor';
 
 @Component({
   selector: 'app-sensor',
@@ -9,14 +9,20 @@ import { Sensor } from '../models/sensor';
 })
 export class SensorComponent implements OnInit {
   @Input() sensor!: Sensor;
+  @Output() onDeleteSensor: EventEmitter<void> = new EventEmitter();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+  }
 
   ngOnInit(): void {
   }
 
   detail(id: number) {
     this.router.navigate(['/sensor', id]);
+  }
+
+  deleteSensor() {
+    this.onDeleteSensor.emit();
   }
 
 }

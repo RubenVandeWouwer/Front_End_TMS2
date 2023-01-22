@@ -11,13 +11,14 @@ import {PumpComponent} from "../pump/pump.component";
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { SensorComponent } from '../sensor/sensor.component';
 import { SensorDetailComponent } from '../sensor-detail/sensor-detail.component';
+import {OldPumpDetailComponent} from "../oldPump-detail/oldPump-detail.component";
 
 
 
 @NgModule({
     declarations: [SitesComponent,
         SiteComponent,
-        SiteDetailComponent, PumpDetailComponent, PumpComponent, SensorComponent, SensorDetailComponent],
+        SiteDetailComponent, PumpDetailComponent, OldPumpDetailComponent, PumpComponent, SensorComponent, SensorDetailComponent],
     exports: [SitesComponent,
         SiteComponent,
         SiteDetailComponent],

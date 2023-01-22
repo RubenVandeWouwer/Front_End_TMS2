@@ -3,7 +3,7 @@ import {PumpValues} from "./pumpValues";
 export interface Pump {
   id: number;
   name: string;
-  siteId?: any;
+  sensorId?: any;
   inputValue: number;
   pumpValues: PumpValues[];
   isDefective: Boolean;
