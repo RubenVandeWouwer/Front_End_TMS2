@@ -12,11 +12,16 @@ import * as apex from 'ng-apexcharts';
 })
 export class PumpDetailComponent implements OnInit {
   pump!: Pump;
-  pumpChart= [] as number[];
+  pumpChart = [] as number[];
   series!: apex.ApexAxisChartSeries;
   chart!: apex.ApexChart;
   title!: apex.ApexTitleSubtitle;
-  xaxis!: apex.ApexXAxis
+  xaxis!: apex.ApexXAxis;
+  pumpId!: any;
+
+  form: any = {
+    inputValue: null,
+  };
 
   constructor(
     private pumpService: PumpService,
@@ -24,25 +29,31 @@ export class PumpDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const pumpId = this.route.snapshot.paramMap.get('id');
-    console.log(pumpId);
-    if (pumpId != null) {
-      this.pumpService.getPumpById(+pumpId).subscribe((result) => {
+    this.pumpId = this.route.snapshot.paramMap.get('id');
+    console.log(this.pumpId);
+    if (this.pumpId != null) {
+      this.pumpService.getPumpById(+this.pumpId).subscribe((result) => {
         this.pump = result;
         result.pumpValues.map((x) => {
           this.pumpChart.push(x.value);
         });
         console.log(this.pumpChart);
-        this.title= {text: this.pump.name}
+        this.title = { text: this.pump.name };
       });
       // this.title = {text: this.pump.name};
-      this.series = [{name: 'Ampere', data: this.pumpChart}];
-      this.chart = {type:'line'}
+      this.series = [{ name: 'Ampere', data: this.pumpChart }];
+      this.chart = { type: 'line' };
       this.xaxis = {
-        categories: [
-          "text",
-        ]
-      }
+        categories: ['text'],
+      };
     }
+  }
+
+  updateInputValue() {
+    this.pump.inputValue = this.form.inputValue;
+    console.log(this.pump);
+    this.pumpService.updatePump(this.pump.id, this.pump).subscribe(() => {
+      this.ngOnInit();
+    });
   }
 }

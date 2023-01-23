@@ -15,7 +15,12 @@ export class OldPumpDetailComponent implements OnInit {
   series!: apex.ApexAxisChartSeries;
   chart!: apex.ApexChart;
   title!: apex.ApexTitleSubtitle;
-  xaxis!: apex.ApexXAxis
+  xaxis!: apex.ApexXAxis;
+  isViewed!: number;
+
+  form: any = {
+    inputValue: null,
+  };
 
   constructor(
     private oldPumpService: OldPumpService,
@@ -43,4 +48,19 @@ export class OldPumpDetailComponent implements OnInit {
       }
     }
   }
+
+  updateInputValue(){
+    this.pump.inputValue = !this.pump.inputValue;
+    console.log(this.pump.inputValue)
+    this.oldPumpService.updateOldPump(this.pump.id, this.pump).subscribe();
+  }
+
+  // updateInputValue() {
+  //   this.pump.inputValue = this.form.inputValue;
+  //   console.log(this.pump.inputValue)
+  //   console.log(this.pump);
+  //   this.oldPumpService.updateOldPump(this.pump.id, this.pump).subscribe(() => {
+  //     this.ngOnInit();
+  //   });
+  // }
 }
