@@ -30,67 +30,46 @@
                     </div>
                   </div>
                 </div>
-                <div *ngIf="pump.pumpValues.length < 1">
-                  <div class="flex justify-between pb-4">
-                    <div class="flex flex-col items-center">
-                      <label class="block text-gray-700 text-sm font-bold mb-2"
-                        >Latest data reading:</label
-                      >
-                      <span>No readings yet.</span>
-                    </div>
-                    <div class="flex justify-center">
-                      <button
-                        class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                      >
-                        Check logs
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div *ngIf="pump.pumpValues.length > 1" class="grid">
-                  <div class="grid-cols-2 items-center mb-3">
-                    <div>
-                      <label
-                        class="block text-gray-700 text-sm font-bold mb-2"
-                        for="sensor"
-                        >Current Electricy usage (A)</label>
-                      <input
-                        class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="sensor"
-                        type="text"
-                        placeholder="Ampere"
-                        value="{{
-                          pump.pumpValues[pump.pumpValues.length - 1].value
-                        }}"
-                      />
-                    </div>
-                  </div>
-                  <div class=" grid-cols-2 items-center mb-3">
+                <div *ngIf="pump.pumpValues.length > 1">
+                  <div class="grid grid-cols-2 items-center mb-5">
                     <div>
                       <label
                         class="block text-gray-700 text-sm font-bold mb-2"
                         for="drainage"
                         >Current FlowRate (l/min)</label
                       >
-                      <input
-                        class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="drainage"
-                        type="text"
-                        placeholder="FlowRate"
-                        value="{{
+                      <span
+                        >{{
                           pump.pumpValues[pump.pumpValues.length - 1].flowRate
-                        }}"
-                      />
+                        }}
+                        l/min</span
+                      >
+                    </div>
+                    <div>
+                      <label
+                        class="block text-gray-700 text-sm font-bold mb-2"
+                        for="sensor"
+                        >Current Electricy usage (A)</label
+                      >
+                      <span
+                        >{{
+                          pump.pumpValues[pump.pumpValues.length - 1].value
+                        }}
+                        Ampere</span
+                      >
                     </div>
                   </div>
+                  <div><label for="minmax-range" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">Current pumping value: {{pump.pumpValues[pump.pumpValues.length - 1].value}}</label>
+                    <input id="minmax-range" type="range" min="0" max="100" value="{{pump.pumpValues[pump.pumpValues.length - 1].value}}" class="w-full h-2 rounded-lg appearance-none cursor-pointer bg-gray-200"></div>
                 </div>
+
               </div>
-              <ng-template #notassigned
-                ><h1 class="text-red-600">
-                  Error 204: This Pump Does Not Exist
-                </h1></ng-template
-              >
             </div>
+            <ng-template #notassigned
+              ><h1 class="text-red-600">
+                Error 204: This Pump Does Not Exist
+              </h1></ng-template
+            >
           </div>
         </div>
       </div>
