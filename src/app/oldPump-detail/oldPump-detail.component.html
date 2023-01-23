@@ -14,7 +14,7 @@
                   </apx-chart>
 
                 </div>
-                <div *ngIf="pump.pumpValues.length > 1">
+                <div *ngIf="pump.oldPumpValues.length > 1">
                   <div class="grid grid-cols-2 items-center mb-3">
                     <div>
                       <label
@@ -28,7 +28,7 @@
                               type="text"
                               placeholder="Ampere"
                               value="{{
-                                        pump.pumpValues[pump.pumpValues.length - 1].value
+                                        pump.oldPumpValues[pump.oldPumpValues.length - 1].value
                                       }}"
                       />
                     </div>
@@ -45,7 +45,7 @@
                               placeholder="Date"
 
                               value="{{
-                                        pump.pumpValues[pump.pumpValues.length - 1].date
+                                        pump.oldPumpValues[pump.oldPumpValues.length - 1].date
                                           | date : 'dd/MM/yyyy hhumm'
                                       }}"
 
@@ -65,7 +65,7 @@
                               type="text"
                               placeholder="FlowRate"
                               value="{{
-                                        pump.pumpValues[pump.pumpValues.length - 1].flowRate
+                                        pump.oldPumpValues[pump.oldPumpValues.length - 1].flowRate
                                       }}"
                       />
                     </div>

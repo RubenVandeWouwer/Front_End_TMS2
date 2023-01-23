@@ -2,8 +2,8 @@ import {OldPumpValues} from "./oldPumpValues";
 
 export interface OldPump {
   id: number;
-  name: String;
-  siteId?: any;
+  name: string;
+  sensorId?: any;
   inputValue: number;
   oldPumpValues: OldPumpValues[];
   isDefective: Boolean;

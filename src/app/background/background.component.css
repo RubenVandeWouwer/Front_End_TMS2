@@ -1,12 +1,6 @@
-/*div{*/
-/*  background-image: url("src/assets/images/hooyberghsbg.png");*/
-/*  background-position: center;*/
-/*  background-repeat: no-repeat;*/
-/*  background-size: contain;*/
-/*  width: 100vw;*/
-/*  height: 100vh;*/
-/*}*/
-div{
-  width: 52vw;
-  height: 100vh;
+* {
+  background-image: url("src/assets/images/hooyberghsbg.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

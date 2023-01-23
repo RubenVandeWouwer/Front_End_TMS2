@@ -1,4 +1,6 @@
 import {SensorValues} from "./sensorValues";
+import {Pump} from "./pump";
+import {OldPump} from "./oldPump";
 
 export interface Sensor {
   id: number;
@@ -8,4 +10,6 @@ export interface Sensor {
   sensorValues: SensorValues[];
   isDefective: Boolean;
   sensorLogs: number;
+  pumps: Pump[];
+  oldPumps: OldPump[];
 }

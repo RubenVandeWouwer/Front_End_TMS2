@@ -1,12 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Site } from '../../models/site';
-import { Sensor } from '../../models/sensor';
-import { SiteService } from '../../services/site.service';
+import {Component, Input, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
+import {Site} from '../../models/site';
+import {Sensor} from '../../models/sensor';
+import {SiteService} from '../../services/site.service';
 import * as apex from 'ng-apexcharts';
-import { SensorService } from '../../services/sensor.service';
-import { DataList } from '../../models/DataList';
+import {SensorService} from '../../services/sensor.service';
+import {DataList} from '../../models/DataList';
+import {IDropdownSettings} from "ng-multiselect-dropdown";
+import {PumpService} from "../../services/pump.service";
+import {OldPumpService} from "../../services/old-pump.service";
 
 @Component({
   selector: 'app-site-detail',
@@ -18,23 +21,43 @@ export class SiteDetailComponent implements OnInit {
   series!: apex.ApexAxisChartSeries;
   chart!: apex.ApexChart;
   title!: apex.ApexTitleSubtitle;
-  sensors!: Sensor[];
+  sensors = [] as Sensor[];
   sensor!: Sensor;
-  datalist = [] as DataList[];
+  dataLists = [] as DataList[];
   dataItem!: DataList;
-  valuelist = [] as number[];
+  valueList = [] as number[];
   text!: string;
+  dropdownListSensor!: Sensor[];
+  dropdownSettingsSensor: IDropdownSettings = {};
+  toggleModal!: boolean;
+
+  form: any = {
+    siteName: null,
+    siteAddress: null,
+    siteManager: null,
+    siteManagerNbr: null,
+  };
 
   constructor(
     private siteService: SiteService,
     private route: ActivatedRoute,
-    private sensorService: SensorService
-  ) {}
+    private sensorService: SensorService,
+    private pumpService: PumpService,
+    private oldPumpService: OldPumpService,
+  ) {
+  }
 
   ngOnInit(): void {
-    this.text = "tekst";
+    this.dataLists = [];
     const siteId = this.route.snapshot.paramMap.get('id');
-    console.log(siteId);
+    this.sensorService.getSensors().subscribe((x) => {
+        this.dropdownListSensor = x.filter((x) => x.siteId == null)
+      }
+    )
+    this.dropdownSettingsSensor = {
+      idField: 'id',
+      textField: `name`,
+    };
     if (siteId != null) {
       this.siteService.getSiteById(+siteId).subscribe((result) => {
         this.site = result;
@@ -43,26 +66,91 @@ export class SiteDetailComponent implements OnInit {
             this.sensor = s;
             // alle waarden in de valuelist steken
             s.sensorValues?.map((x) => {
-              this.valuelist.push(x.value);
+              this.valueList.push(x.value);
             });
             //object maken
-            this.dataItem = { name: x.name, data: this.valuelist };
+            this.dataItem = {name: x.name, data: this.valueList};
             //object in de lijst plaatsen
-            this.datalist.push(this.dataItem);
+            this.dataLists.push(this.dataItem);
             // valuelist leegmaken voor de volgende iteratie
-            this.valuelist = [];
-            console.log(this.datalist);
-            console.log(this.dataItem);
+            this.valueList = [];
+            console.log(this.dataLists, 2);
+            console.log(this.dataItem, 3);
           });
         });
-        this.title = { text: this.site.name };
-        console.log(this.datalist)
-        this.datalist.map((x) => {
+        this.title = {text: this.site.name};
+        console.log(this.dataLists)
+        this.dataLists.map((x) => {
           this.series.push(x);
         });
-        this.series = this.datalist;
+        this.series = this.dataLists;
       });
     }
-    this.chart = { type: 'line' };
+    this.chart = {type: 'line'};
+  }
+
+  onSensorSelect(item: any) {
+
+    this.sensorService.getSensorById(item.id).subscribe((x) => {
+      this.sensors.push(x)
+    })
+
+  }
+
+  onSensorDeSelect(item: any) {
+    this.sensors = this.sensors.filter((x) => x.id != item.id)
+  }
+
+  onSelectAllSensors(items: any) {
+    items.map((x: Sensor) => {
+      this.sensorService.getSensorById(x.id).subscribe((x) => {
+        this.sensors.push(x)
+      })
+    })
+
+  }
+
+  onUnSelectAllSensors() {
+    this.sensors = [];
+  }
+
+  deleteSensor(sensor: Sensor) {
+    if (confirm(`Do you want to delete ${sensor.name}?`)) {
+      if (sensor.pumps != []) {
+        sensor.pumps.map((x) => {
+          x.sensorId = null;
+          this.pumpService.updatePump(x.id, x).subscribe();
+        })
+      }
+      if (sensor.oldPumps != []) {
+        sensor.oldPumps.map((x) => {
+          x.sensorId = null;
+          this.oldPumpService.updateOldPump(x.id, x).subscribe();
+        })
+      }
+      setTimeout(() => {
+        sensor.siteId = null;
+        this.sensorService.updateSensor(sensor.id, sensor).subscribe(() => {
+          this.ngOnInit();
+        })
+      }, 700);
+    }
+  }
+
+  editSite() {
+    this.form.siteName != null ? this.site.name = this.form.siteName : null;
+    this.form.siteAddress != null ? this.site.address = this.form.siteAddress : null;
+    this.form.siteManager != null ? this.site.siteManager = this.form.siteManager : null;
+    this.form.siteManagerNbr != null ? this.site.siteManagerNbr = this.form.siteManagerNbr : null;
+    if (this.sensors != []) {
+      this.sensors.map((s) => {
+        s.siteId = this.site.id;
+        this.sensorService.updateSensor(s.id, s).subscribe();
+      })
+      this.siteService.updateSite(this.site.id, this.site).subscribe(() => {
+        this.ngOnInit();
+        this.toggleModal = !this.toggleModal;
+      })
+    }
   }
 }

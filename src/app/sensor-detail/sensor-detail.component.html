@@ -1,14 +1,12 @@
 <section class="h-full gradient-form md:h-full mt-20 flex justify-center">
   <div class="block rounded-lg">
     <div class="lg:flex lg:flex-wrap g-0">
-      <div class="px-4 md:px-0">
-        <div class="md:mx-6">
+      <div class="">
+        <div class="">
           <div class="gradient-form">
-            <div class="flex justify-between mx-16 mb-10">
-              <div *ngIf="sensor; else notassigned" class="w-full mx-5">
-                <h1 class="text-3xl mb-5">{{ sensor.name }}</h1>
-                <br />
-
+            <div class="flex justify-between">
+              <div *ngIf="sensor; else notassigned" class="">
+                <br/>
                 <div id="chart">
                   <apx-chart
                     [series]="series"
@@ -16,39 +14,93 @@
                     [title]="title"
                   ></apx-chart>
                 </div>
-                <div class="grid grid-cols-2 items-center mb-3">
-                  <div>
-                    <label
-                      class="block text-gray-700 text-sm font-bold mb-2"
-                      for="drainage"
-                      >Latest data reading</label
-                    >
-                    <input
-                      class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      id="drainage"
-                      type="text"
-                      placeholder="Date"
-                      value="{{
-                        sensor.sensorValues[sensor.sensorValues.length-1].date
+                <div *ngIf="sensor.sensorValues.length > 1">
+                  <div class="flex justify-between pb-4">
+                    <div class="flex flex-col items-center">
+                      <label
+                        class="block text-gray-700 text-sm font-bold mb-2"
+                      >Latest data reading:</label
+                      >
+                      <span>{{
+                        sensor.sensorValues[sensor.sensorValues.length - 1].date
                           | date : 'dd/MM/yyyy hhumm'
-                      }}"
-                    />
+                        }}</span>
+                    </div>
+                    <div class="flex justify-center">
+                      <button
+                        class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                      >Check logs
+                      </button>
+                    </div>
+
                   </div>
                 </div>
-                <div class="grid grid-cols-2 items-center mb-5">
-                  <div>
-                    <a
-                      href=""
-                      class="w-full text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                      >Check logs</a
-                    >
+                <div *ngIf="sensor.sensorValues.length < 1">
+                  <div class="flex justify-between pb-4">
+                    <div class="flex flex-col items-center">
+                      <label
+                        class="block text-gray-700 text-sm font-bold mb-2"
+                      >Latest data reading:</label
+                      >
+                      <span>No readings yet.</span>
+                    </div>
+                    <div class="flex justify-center">
+                      <button
+                        class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                      >Check logs
+                      </button>
+                    </div>
+
                   </div>
+                </div>
+
+                <div class="flex mb-5">
+                  <div>
+                    <ng-multiselect-dropdown
+                      class=""
+                      [placeholder]="'Add pump'"
+                      [settings]="dropdownSettingsPump"
+                      [data]="dropdownListPump"
+                      (onSelect)="onPumpSelect($event)"
+                      (onSelectAll)="onSelectAllPumps($event)"
+                      (onDeSelect)="onPumpDeSelect($event)"
+                      (onDeSelectAll)="onUnSelectAllPumps()">>
+
+                    </ng-multiselect-dropdown>
+                  </div>
+                  <div>
+                    <ng-multiselect-dropdown
+                      class=""
+                      [placeholder]="'Add old pump'"
+                      [settings]="dropdownSettingsOldPump"
+                      [data]="dropdownListOldPump"
+                      (onSelect)="onOldPumpSelect($event)"
+                      (onSelectAll)="onSelectAllOldPumps($event)"
+                      (onDeSelect)="onOldPumpDeSelect($event)"
+                      (onDeSelectAll)="onUnSelectAllOldPumps()">>
+                    </ng-multiselect-dropdown>
+                  </div>
+                  <button (click)="submitPumps()"
+                          class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                  >Submit
+                  </button>
+                </div>
+                <div class="grid grid-cols-3">
+                  <app-pump class="mx-5" (onDeletePump)="deletePump(pump)"
+                            *ngFor="let pump of sensor.pumps"
+                            [pump]="pump"
+                  ></app-pump>
+                  <app-pump class="mx-5" (onDeletePump)="deleteOldPump(pump)"
+                            *ngFor="let pump of sensor.oldPumps"
+                            [oldPump]="pump"
+                  ></app-pump>
                 </div>
               </div>
+
               <ng-template #notassigned
-                ><h1 class="text-red-600">
-                  Error 204: This Sensor Does Not Exist
-                </h1></ng-template
+              ><h1 class="text-red-600">
+                Error 204: This Sensor Does Not Exist
+              </h1></ng-template
               >
             </div>
           </div>

@@ -11,6 +11,4 @@ export interface Site {
   drainageDepth: number;
   sensorDepth: number;
   sensors: Sensor[];
-  pumps: Pump[];
-  oldPumps: OldPump[];
 }
