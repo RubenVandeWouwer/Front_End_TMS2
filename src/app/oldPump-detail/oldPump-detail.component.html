@@ -2,18 +2,53 @@
   <div class="block rounded-lg">
     <div class="lg:flex lg:flex-wrap g-0">
       <div class="px-4 md:px-0">
-        <div class="md:mx-6 ">
+        <div class="md:mx-6">
           <div class="gradient-form">
             <div class="flex justify-between mx-16 mb-10">
-              <div *ngIf="pump; else notassigned" class="w-full mx-5">
-                <div id="chart">
+              <div *ngIf="pump; else notassigned" class="w-full mx-5 vw">
                   <apx-chart
                     [series]="series"
                     [chart]="chart"
                     [title]="title">
                   </apx-chart>
+                  <div *ngIf="pump.oldPumpValues.length > 1">
+                    <div class="flex justify-between pb-4">
+                      <div class="flex flex-col items-center">
+                        <label class="block text-gray-700 text-sm font-bold mb-2"
+                          >Latest data reading:</label
+                        >
+                        <span>{{
+                          pump.oldPumpValues[pump.oldPumpValues.length - 1].date
+                            | date : "dd/MM/yyyy hhumm"
+                        }}</span>
+                      </div>
+                      <div class="flex justify-center">
+                        <button
+                          class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                        >
+                          Check logs
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="pump.oldPumpValues.length < 1">
+                    <div class="flex justify-between pb-4">
+                      <div class="flex flex-col items-center">
+                        <label class="block text-gray-700 text-sm font-bold mb-2"
+                          >Latest data reading:</label
+                        >
+                        <span>No readings yet.</span>
+                      </div>
+                      <div class="flex justify-center">
+                        <button
+                          class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                        >
+                          Check logs
+                        </button>
+                      </div>
+                    </div>
+                  </div>
 
-                </div>
                 <div *ngIf="pump.oldPumpValues.length > 1">
                   <div class="grid grid-cols-2 items-center mb-3">
                     <div>
@@ -30,25 +65,6 @@
                               value="{{
                                         pump.oldPumpValues[pump.oldPumpValues.length - 1].value
                                       }}"
-                      />
-                    </div>
-                    <div>
-                      <label
-                              class="block text-gray-700 text-sm font-bold mb-2"
-                              for="drainage"
-                      >Latest data reading</label
-                      >
-                      <input
-                              class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                              id="drainage"
-                              type="text"
-                              placeholder="Date"
-
-                              value="{{
-                                        pump.oldPumpValues[pump.oldPumpValues.length - 1].date
-                                          | date : 'dd/MM/yyyy hhumm'
-                                      }}"
-
                       />
                     </div>
                   </div>
