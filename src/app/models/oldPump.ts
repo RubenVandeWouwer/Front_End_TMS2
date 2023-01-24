@@ -4,7 +4,7 @@ export interface OldPump {
   id: number;
   name: string;
   sensorId?: any;
-  inputValue: number;
+  inputValue: Boolean;
   oldPumpValues: OldPumpValues[];
   isDefective: Boolean;
   pumpLogs?: number;

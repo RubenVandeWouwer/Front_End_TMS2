@@ -54,10 +54,13 @@
                         for="drainage"
                         >Current FlowRate (l/min)</label
                       >
-                      <span>{{
-                        pump.oldPumpValues[pump.oldPumpValues.length - 1]
-                          .flowRate
-                      }} l/min</span>
+                      <span
+                        >{{
+                          pump.oldPumpValues[pump.oldPumpValues.length - 1]
+                            .flowRate
+                        }}
+                        l/min</span
+                      >
                     </div>
                     <div>
                       <label
@@ -65,28 +68,47 @@
                         for="sensor"
                         >Current Electricy usage (A)</label
                       >
-                      <span>{{
-                        pump.oldPumpValues[pump.oldPumpValues.length - 1]
-                          .value
-                      }} Ampere</span>
+                      <span
+                        >{{
+                          pump.oldPumpValues[pump.oldPumpValues.length - 1]
+                            .value
+                        }}
+                        Ampere</span
+                      >
                     </div>
                   </div>
-                  <div><label class="relative inline-flex items-center cursor-pointer">
-                    <input type="checkbox" value="" class="sr-only peer">
-                    <div class="w-14 h-7 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer bg-gray-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                    <span class="ml-3 text-sm font-medium text-black-400">Pump Power On/Off Toggle</span>
-                  </label></div>
-                </div>
+                  <form action="#">
+                    <div>
+                      <label
+                        class="relative inline-flex items-center cursor-pointer"
+                      >
+                        <input
+                          type="checkbox"
+                          class="sr-only peer"
+                          name="inputValue"
+                          [checked]="pump.inputValue"
+                          (change)="updateInputValue()"
+                        />
+                        <div
+                          class="w-14 h-7 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer bg-gray-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+                        ></div>
+                        <span class="ml-3 text-sm font-medium text-black-400"
+                          >Pump Power On/Off Toggle</span
+                        >
+                      </label>
+                    </div>
+                  </form>
                 </div>
               </div>
-              <ng-template #notassigned
-                ><h1 class="text-red-600">
-                  Error 204: This Pump Does Not Exist
-                </h1></ng-template
-              >
             </div>
+            <ng-template #notassigned
+              ><h1 class="text-red-600">
+                Error 404: This Pump Does Not Exist
+              </h1></ng-template
+            >
           </div>
         </div>
       </div>
     </div>
+  </div>
 </section>
