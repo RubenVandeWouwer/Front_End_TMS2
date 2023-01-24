@@ -41,6 +41,7 @@ export class PumpDetailComponent implements OnInit {
       this.xaxis = {
         categories: ['text'],
       };
+      this.xaxis = {labels: {show: false}}
     }
   }
 
