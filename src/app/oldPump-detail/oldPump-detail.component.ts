@@ -46,6 +46,7 @@ export class OldPumpDetailComponent implements OnInit {
           "text",
         ]
       }
+      this.xaxis = {labels: {show: false}}
     }
   }
 

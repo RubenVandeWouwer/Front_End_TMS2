@@ -7,6 +7,8 @@ import { SiteDetailComponent } from './sites/site-detail/site-detail.component';
 import { SitesComponent } from './sites/sites/sites.component';
 import { SensorDetailComponent } from './sensor-detail/sensor-detail.component';
 import {OldPumpDetailComponent} from "./oldPump-detail/oldPump-detail.component";
+import { PumplogComponent } from './pumplog/pumplog.component';
+import { SensorlogComponent } from './sensorlog/sensorlog.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -15,7 +17,9 @@ const routes: Routes = [
   { path: 'site/:id', component: SiteDetailComponent },
   { path: 'pump/:id', component: PumpDetailComponent },
   { path: 'oldPump/:id', component: OldPumpDetailComponent },
-  {path: 'sensor/:id', component: SensorDetailComponent}
+  {path: 'sensor/:id', component: SensorDetailComponent},
+  {path: 'pumplog/:id', component: PumplogComponent},
+  {path: 'sensorlog/:id', component: SensorlogComponent},
 ];
 
 @NgModule({

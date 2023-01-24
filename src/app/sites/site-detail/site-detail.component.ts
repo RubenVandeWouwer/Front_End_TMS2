@@ -30,6 +30,7 @@ export class SiteDetailComponent implements OnInit {
   dropdownListSensor!: Sensor[];
   dropdownSettingsSensor: IDropdownSettings = {};
   toggleModal!: boolean;
+  xaxis!: apex.ApexXAxis;
 
   form: any = {
     siteName: null,
@@ -87,6 +88,7 @@ export class SiteDetailComponent implements OnInit {
       });
     }
     this.chart = {type: 'line'};
+    this.xaxis = {labels: {show: false}};
   }
 
   onSensorSelect(item: any) {

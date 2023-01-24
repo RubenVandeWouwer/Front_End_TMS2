@@ -27,7 +27,7 @@ export class SensorDetailComponent implements OnInit {
   series!: apex.ApexAxisChartSeries;
   chart!: apex.ApexChart;
   title!: apex.ApexTitleSubtitle;
-  xaxis!: apex.ApexXAxis
+  xaxis!: apex.ApexXAxis;
 
   constructor(private SensorService: SensorService, private route: ActivatedRoute, private pumpService: PumpService, private oldPumpService: OldPumpService) {
   }
@@ -61,7 +61,8 @@ export class SensorDetailComponent implements OnInit {
         this.title = {text: this.sensor.name};
       });
       this.series = [{name: 'Pressure', data: this.sensorChart}];
-      this.chart = {type: 'line'}
+      this.chart = {type: 'line'};
+      this.xaxis = {labels: {show: false}}
     }
   }
 

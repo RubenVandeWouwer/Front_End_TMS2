@@ -6,7 +6,7 @@
           <div class="gradient-form">
             <div class="flex justify-between mx-16 mb-10">
               <div *ngIf="pump; else notassigned" class="w-full mx-5 vw">
-                <apx-chart [series]="series" [chart]="chart" [title]="title">
+                <apx-chart [series]="series" [chart]="chart" [title]="title" [xaxis]="xaxis">
                 </apx-chart>
                 <div *ngIf="pump.oldPumpValues.length > 1">
                   <div class="flex justify-between pb-4">

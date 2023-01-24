@@ -7,7 +7,7 @@
             <div class="flex justify-between mx-16 mb-10">
               <div *ngIf="pump; else notassigned" class="w-full mx-5 vw">
                 <div id="chart">
-                  <apx-chart [series]="series" [chart]="chart" [title]="title">
+                  <apx-chart [series]="series" [chart]="chart" [title]="title" [xaxis]="xaxis">
                   </apx-chart>
                 </div>
                 <div *ngIf="pump.pumpValues.length > 1">
@@ -22,7 +22,7 @@
                       }}</span>
                     </div>
                     <div class="flex justify-center">
-                      <button
+                      <button [routerLink]="['/pumplog' , pump.id]"
                         class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                       >
                         Check logs
