@@ -39,7 +39,7 @@ export class OldPumpDetailComponent implements OnInit {
         this.title= {text: this.pump.name}
       });
       // this.title = {text: this.pump.name};
-      this.series = [{name: 'Ampere', data: this.pumpChart}];
+      this.series = [{name: 'Milliampere', data: this.pumpChart}];
       this.chart = {type:'line'}
       this.xaxis = {
         categories: [

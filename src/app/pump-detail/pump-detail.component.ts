@@ -36,8 +36,7 @@ export class PumpDetailComponent implements OnInit {
         console.log(this.pumpChart);
         this.title = { text: this.pump.name };
       });
-      // this.title = {text: this.pump.name};
-      this.series = [{ name: 'Ampere', data: this.pumpChart }];
+      this.series = [{ name: 'Milliampere', data: this.pumpChart }];
       this.chart = { type: 'line' };
       this.xaxis = {
         categories: ['text'],
@@ -45,14 +44,9 @@ export class PumpDetailComponent implements OnInit {
     }
   }
 
-  updateInputValue(value: any) {
-    this.pump.inputValue = value.target.value;
-    setTimeout(()=>{
-
-    },500)
-    console.log(this.pump);
-    // this.pumpService.updatePump(this.pump.id, this.pump).subscribe(() => {
-    //   this.ngOnInit();
-    // });
+  updateInputValue() {
+    this.pumpService.updatePump(this.pump.id, this.pump).subscribe(() => {
+      this.ngOnInit();
+    });
   }
 }

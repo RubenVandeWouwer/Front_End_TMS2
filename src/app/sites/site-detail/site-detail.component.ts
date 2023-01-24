@@ -94,7 +94,6 @@ export class SiteDetailComponent implements OnInit {
     this.sensorService.getSensorById(item.id).subscribe((x) => {
       this.sensors.push(x)
     })
-
   }
 
   onSensorDeSelect(item: any) {
@@ -107,7 +106,6 @@ export class SiteDetailComponent implements OnInit {
         this.sensors.push(x)
       })
     })
-
   }
 
   onUnSelectAllSensors() {
