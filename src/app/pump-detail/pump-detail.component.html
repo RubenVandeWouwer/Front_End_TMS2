@@ -2,89 +2,79 @@
   <div class="block rounded-lg">
     <div class="lg:flex lg:flex-wrap g-0">
       <div class="px-4 md:px-0">
-        <div class="md:mx-6 ">
+        <div class="md:mx-6">
           <div class="gradient-form">
             <div class="flex justify-between mx-16 mb-10">
-              <div *ngIf="pump; else notassigned" class="w-full mx-5">
+              <div *ngIf="pump; else notassigned" class="w-full mx-5 vw">
                 <div id="chart">
-                  <apx-chart
-                    [series]="series"
-                    [chart]="chart"
-                    [title]="title">
+                  <apx-chart [series]="series" [chart]="chart" [title]="title" [xaxis]="xaxis">
                   </apx-chart>
-
                 </div>
                 <div *ngIf="pump.pumpValues.length > 1">
-                  <div class="grid grid-cols-2 items-center mb-3">
-                    <div>
-                      <label
-                              class="block text-gray-700 text-sm font-bold mb-2"
-                              for="sensor"
-                      >Current Electricy usage (A)</label
+                  <div class="flex justify-between pb-4">
+                    <div class="flex flex-col items-center">
+                      <label class="block text-gray-700 text-sm font-bold mb-2"
+                        >Latest data reading:</label
                       >
-                      <input
-                              class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                              id="sensor"
-                              type="text"
-                              placeholder="Ampere"
-                              value="{{
-                                        pump.pumpValues[pump.pumpValues.length - 1].value
-                                      }}"
-                      />
+                      <span>{{
+                        pump.pumpValues[pump.pumpValues.length - 1].date
+                          | date : "dd/MM/yyyy hhumm"
+                      }}</span>
                     </div>
-                    <div>
-                      <label
-                              class="block text-gray-700 text-sm font-bold mb-2"
-                              for="drainage"
-                      >Latest data reading</label
+                    <div class="flex justify-center">
+                      <button [routerLink]="['/pumplog' , pump.id]"
+                        class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                       >
-                      <input
-                              class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                              id="drainage"
-                              type="text"
-                              placeholder="Date"
-
-                              value="{{
-                                        pump.pumpValues[pump.pumpValues.length - 1].date
-                                          | date : 'dd/MM/yyyy hhumm'
-                                      }}"
-
-                      />
+                        Check logs
+                      </button>
                     </div>
                   </div>
+                </div>
+                <div *ngIf="pump.pumpValues.length > 1">
                   <div class="grid grid-cols-2 items-center mb-5">
                     <div>
                       <label
-                              class="block text-gray-700 text-sm font-bold mb-2"
-                              for="drainage"
-                      >Current FlowRate (l/min)</label
+                        class="block text-gray-700 text-sm font-bold mb-2"
+                        for="drainage"
+                        >Current FlowRate (l/min)</label
                       >
-                      <input
-                              class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                              id="drainage"
-                              type="text"
-                              placeholder="FlowRate"
-                              value="{{
-                                        pump.pumpValues[pump.pumpValues.length - 1].flowRate
-                                      }}"
-                      />
+                      <span
+                        >{{
+                          pump.pumpValues[pump.pumpValues.length - 1].flowRate
+                        }}
+                        l/min</span
+                      >
                     </div>
                     <div>
-                      <a
-                              href=""
-                              class="w-full text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                      >Check logs</a
+                      <label
+                        class="block text-gray-700 text-sm font-bold mb-2"
+                        for="sensor"
+                        >Current Electricy usage (A)</label
                       >
+                      <span
+                        >{{
+                          pump.pumpValues[pump.pumpValues.length - 1].value
+                        }}
+                        Milliampere</span>
                     </div>
                   </div>
+                  <form action="#">
+                  <div><label for="inputValue" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">Current pumping value: {{pump.inputValue}}%</label>
+                    <input name="inputValue" [(ngModel)]="this.pump.inputValue" id="inputValue" type="range" min="0" max="100"  class="w-full h-2 rounded-lg appearance-none cursor-pointer bg-gray-200"></div>
+                    <button type="submit" (click)="updateInputValue()"
+
+                    class="w-full mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+              Submit
+            </button>
+                  </form>
+                  <!-- (input)="updateInputValue($event)" -->
+                  </div>
               </div>
-              </div>
-              <ng-template #notassigned
-              ><h1 class="text-red-600">
-                Error 204: This Pump Does Not Exist
-              </h1></ng-template
-              >
             </div>
+            <ng-template #notassigned
+              ><h1 class="text-red-600">
+                Error 404: This Pump Does Not Exist
+              </h1></ng-template>
           </div>
         </div>
       </div>
