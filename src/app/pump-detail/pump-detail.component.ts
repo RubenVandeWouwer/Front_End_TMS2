@@ -19,10 +19,6 @@ export class PumpDetailComponent implements OnInit {
   xaxis!: apex.ApexXAxis;
   pumpId!: any;
 
-  form: any = {
-    inputValue: null,
-  };
-
   constructor(
     private pumpService: PumpService,
     private route: ActivatedRoute
@@ -49,11 +45,14 @@ export class PumpDetailComponent implements OnInit {
     }
   }
 
-  updateInputValue() {
-    this.pump.inputValue = this.form.inputValue;
+  updateInputValue(value: any) {
+    this.pump.inputValue = value.target.value;
+    setTimeout(()=>{
+
+    },500)
     console.log(this.pump);
-    this.pumpService.updatePump(this.pump.id, this.pump).subscribe(() => {
-      this.ngOnInit();
-    });
+    // this.pumpService.updatePump(this.pump.id, this.pump).subscribe(() => {
+    //   this.ngOnInit();
+    // });
   }
 }
