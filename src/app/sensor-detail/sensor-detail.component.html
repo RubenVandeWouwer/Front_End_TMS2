@@ -27,12 +27,18 @@
                           | date : "dd/MM/yyyy hhumm"
                       }}</span>
                     </div>
-                    <div class="flex justify-center">
-
-                      <button [routerLink]="['/sensorlog' , sensor.id]"
+                    <div *ngIf="checkButton" class="flex justify-center">
+                      <button (click)="checkButton = false"
                         class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                       >
                         Check logs
+                      </button>
+                    </div>
+                    <div *ngIf="!checkButton" class="flex justify-center">
+                      <button (click)="checkButton = true"
+                        class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                      >
+                        Check Pumps
                       </button>
                     </div>
                   </div>
@@ -54,7 +60,13 @@
                     </div>
                   </div>
                 </div>
-                <div class="flex mb-5">
+                <div *ngIf="!checkButton">
+                  <div *ngFor="let log of sensor.sensorLogs">
+                    {{log.error}} at
+                    {{log.date}}
+                  </div>
+                </div>
+                <div *ngIf="checkButton" class="flex mb-5">
                   <div>
                     <ng-multiselect-dropdown
                       class=""
@@ -88,7 +100,7 @@
                     Submit
                   </button>
                 </div>
-                <div class="grid grid-cols-3">
+                <div *ngIf="checkButton" class="grid grid-cols-3">
                   <app-pump
                     class="mx-5"
                     (onDeletePump)="deletePump(pump)"

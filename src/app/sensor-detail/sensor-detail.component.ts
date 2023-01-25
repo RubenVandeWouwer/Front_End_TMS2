@@ -8,10 +8,6 @@ import {OldPumpService} from "../services/old-pump.service";
 import {IDropdownSettings,} from 'ng-multiselect-dropdown';
 import {Pump} from "../models/pump";
 import {OldPump} from "../models/oldPump";
-import {PumpValueService} from "../services/pump-value.service";
-import {PumpValues} from "../models/pumpValues";
-import {SensorValueService} from "../services/sensor-value.service";
-import {SensorValues} from "../models/sensorValues";
 
 @Component({
   selector: 'app-sensor-detail',
@@ -32,7 +28,7 @@ export class SensorDetailComponent implements OnInit {
   chart!: apex.ApexChart;
   title!: apex.ApexTitleSubtitle;
   xaxis!: apex.ApexXAxis;
-
+  checkButton = true;
 
   constructor(private SensorService: SensorService, private route: ActivatedRoute, private pumpService: PumpService, private oldPumpService: OldPumpService) {
   }
@@ -52,12 +48,10 @@ export class SensorDetailComponent implements OnInit {
       idField: 'id',
       textField: `name`,
     };
-
     this.dropdownSettingsOldPump = {
       idField: 'id',
       textField: `name`,
     };
-
     if (sensorId != null) {
       this.SensorService.getSensorById(+sensorId).subscribe((result) => {
         this.sensor = result;
@@ -160,20 +154,5 @@ export class SensorDetailComponent implements OnInit {
       })
     }
 
-  }
-
-
-  testSensor() {
-    // this.pumpValue.pumpId = 3;
-    // this.pumpValue.flowRate = 150;
-    // let now = new Date();
-    // this.pumpValue.date = now.toISOString();
-    // this.pumpValue.value = 55;
-    // this.pumpValueService.createPumpValue(this.pumpValue).subscribe();
-    this.sensorValue.sensorId = 3;
-    this.sensorValue.value = 61.0;
-    let now = new Date();
-    this.sensorValue.date = now.toISOString();
-    this.sensorValueService.createSensorValue(this.sensorValue).subscribe();
   }
 }
