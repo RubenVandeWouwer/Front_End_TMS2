@@ -14,16 +14,16 @@
                   <div class="flex justify-between pb-4">
                     <div class="flex flex-col items-center">
                       <label class="block text-gray-700 text-sm font-bold mb-2"
-                        >Latest data reading:</label
+                      >Latest data reading:</label
                       >
                       <span>{{
                         pump.pumpValues[pump.pumpValues.length - 1].date
                           | date : "dd/MM/yyyy hhumm"
-                      }}</span>
+                        }}</span>
                     </div>
                     <div class="flex justify-center">
                       <button [routerLink]="['/pumplog' , pump.id]"
-                        class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                              class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                       >
                         Check logs
                       </button>
@@ -35,12 +35,12 @@
                     <div>
                       <label
                         class="block text-gray-700 text-sm font-bold mb-2"
-                        for="drainage"
-                        >Current FlowRate (l/min)</label
+
+                      >Current FlowRate (l/min)</label
                       >
                       <span
-                        >{{
-                          pump.pumpValues[pump.pumpValues.length - 1].flowRate
+                      >{{
+                        pump.pumpValues[pump.pumpValues.length - 1].flowRate
                         }}
                         l/min</span
                       >
@@ -48,33 +48,73 @@
                     <div>
                       <label
                         class="block text-gray-700 text-sm font-bold mb-2"
-                        for="sensor"
-                        >Current Electricy usage (A)</label
+                      >Current Electricy usage (A)</label
                       >
                       <span
-                        >{{
-                          pump.pumpValues[pump.pumpValues.length - 1].value
+                      >{{
+                        pump.pumpValues[pump.pumpValues.length - 1].value
                         }}
                         Milliampere</span>
                     </div>
                   </div>
-                  <form action="#">
-                  <div><label for="inputValue" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">Current pumping value: {{pump.inputValue}}%</label>
-                    <input name="inputValue" [(ngModel)]="this.pump.inputValue" id="inputValue" type="range" min="0" max="100"  class="w-full h-2 rounded-lg appearance-none cursor-pointer bg-gray-200"></div>
-                    <button type="submit" (click)="updateInputValue()"
-
-                    class="w-full mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-              Submit
-            </button>
-                  </form>
-                  <!-- (input)="updateInputValue($event)" -->
+                </div>
+                <div *ngIf="pump.pumpValues.length < 1">
+                  <div class="flex justify-between pb-4">
+                    <div class="flex flex-col items-center">
+                      <label class="block text-gray-700 text-sm font-bold mb-2"
+                      >Latest data reading:</label
+                      >
+                      <span>No readings yet.</span>
+                    </div>
+                    <div class="flex justify-center">
+                      <button [routerLink]="['/pumplog' , pump.id]"
+                              class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                      >
+                        Check logs
+                      </button>
+                    </div>
                   </div>
+                </div>
+                <div *ngIf="pump.pumpValues.length < 1">
+                  <div class="grid grid-cols-2 items-center mb-5">
+                    <div>
+                      <label
+                        class="block text-gray-700 text-sm font-bold mb-2"
+
+                      >Current FlowRate (l/min)</label
+                      >
+                      <span
+                      >No readings yet.</span
+                      >
+                    </div>
+                    <div>
+                      <label
+                        class="block text-gray-700 text-sm font-bold mb-2"
+                      >Current Electricy usage (A)</label
+                      >
+                      <span
+                      >No readings yet.</span>
+                    </div>
+                  </div>
+                </div>
+                <form action="#">
+                  <div><label for="inputValue"
+                              class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">Current pumping
+                    value: {{pump.inputValue}}%</label>
+                    <input name="inputValue" [(ngModel)]="this.pump.inputValue" id="inputValue" type="range" min="0"
+                           max="100" class="w-full h-2 rounded-lg appearance-none cursor-pointer bg-gray-200"></div>
+                  <button type="submit" (click)="updateInputValue()"
+
+                          class="w-full mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Submit
+                  </button>
+                </form>
               </div>
             </div>
             <ng-template #notassigned
-              ><h1 class="text-red-600">
-                Error 404: This Pump Does Not Exist
-              </h1></ng-template>
+            ><h1 class="text-red-600">
+              Error 404: This Pump Does Not Exist
+            </h1></ng-template>
           </div>
         </div>
       </div>
