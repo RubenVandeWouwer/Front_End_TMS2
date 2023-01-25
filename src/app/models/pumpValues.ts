@@ -3,6 +3,6 @@ export interface PumpValues {
   pumpId: number;
   value: number;
   flowRate: number;
-  date: Date;
+  date: string;
 }
 
