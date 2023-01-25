@@ -28,6 +28,7 @@ export class SensorDetailComponent implements OnInit {
   chart!: apex.ApexChart;
   title!: apex.ApexTitleSubtitle;
   xaxis!: apex.ApexXAxis;
+  checkButton = true;
 
   constructor(private SensorService: SensorService, private route: ActivatedRoute, private pumpService: PumpService, private oldPumpService: OldPumpService) {
   }
@@ -132,10 +133,10 @@ export class SensorDetailComponent implements OnInit {
   }
 
   deleteOldPump(pump: OldPump) {
-    if(confirm(`Are you sure you want to delete ${pump.name}`)){
+    if (confirm(`Are you sure you want to delete ${pump.name}`)) {
       this.oldPumpService.getOldPumpById(pump.id).subscribe((x) => {
         x.sensorId = null;
-        this.oldPumpService.updateOldPump(x.id, x).subscribe(() =>{
+        this.oldPumpService.updateOldPump(x.id, x).subscribe(() => {
           this.ngOnInit();
         });
       })
@@ -144,10 +145,10 @@ export class SensorDetailComponent implements OnInit {
   }
 
   deletePump(pump: Pump) {
-    if(confirm(`Are you sure you want to delete ${pump.name}`)){
+    if (confirm(`Are you sure you want to delete ${pump.name}`)) {
       this.pumpService.getPumpById(pump.id).subscribe((x) => {
         x.sensorId = null;
-        this.pumpService.updatePump(x.id, x).subscribe(() =>{
+        this.pumpService.updatePump(x.id, x).subscribe(() => {
           this.ngOnInit();
         });
       })
