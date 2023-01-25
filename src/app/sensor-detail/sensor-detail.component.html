@@ -28,14 +28,16 @@
                       }}</span>
                     </div>
                     <div *ngIf="checkButton" class="flex justify-center">
-                      <button (click)="checkButton = false"
+                      <button
+                        (click)="checkButton = false"
                         class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                       >
                         Check logs
                       </button>
                     </div>
                     <div *ngIf="!checkButton" class="flex justify-center">
-                      <button (click)="checkButton = true"
+                      <button
+                        (click)="checkButton = true"
                         class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                       >
                         Check Pumps
@@ -61,9 +63,35 @@
                   </div>
                 </div>
                 <div *ngIf="!checkButton">
-                  <div *ngFor="let log of sensor.sensorLogs">
-                    {{log.error}} at
-                    {{log.date}}
+                  <div>
+                    <div class="relative overflow-x-auto">
+                      <table class="w-full text-sm text-left text-gray-500">
+                        <thead
+                          class="text-xs text-gray-700 uppercase bg-gray-50"
+                        >
+                          <tr>
+                            <th scope="col" class="px-6 py-3">Message</th>
+                            <th scope="col" class="px-6 py-3">TimeStamp</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr
+                            *ngFor="let log of sensor.sensorLogs"
+                            class="bg-white border-b"
+                          >
+                            <th
+                              scope="row"
+                              class="px-6 py-4 font-medium text-gray-700 whitespace-nowrap"
+                            >
+                              {{ log.error }}
+                            </th>
+                            <td class="px-6 py-4">
+                              {{ log.date | date : "dd/MM/yyyy hhumm"}}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
                 <div *ngIf="checkButton" class="flex mb-5">

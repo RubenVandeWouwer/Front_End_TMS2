@@ -99,6 +99,36 @@
                     </div>
                   </form>
                 </div>
+                <div>
+                  <div class="relative overflow-x-auto pt-5">
+                    <table class="w-full text-sm text-left text-gray-500">
+                      <thead
+                        class="text-xs text-gray-700 uppercase bg-gray-50"
+                      >
+                        <tr>
+                          <th scope="col" class="px-6 py-3">Message</th>
+                          <th scope="col" class="px-6 py-3">TimeStamp</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          *ngFor="let log of pump.pumpLogs"
+                          class="bg-white border-b"
+                        >
+                          <th
+                            scope="row"
+                            class="px-6 py-4 font-medium text-gray-700 whitespace-nowrap"
+                          >
+                            {{ log.error }}
+                          </th>
+                          <td class="px-6 py-4">
+                            {{ log.date | date : "dd/MM/yyyy hhumm"}}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
             </div>
             <ng-template #notassigned

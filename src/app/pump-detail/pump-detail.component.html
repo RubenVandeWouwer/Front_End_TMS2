@@ -7,7 +7,12 @@
             <div class="flex justify-between mx-16 mb-10">
               <div *ngIf="pump; else notassigned" class="w-full mx-5 vw">
                 <div id="chart">
-                  <apx-chart [series]="series" [chart]="chart" [title]="title" [xaxis]="xaxis">
+                  <apx-chart
+                    [series]="series"
+                    [chart]="chart"
+                    [title]="title"
+                    [xaxis]="xaxis"
+                  >
                   </apx-chart>
                 </div>
                 <div *ngIf="pump.pumpValues.length > 1">
@@ -22,7 +27,8 @@
                       }}</span>
                     </div>
                     <div class="flex justify-center">
-                      <button [routerLink]="['/pumplog' , pump.id]"
+                      <button
+                        [routerLink]="['/pumplog', pump.id]"
                         class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                       >
                         Check logs
@@ -55,26 +61,73 @@
                         >{{
                           pump.pumpValues[pump.pumpValues.length - 1].value
                         }}
-                        Milliampere</span>
+                        Milliampere</span
+                      >
                     </div>
                   </div>
                   <form action="#">
-                  <div><label for="inputValue" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">Current pumping value: {{pump.inputValue}}%</label>
-                    <input name="inputValue" [(ngModel)]="this.pump.inputValue" id="inputValue" type="range" min="0" max="100"  class="w-full h-2 rounded-lg appearance-none cursor-pointer bg-gray-200"></div>
-                    <button type="submit" (click)="updateInputValue()"
-
-                    class="w-full mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-              Submit
-            </button>
+                    <div>
+                      <label
+                        for="inputValue"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900"
+                        >Current pumping value: {{ pump.inputValue }}%</label
+                      >
+                      <input
+                        name="inputValue"
+                        [(ngModel)]="this.pump.inputValue"
+                        id="inputValue"
+                        type="range"
+                        min="0"
+                        max="100"
+                        class="w-full h-2 rounded-lg appearance-none cursor-pointer bg-gray-200"
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      (click)="updateInputValue()"
+                      class="w-full mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    >
+                      Submit
+                    </button>
                   </form>
-                  <!-- (input)="updateInputValue($event)" -->
+                </div>
+                <div>
+                  <div class="relative overflow-x-auto pt-5">
+                    <table class="w-full text-sm text-left text-gray-500">
+                      <thead
+                        class="text-xs text-gray-700 uppercase bg-gray-50"
+                      >
+                        <tr>
+                          <th scope="col" class="px-6 py-3">Message</th>
+                          <th scope="col" class="px-6 py-3">TimeStamp</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          *ngFor="let log of pump.pumpLogs"
+                          class="bg-white border-b"
+                        >
+                          <th
+                            scope="row"
+                            class="px-6 py-4 font-medium text-gray-700 whitespace-nowrap"
+                          >
+                            {{ log.error }}
+                          </th>
+                          <td class="px-6 py-4">
+                            {{ log.date | date : "dd/MM/yyyy hhumm"}}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
+                </div>
               </div>
             </div>
             <ng-template #notassigned
               ><h1 class="text-red-600">
                 Error 404: This Pump Does Not Exist
-              </h1></ng-template>
+              </h1></ng-template
+            >
           </div>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import { PumpLog } from "./pumplogs";
 import {PumpValues} from "./pumpValues";
 
 export interface Pump {
@@ -7,7 +8,7 @@ export interface Pump {
   inputValue: number;
   pumpValues: PumpValues[];
   isDefective: Boolean;
-  pumpLogs?: number;
+  pumpLogs: PumpLog[];
 }
 
 
