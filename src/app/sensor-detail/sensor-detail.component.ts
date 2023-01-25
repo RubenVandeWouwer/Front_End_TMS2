@@ -32,14 +32,9 @@ export class SensorDetailComponent implements OnInit {
   chart!: apex.ApexChart;
   title!: apex.ApexTitleSubtitle;
   xaxis!: apex.ApexXAxis;
-  pumpValue = {} as PumpValues;
-  sensorValue = {} as SensorValues;
 
-  constructor(private SensorService: SensorService, private route: ActivatedRoute,
-              private pumpService: PumpService,
-              private oldPumpService: OldPumpService,
-              private pumpValueService: PumpValueService,
-              private sensorValueService: SensorValueService) {
+
+  constructor(private SensorService: SensorService, private route: ActivatedRoute, private pumpService: PumpService, private oldPumpService: OldPumpService) {
   }
 
   ngOnInit(): void {
@@ -73,7 +68,8 @@ export class SensorDetailComponent implements OnInit {
         this.title = {text: this.sensor.name};
       });
       this.series = [{name: 'Pressure', data: this.sensorChart}];
-      this.chart = {type: 'line'}
+      this.chart = {type: 'line'};
+      this.xaxis = {labels: {show: false}}
     }
   }
 

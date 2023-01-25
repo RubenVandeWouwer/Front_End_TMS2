@@ -6,60 +6,54 @@
           <div class="gradient-form">
             <div class="flex justify-between">
               <div *ngIf="sensor; else notassigned" class="">
-                <br/>
+                <br />
                 <div id="chart">
                   <apx-chart
                     [series]="series"
                     [chart]="chart"
                     [title]="title"
+                    [xaxis]="xaxis"
                   ></apx-chart>
                 </div>
+
                 <div *ngIf="sensor.sensorValues.length > 1">
                   <div class="flex justify-between pb-4">
                     <div class="flex flex-col items-center">
-                      <label
-                        class="block text-gray-700 text-sm font-bold mb-2"
-                      >Latest data reading:</label
+                      <label class="block text-gray-700 text-sm font-bold mb-2"
+                        >Latest data reading:</label
                       >
                       <span>{{
                         sensor.sensorValues[sensor.sensorValues.length - 1].date
-                          | date : 'dd/MM/yyyy hhumm'
-                        }}</span>
+                          | date : "dd/MM/yyyy hhumm"
+                      }}</span>
                     </div>
                     <div class="flex justify-center">
-                      <button (click)="testSensor()"
-                        class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                      >Test sensor
-                      </button>
-                    </div>
-                    <div class="flex justify-center">
-                      <button
-                        class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                      >Check logs
-                      </button>
-                    </div>
 
+                      <button [routerLink]="['/sensorlog' , sensor.id]"
+                        class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                      >
+                        Check logs
+                      </button>
+                    </div>
                   </div>
                 </div>
                 <div *ngIf="sensor.sensorValues.length < 1">
                   <div class="flex justify-between pb-4">
                     <div class="flex flex-col items-center">
-                      <label
-                        class="block text-gray-700 text-sm font-bold mb-2"
-                      >Latest data reading:</label
+                      <label class="block text-gray-700 text-sm font-bold mb-2"
+                        >Latest data reading:</label
                       >
                       <span>No readings yet.</span>
                     </div>
                     <div class="flex justify-center">
                       <button
                         class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                      >Check logs
+                      >
+                        Check logs
                       </button>
                     </div>
-
                   </div>
                 </div>
-
                 <div class="flex mb-5">
                   <div>
                     <ng-multiselect-dropdown
@@ -70,8 +64,8 @@
                       (onSelect)="onPumpSelect($event)"
                       (onSelectAll)="onSelectAllPumps($event)"
                       (onDeSelect)="onPumpDeSelect($event)"
-                      (onDeSelectAll)="onUnSelectAllPumps()">>
-
+                      (onDeSelectAll)="onUnSelectAllPumps()"
+                      >>
                     </ng-multiselect-dropdown>
                   </div>
                   <div>
@@ -83,30 +77,36 @@
                       (onSelect)="onOldPumpSelect($event)"
                       (onSelectAll)="onSelectAllOldPumps($event)"
                       (onDeSelect)="onOldPumpDeSelect($event)"
-                      (onDeSelectAll)="onUnSelectAllOldPumps()">>
+                      (onDeSelectAll)="onUnSelectAllOldPumps()"
+                      >>
                     </ng-multiselect-dropdown>
                   </div>
-                  <button (click)="submitPumps()"
-                          class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                  >Submit
+                  <button
+                    (click)="submitPumps()"
+                    class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                  >
+                    Submit
                   </button>
                 </div>
                 <div class="grid grid-cols-3">
-                  <app-pump class="mx-5" (onDeletePump)="deletePump(pump)"
-                            *ngFor="let pump of sensor.pumps"
-                            [pump]="pump"
+                  <app-pump
+                    class="mx-5"
+                    (onDeletePump)="deletePump(pump)"
+                    *ngFor="let pump of sensor.pumps"
+                    [pump]="pump"
                   ></app-pump>
-                  <app-pump class="mx-5" (onDeletePump)="deleteOldPump(pump)"
-                            *ngFor="let pump of sensor.oldPumps"
-                            [oldPump]="pump"
+                  <app-pump
+                    class="mx-5"
+                    (onDeletePump)="deleteOldPump(pump)"
+                    *ngFor="let pump of sensor.oldPumps"
+                    [oldPump]="pump"
                   ></app-pump>
                 </div>
               </div>
-
               <ng-template #notassigned
-              ><h1 class="text-red-600">
-                Error 204: This Sensor Does Not Exist
-              </h1></ng-template
+                ><h1 class="text-red-600">
+                  Error 404: This Sensor Does Not Exist
+                </h1></ng-template
               >
             </div>
           </div>
