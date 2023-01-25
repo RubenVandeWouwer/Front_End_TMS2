@@ -87,6 +87,10 @@
                     Submit
                   </button>
                 </div>
+                <div *ngFor="let log of sensor.sensorLogs">
+                  {{log.error}} at
+                  {{log.date}}
+                </div>
                 <div class="grid grid-cols-3">
                   <app-pump
                     class="mx-5"

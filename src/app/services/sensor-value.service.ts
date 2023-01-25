@@ -17,7 +17,6 @@ export class SensorValueService {
   };
 
   url: string = "https://localhost:7120/api/sensorvalue"
-
   // url: string = "https://hooyberghs-api.azurewebsites.net/api/sensorvalue"
 
   constructor(private httpClient: HttpClient) {
