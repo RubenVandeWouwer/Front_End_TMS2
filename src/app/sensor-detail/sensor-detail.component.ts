@@ -67,9 +67,9 @@ export class SensorDetailComponent implements OnInit {
   }
 
   getSensorData(sensorId: number) {
+    this.sensorChart = [];
     this.SensorService.getSensorById(sensorId).subscribe((result) => {
       this.sensor = result;
-      this.sensorChart = [];
       result.sensorValues.map((x) => {
         this.sensorChart.push(x.value);
       });
