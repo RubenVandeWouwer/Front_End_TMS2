@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Pump } from '../models/pump';
-import { PumpService } from '../services/pump.service';
-import { SiteService } from '../services/site.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Pump} from '../models/pump';
+import {PumpService} from '../services/pump.service';
+import {SiteService} from '../services/site.service';
 import * as apex from 'ng-apexcharts';
 
 @Component({
@@ -22,7 +22,8 @@ export class PumpDetailComponent implements OnInit {
   constructor(
     private pumpService: PumpService,
     private route: ActivatedRoute
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.pumpId = this.route.snapshot.paramMap.get('id');
@@ -34,10 +35,10 @@ export class PumpDetailComponent implements OnInit {
           this.pumpChart.push(x.value);
         });
         console.log(this.pumpChart);
-        this.title = { text: this.pump.name };
+        this.title = {text: this.pump.name};
       });
-      this.series = [{ name: 'Milliampere', data: this.pumpChart }];
-      this.chart = { type: 'line' };
+      this.series = [{name: 'Milliampere', data: this.pumpChart}];
+      this.chart = {type: 'line'};
       this.xaxis = {
         categories: ['text'],
       };
@@ -46,6 +47,7 @@ export class PumpDetailComponent implements OnInit {
   }
 
   updateInputValue() {
+    this.pump.isUserInput = true;
     this.pumpService.updatePump(this.pump.id, this.pump).subscribe(() => {
       this.ngOnInit();
     });
