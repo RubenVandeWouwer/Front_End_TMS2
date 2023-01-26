@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {Pump} from '../models/pump';
-import {PumpService} from '../services/pump.service';
-import {SiteService} from '../services/site.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Pump } from '../models/pump';
+import { PumpService } from '../services/pump.service';
+import { SiteService } from '../services/site.service';
 import * as apex from 'ng-apexcharts';
 
 @Component({
@@ -19,38 +19,52 @@ export class PumpDetailComponent implements OnInit {
   xaxis!: apex.ApexXAxis;
   pumpId!: any;
   checkButton = true;
+  intervalId: any;
 
   constructor(
     private pumpService: PumpService,
     private route: ActivatedRoute
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.pumpId = this.route.snapshot.paramMap.get('id');
     console.log(this.pumpId);
     if (this.pumpId != null) {
-      this.pumpService.getPumpById(+this.pumpId).subscribe((result) => {
-        this.pump = result;
-        result.pumpValues.map((x) => {
-          this.pumpChart.push(x.value);
-        });
-        console.log(this.pumpChart);
-        this.title = {text: this.pump.name};
-      });
-      this.series = [{name: 'Milliampere', data: this.pumpChart}];
-      this.chart = {type: 'line'};
-      this.xaxis = {
-        categories: ['text'],
-      };
-      this.xaxis = {labels: {show: false}}
+      this.getPumpData();
+      this.buildChart();
+      this.intervalId = setInterval(() => {
+        this.getPumpData();
+      }, 20000);
+      this.intervalId = setInterval(() => {
+        this.buildChart();
+      }, 20000);
     }
   }
 
+  getPumpData() {
+    this.pumpService.getPumpById(+this.pumpId).subscribe((result) => {
+      this.pump = result;
+      result.pumpValues.map((x) => {
+        this.pumpChart.push(x.value);
+      });
+      console.log(this.pumpChart);
+      this.title = { text: this.pump.name };
+    });
+  }
+
+  buildChart() {
+    this.series = [{ name: 'Milliampere', data: this.pumpChart }];
+    this.chart = { type: 'line' };
+    this.xaxis = { labels: { show: false } };
+  }
+
   updateInputValue() {
-    this.pump.isUserInput = true;
     this.pumpService.updatePump(this.pump.id, this.pump).subscribe(() => {
       this.ngOnInit();
     });
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.intervalId);
   }
 }

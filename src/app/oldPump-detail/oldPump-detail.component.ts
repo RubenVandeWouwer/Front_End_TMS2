@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as apex from 'ng-apexcharts';
-import {OldPump} from "../models/oldPump";
-import {OldPumpService} from "../services/old-pump.service";
+import { OldPump } from '../models/oldPump';
+import { OldPumpService } from '../services/old-pump.service';
 
 @Component({
   selector: 'app-pump-detail',
@@ -11,13 +11,14 @@ import {OldPumpService} from "../services/old-pump.service";
 })
 export class OldPumpDetailComponent implements OnInit {
   pump!: OldPump;
-  pumpChart= [] as number[];
+  pumpChart = [] as number[];
   series!: apex.ApexAxisChartSeries;
   chart!: apex.ApexChart;
   title!: apex.ApexTitleSubtitle;
   xaxis!: apex.ApexXAxis;
   isViewed!: number;
   checkButton = true;
+  intervalId: any;
 
   form: any = {
     inputValue: null,
@@ -31,30 +32,42 @@ export class OldPumpDetailComponent implements OnInit {
   ngOnInit(): void {
     const pumpId = this.route.snapshot.paramMap.get('id');
     if (pumpId != null) {
-      this.oldPumpService.getOldPumpById(+pumpId).subscribe((result) => {
-        this.pump = result;
-        result.oldPumpValues.map((x) => {
-          this.pumpChart.push(x.value);
-        });
-        console.log(this.pump.name);
-        this.title= {text: this.pump.name}
-      });
-      // this.title = {text: this.pump.name};
-      this.series = [{name: 'Milliampere', data: this.pumpChart}];
-      this.chart = {type:'line'}
-      this.xaxis = {
-        categories: [
-          "text",
-        ]
-      }
-      this.xaxis = {labels: {show: false}}
+      this.getOldPumpData(+pumpId)
+      this.buildChart()
+      this.intervalId = setInterval(() => {
+        this.getOldPumpData(+pumpId);
+      }, 20000);
+      this.intervalId = setInterval(() => {
+        this.buildChart();
+      }, 20000);
     }
   }
 
-  updateInputValue(){
+  getOldPumpData(pumpId: number){
+    this.oldPumpService.getOldPumpById(+pumpId).subscribe((result) => {
+      this.pump = result;
+      result.oldPumpValues.map((x) => {
+        this.pumpChart.push(x.value);
+      });
+      console.log(this.pump.name);
+      this.title = { text: this.pump.name };
+    });
+  }
+
+  buildChart(){
+    this.series = [{ name: 'Milliampere', data: this.pumpChart }];
+    this.chart = { type: 'line' };
+    this.xaxis = { labels: { show: false } };
+  }
+
+  updateInputValue() {
     this.pump.inputValue = !this.pump.inputValue;
-    console.log(this.pump.inputValue)
+    console.log(this.pump.inputValue);
     this.oldPumpService.updateOldPump(this.pump.id, this.pump).subscribe();
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.intervalId);
   }
 
   // updateInputValue() {
