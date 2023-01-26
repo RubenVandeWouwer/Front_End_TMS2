@@ -9,6 +9,7 @@ export interface OldPump {
   oldPumpValues: OldPumpValues[];
   isDefective: Boolean;
   pumpLogs: PumpLog[];
+  isUserInput: Boolean;
 }
 
 

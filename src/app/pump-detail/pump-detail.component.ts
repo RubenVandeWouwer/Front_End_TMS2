@@ -33,11 +33,9 @@ export class PumpDetailComponent implements OnInit {
       this.getPumpData(+pumpId);
       this.intervalId = setInterval(() => {
         this.getPumpData(+pumpId);
+        this.buildChart();
       }, 20000);
     }
-    this.intervalId = setInterval(() => {
-      this.buildChart();
-    }, 20000);
     this.buildChart();
     console.log("Builded chart")
   }
@@ -62,6 +60,7 @@ export class PumpDetailComponent implements OnInit {
   }
 
   updateInputValue() {
+    this.pump.isUserInput=true;
     this.pumpService.updatePump(this.pump.id, this.pump).subscribe(() => {
       this.ngOnInit();
     });

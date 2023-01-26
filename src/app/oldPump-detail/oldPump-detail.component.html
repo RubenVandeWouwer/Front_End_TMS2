@@ -82,7 +82,7 @@
                       >
                     </div>
                   </div>
-                  <form action="#">
+                  <form action="#" *ngIf="!pump.isDefective">
                     <div>
                       <label
                         class="relative inline-flex items-center cursor-pointer"
@@ -103,6 +103,7 @@
                       </label>
                     </div>
                   </form>
+                  <p *ngIf="pump.isDefective" class="text-red-600">Pump is Defective, Check logs.</p>
                 </div>
                 <div *ngIf="!checkButton">
                   <div class="relative overflow-x-auto pt-5">
