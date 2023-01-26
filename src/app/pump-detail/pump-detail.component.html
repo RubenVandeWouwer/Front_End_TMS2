@@ -65,11 +65,12 @@
                         >{{
                           pump.pumpValues[pump.pumpValues.length - 1].value
                         }}
-                        Milliampere</span
+                        Ampere</span
                       >
                     </div>
                   </div>
-                  <form action="#" *ngIf="!pump.isDefective">
+                  <p *ngIf="pump.isDefective" class="text-red-600 pb-4">Pump is defective and has automatically terminated. For more info check the logs. Only activate the pump if repaired!</p>
+                  <form action="#">
                     <div>
                       <label
                         for="inputValue"
@@ -94,7 +95,6 @@
                       Submit
                     </button>
                   </form>
-                  <p *ngIf="pump.isDefective" class="text-red-600">Pump is Defective, Check logs.</p>
                 </div>
                 <div *ngIf="pump.pumpValues.length < 1">
                   <div class="flex justify-between pb-4">
