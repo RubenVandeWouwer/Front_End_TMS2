@@ -27,23 +27,25 @@ export class PumpDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.pumpId = this.route.snapshot.paramMap.get('id');
+    const pumpId = this.route.snapshot.paramMap.get('id');
     console.log(this.pumpId);
-    if (this.pumpId != null) {
-      this.getPumpData();
-      this.buildChart();
+    if (pumpId != null) {
+      this.getPumpData(+pumpId);
       this.intervalId = setInterval(() => {
-        this.getPumpData();
-      }, 20000);
-      this.intervalId = setInterval(() => {
-        this.buildChart();
+        this.getPumpData(+pumpId);
       }, 20000);
     }
+    this.intervalId = setInterval(() => {
+      this.buildChart();
+    }, 20000);
+    this.buildChart();
+    console.log("Builded chart")
   }
 
-  getPumpData() {
-    this.pumpService.getPumpById(+this.pumpId).subscribe((result) => {
+  getPumpData(pumpId: number) {
+    this.pumpService.getPumpById(pumpId).subscribe((result) => {
       this.pump = result;
+      this.pumpChart = [];
       result.pumpValues.map((x) => {
         this.pumpChart.push(x.value);
       });

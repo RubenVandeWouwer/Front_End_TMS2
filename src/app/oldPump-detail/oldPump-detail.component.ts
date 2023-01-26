@@ -46,6 +46,7 @@ export class OldPumpDetailComponent implements OnInit {
   getOldPumpData(pumpId: number){
     this.oldPumpService.getOldPumpById(+pumpId).subscribe((result) => {
       this.pump = result;
+      this.pumpChart = [];
       result.oldPumpValues.map((x) => {
         this.pumpChart.push(x.value);
       });
