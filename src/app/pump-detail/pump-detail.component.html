@@ -69,7 +69,7 @@
                       >
                     </div>
                   </div>
-                  <form action="#">
+                  <form action="#" *ngIf="!pump.isDefective">
                     <div>
                       <label
                         for="inputValue"
@@ -94,6 +94,7 @@
                       Submit
                     </button>
                   </form>
+                  <p *ngIf="pump.isDefective" class="text-red-600">Pump is Defective, Check logs.</p>
                 </div>
                 <div *ngIf="pump.pumpValues.length < 1">
                   <div class="flex justify-between pb-4">

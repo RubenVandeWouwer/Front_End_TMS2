@@ -59,10 +59,9 @@ export class SensorDetailComponent implements OnInit {
       this.buildChart();
       this.intervalId = setInterval(() => {
         this.getSensorData(+sensorId);
-      }, 20000);
-      this.intervalId = setInterval(() => {
         this.buildChart();
       }, 20000);
+
     }
   }
 

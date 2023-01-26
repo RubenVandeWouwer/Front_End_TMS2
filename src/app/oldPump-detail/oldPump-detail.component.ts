@@ -36,10 +36,8 @@ export class OldPumpDetailComponent implements OnInit {
       this.buildChart()
       this.intervalId = setInterval(() => {
         this.getOldPumpData(+pumpId);
-      }, 20000);
-      this.intervalId = setInterval(() => {
         this.buildChart();
-      }, 20000);
+      }, 5000);
     }
   }
 
@@ -62,8 +60,9 @@ export class OldPumpDetailComponent implements OnInit {
   }
 
   updateInputValue() {
+    this.pump.isUserInput=true;
     this.pump.inputValue = !this.pump.inputValue;
-    console.log(this.pump.inputValue);
+    console.log("hgchfhfhjfj");
     this.oldPumpService.updateOldPump(this.pump.id, this.pump).subscribe();
   }
 
