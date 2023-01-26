@@ -1,21 +1,20 @@
-import {Component, OnInit} from '@angular/core';
-import {SensorService} from '../services/sensor.service';
-import {ActivatedRoute} from '@angular/router';
-import {Sensor} from '../models/sensor';
+import { Component, OnInit } from '@angular/core';
+import { SensorService } from '../services/sensor.service';
+import { ActivatedRoute } from '@angular/router';
+import { Sensor } from '../models/sensor';
 import * as apex from 'ng-apexcharts';
-import {PumpService} from "../services/pump.service";
-import {OldPumpService} from "../services/old-pump.service";
-import {IDropdownSettings,} from 'ng-multiselect-dropdown';
-import {Pump} from "../models/pump";
-import {OldPump} from "../models/oldPump";
+import { PumpService } from '../services/pump.service';
+import { OldPumpService } from '../services/old-pump.service';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { Pump } from '../models/pump';
+import { OldPump } from '../models/oldPump';
 
 @Component({
   selector: 'app-sensor-detail',
   templateUrl: './sensor-detail.component.html',
-  styleUrls: ['./sensor-detail.component.css']
+  styleUrls: ['./sensor-detail.component.css'],
 })
 export class SensorDetailComponent implements OnInit {
-
   sensor!: Sensor;
   sensorChart = [] as number[];
   dropdownListPump!: Pump[];
@@ -29,21 +28,24 @@ export class SensorDetailComponent implements OnInit {
   title!: apex.ApexTitleSubtitle;
   xaxis!: apex.ApexXAxis;
   checkButton = true;
+  intervalId: any;
 
-  constructor(private SensorService: SensorService, private route: ActivatedRoute, private pumpService: PumpService, private oldPumpService: OldPumpService) {
-  }
+  constructor(
+    private SensorService: SensorService,
+    private route: ActivatedRoute,
+    private pumpService: PumpService,
+    private oldPumpService: OldPumpService
+  ) {}
 
   ngOnInit(): void {
     const sensorId = this.route.snapshot.paramMap.get('id');
 
     this.pumpService.getPumps().subscribe((x) => {
-        this.dropdownListPump = x.filter((x) => x.sensorId == null)
-      }
-    )
+      this.dropdownListPump = x.filter((x) => x.sensorId == null);
+    });
     this.oldPumpService.getOldPumps().subscribe((x) => {
-        this.dropdownListOldPump = x.filter((x) => x.sensorId == null)
-      }
-    )
+      this.dropdownListOldPump = x.filter((x) => x.sensorId == null);
+    });
     this.dropdownSettingsPump = {
       idField: 'id',
       textField: `name`,
@@ -53,37 +55,50 @@ export class SensorDetailComponent implements OnInit {
       textField: `name`,
     };
     if (sensorId != null) {
-      this.SensorService.getSensorById(+sensorId).subscribe((result) => {
-        this.sensor = result;
-        result.sensorValues.map((x) => {
-          this.sensorChart.push(x.value);
-        });
-        console.log(this.sensorChart);
-        this.title = {text: this.sensor.name};
-      });
-      this.series = [{name: 'Pressure', data: this.sensorChart}];
-      this.chart = {type: 'line'};
-      this.xaxis = {labels: {show: false}}
+      this.getSensorData(+sensorId)
+      this.buildChart();
+      this.intervalId = setInterval(() => {
+        this.getSensorData(+sensorId);
+      }, 20000);
+      this.intervalId = setInterval(() => {
+        this.buildChart();
+      }, 20000);
     }
+  }
+
+  getSensorData(sensorId: number) {
+    this.SensorService.getSensorById(sensorId).subscribe((result) => {
+      this.sensor = result;
+      result.sensorValues.map((x) => {
+        this.sensorChart.push(x.value);
+      });
+      console.log(this.sensorChart);
+      this.title = { text: this.sensor.name };
+    });
+  }
+
+  buildChart() {
+    this.series = [{ name: 'Pressure', data: this.sensorChart }];
+    this.chart = { type: 'line' };
+    this.xaxis = { labels: { show: false } };
   }
 
   onPumpSelect(item: any) {
     this.pumpService.getPumpById(item.id).subscribe((x) => {
-      this.pumps.push(x)
-    })
-
+      this.pumps.push(x);
+    });
   }
 
   onPumpDeSelect(item: any) {
-    this.pumps = this.pumps.filter((x) => x.id != item.id)
+    this.pumps = this.pumps.filter((x) => x.id != item.id);
   }
 
   onSelectAllPumps(items: any) {
     items.map((x: Sensor) => {
       this.pumpService.getPumpById(x.id).subscribe((x) => {
-        this.pumps.push(x)
-      })
-    })
+        this.pumps.push(x);
+      });
+    });
   }
 
   onUnSelectAllPumps() {
@@ -93,9 +108,9 @@ export class SensorDetailComponent implements OnInit {
   onSelectAllOldPumps(items: any) {
     items.map((x: Sensor) => {
       this.oldPumpService.getOldPumpById(x.id).subscribe((x) => {
-        this.oldPumps.push(x)
-      })
-    })
+        this.oldPumps.push(x);
+      });
+    });
   }
 
   onUnSelectAllOldPumps() {
@@ -104,13 +119,12 @@ export class SensorDetailComponent implements OnInit {
 
   onOldPumpSelect(item: any) {
     this.oldPumpService.getOldPumpById(item.id).subscribe((x) => {
-      this.oldPumps.push(x)
-    })
-
+      this.oldPumps.push(x);
+    });
   }
 
   onOldPumpDeSelect(item: any) {
-    this.oldPumps = this.oldPumps.filter((x) => x.id != item.id)
+    this.oldPumps = this.oldPumps.filter((x) => x.id != item.id);
   }
 
   submitPumps() {
@@ -120,7 +134,7 @@ export class SensorDetailComponent implements OnInit {
         this.pumpService.updatePump(p.id, p).subscribe(() => {
           this.ngOnInit();
         });
-      })
+      });
     }
     if (this.oldPumps != []) {
       this.oldPumps.map((p) => {
@@ -128,7 +142,7 @@ export class SensorDetailComponent implements OnInit {
         this.oldPumpService.updateOldPump(p.id, p).subscribe(() => {
           this.ngOnInit();
         });
-      })
+      });
     }
   }
 
@@ -139,9 +153,8 @@ export class SensorDetailComponent implements OnInit {
         this.oldPumpService.updateOldPump(x.id, x).subscribe(() => {
           this.ngOnInit();
         });
-      })
+      });
     }
-
   }
 
   deletePump(pump: Pump) {
@@ -151,8 +164,11 @@ export class SensorDetailComponent implements OnInit {
         this.pumpService.updatePump(x.id, x).subscribe(() => {
           this.ngOnInit();
         });
-      })
+      });
     }
+  }
 
+  ngOnDestroy() {
+    clearInterval(this.intervalId);
   }
 }
