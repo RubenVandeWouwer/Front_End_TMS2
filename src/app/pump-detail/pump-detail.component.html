@@ -26,17 +26,25 @@
                           | date : "dd/MM/yyyy hhumm"
                       }}</span>
                     </div>
-                    <div class="flex justify-center">
+                    <div *ngIf="checkButton" class="flex justify-center">
                       <button
-                        [routerLink]="['/pumplog', pump.id]"
+                        (click)="checkButton = false"
                         class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                       >
                         Check logs
                       </button>
                     </div>
+                    <div *ngIf="!checkButton" class="flex justify-center">
+                      <button
+                        (click)="checkButton = true"
+                        class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                      >
+                        Check Pumps
+                      </button>
+                    </div>
                   </div>
                 </div>
-                <div *ngIf="pump.pumpValues.length > 1">
+                <div *ngIf="checkButton&&pump.pumpValues.length > 0">
                   <div class="grid grid-cols-2 items-center mb-5">
                     <div>
                       <label class="block text-gray-700 text-sm font-bold mb-2"
@@ -95,14 +103,6 @@
                       >
                       <span>No readings yet.</span>
                     </div>
-                    <div class="flex justify-center">
-                      <button
-                        [routerLink]="['/pumplog', pump.id]"
-                        class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                      >
-                        Check logs
-                      </button>
-                    </div>
                   </div>
                 </div>
                 <div *ngIf="pump.pumpValues.length < 1">
@@ -121,7 +121,7 @@
                     </div>
                   </div>
                 </div>
-                <div>
+                <div *ngIf="!checkButton">
                   <div class="relative overflow-x-auto pt-5">
                     <table class="w-full text-sm text-left text-gray-500">
                       <thead class="text-xs text-gray-700 uppercase bg-gray-50">

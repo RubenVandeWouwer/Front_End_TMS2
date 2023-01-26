@@ -18,6 +18,7 @@ export class PumpDetailComponent implements OnInit {
   title!: apex.ApexTitleSubtitle;
   xaxis!: apex.ApexXAxis;
   pumpId!: any;
+  checkButton = true;
 
   constructor(
     private pumpService: PumpService,

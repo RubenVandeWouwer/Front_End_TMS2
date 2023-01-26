@@ -17,6 +17,7 @@ export class OldPumpDetailComponent implements OnInit {
   title!: apex.ApexTitleSubtitle;
   xaxis!: apex.ApexXAxis;
   isViewed!: number;
+  checkButton = true;
 
   form: any = {
     inputValue: null,
