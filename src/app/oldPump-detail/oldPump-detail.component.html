@@ -82,6 +82,7 @@
                       >
                     </div>
                   </div>
+                </div>
                   <p *ngIf="pump.isDefective" class="text-red-600 pb-4">Pump is defective and has automatically terminated, Check logs. Only activate the pump if repaired!</p>
                   <form action="#">
                     <div>
@@ -104,7 +105,7 @@
                       </label>
                     </div>
                   </form>
-                </div>
+                
                 <div *ngIf="!checkButton">
                   <div class="relative overflow-x-auto pt-5">
                     <table class="w-full text-sm text-left text-gray-500">

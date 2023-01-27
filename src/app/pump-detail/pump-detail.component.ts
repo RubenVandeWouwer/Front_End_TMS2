@@ -34,7 +34,7 @@ export class PumpDetailComponent implements OnInit {
       this.intervalId = setInterval(() => {
         this.getPumpData(+pumpId);
         this.buildChart();
-      }, 20000);
+      }, 5000);
     }
     this.buildChart();
     console.log('Builded chart');
