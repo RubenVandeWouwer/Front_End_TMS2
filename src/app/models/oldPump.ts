@@ -10,6 +10,7 @@ export interface OldPump {
   isDefective: Boolean;
   pumpLogs: PumpLog[];
   isUserInput: Boolean;
+  repair: Boolean;
 }
 
 

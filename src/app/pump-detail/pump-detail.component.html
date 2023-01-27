@@ -19,12 +19,12 @@
                   <div class="flex justify-between pb-4">
                     <div class="flex flex-col items-center">
                       <label class="block text-gray-700 text-sm font-bold mb-2"
-                        >Latest data reading:</label
+                      >Latest data reading:</label
                       >
                       <span>{{
                         pump.pumpValues[pump.pumpValues.length - 1].date
                           | date : "dd/MM/yyyy hhumm"
-                      }}</span>
+                        }}</span>
                     </div>
                     <div *ngIf="checkButton" class="flex justify-center">
                       <button
@@ -48,24 +48,24 @@
                   <div class="grid grid-cols-2 items-center mb-5">
                     <div>
                       <label class="block text-gray-700 text-sm font-bold mb-2"
-                        >Current FlowRate (l/min)</label
+                      >Current FlowRate (l/min)</label
                       >
                       <span
-                        >{{
-                          pump.pumpValues[pump.pumpValues.length - 1].flowRate
+                      >{{
+                        pump.pumpValues[pump.pumpValues.length - 1].flowRate
                         }}
                         l/min</span
                       >
                     </div>
                     <div>
                       <label class="block text-gray-700 text-sm font-bold mb-2"
-                        >Current Electricy usage (A)</label
+                      >Current Electricy usage (mA)</label
                       >
                       <span
-                        >{{
-                          pump.pumpValues[pump.pumpValues.length - 1].value
+                      >{{
+                        pump.pumpValues[pump.pumpValues.length - 1].value
                         }}
-                        Ampere</span
+                        Milliampere</span
                       >
                     </div>
                   </div>
@@ -74,7 +74,7 @@
                   <div class="flex justify-between pb-4">
                     <div class="flex flex-col items-center">
                       <label class="block text-gray-700 text-sm font-bold mb-2"
-                        >Latest data reading:</label
+                      >Latest data reading:</label
                       >
                       <span>No readings yet.</span>
                     </div>
@@ -84,13 +84,13 @@
                   <div class="grid grid-cols-2 items-center mb-5">
                     <div>
                       <label class="block text-gray-700 text-sm font-bold mb-2"
-                        >Current FlowRate (l/min)</label
+                      >Current FlowRate (l/min)</label
                       >
                       <span>No readings yet.</span>
                     </div>
                     <div>
                       <label class="block text-gray-700 text-sm font-bold mb-2"
-                        >Current Electricy usage (A)</label
+                      >Current Electricy usage (A)</label
                       >
                       <span>No readings yet.</span>
                     </div>
@@ -100,37 +100,49 @@
                   <div class="relative overflow-x-auto pt-5">
                     <table class="w-full text-sm text-left text-gray-500">
                       <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                        <tr>
-                          <th scope="col" class="px-6 py-3">Message</th>
-                          <th scope="col" class="px-6 py-3">TimeStamp</th>
-                        </tr>
+                      <tr>
+                        <th scope="col" class="px-6 py-3">Message</th>
+                        <th scope="col" class="px-6 py-3">TimeStamp</th>
+                      </tr>
                       </thead>
                       <tbody>
-                        <tr
-                          *ngFor="let log of pump.pumpLogs"
-                          class="bg-white border-b"
+                      <tr
+                        *ngFor="let log of pump.pumpLogs"
+                        class="bg-white border-b"
+                      >
+                        <th
+                          scope="row"
+                          class="px-6 py-4 font-medium text-gray-700 whitespace-nowrap"
                         >
-                          <th
-                            scope="row"
-                            class="px-6 py-4 font-medium text-gray-700 whitespace-nowrap"
-                          >
-                            {{ log.error }}
-                          </th>
-                          <td class="px-6 py-4">
-                            {{ log.date | date : "dd/MM/yyyy hhumm" }}
-                          </td>
-                        </tr>
+                          {{ log.error }}
+                        </th>
+                        <td class="px-6 py-4">
+                          {{ log.date | date : "dd/MM/yyyy hhumm" }}
+                        </td>
+                      </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
-                <p *ngIf="pump.isDefective" class="text-red-600 pb-4">Pump is defective and has automatically terminated. For more info check the logs. Only activate the pump if repaired!</p>
-                  <form action="#">
+                <div *ngIf="checkButton">
+                  <div *ngIf="pump.isDefective">
+                    <button
+                      (click)="repairPump()"
+                      class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                    >
+                      Repair {{pump.name}}
+                    </button>
+                    <p class="text-red-600 pb-4">Pump is defective and has automatically terminated, Check logs. Only
+                      activate the pump if repaired!</p>
+                  </div>
+                </div>
+                <div *ngIf="checkButton">
+                  <div *ngIf="!pump.isDefective">
                     <div>
                       <label
                         for="inputValue"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900"
-                        >Current pumping value: {{ pump.inputValue }}%</label
+                      >Current pumping value: {{ pump.inputValue }}%</label
                       >
                       <input
                         name="inputValue"
@@ -149,13 +161,14 @@
                     >
                       Submit
                     </button>
-                  </form>
+                  </div>
+                </div>
               </div>
             </div>
             <ng-template #notassigned
-              ><h1 class="text-red-600">
-                Error 404: This Pump Does Not Exist
-              </h1></ng-template
+            ><h1 class="text-red-600">
+              Error 404: This Pump Does Not Exist
+            </h1></ng-template
             >
           </div>
         </div>
