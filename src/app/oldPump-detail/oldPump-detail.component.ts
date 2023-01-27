@@ -54,28 +54,29 @@ export class OldPumpDetailComponent implements OnInit {
   }
 
   buildChart(){
-    this.series = [{ name: 'Milliampere', data: this.pumpChart }];
+    this.series = [{ name: 'Ampere', data: this.pumpChart }];
     this.chart = { type: 'line' };
     this.xaxis = { labels: { show: false } };
   }
 
   updateInputValue() {
-    this.pump.isUserInput=true;
-    this.pump.inputValue = !this.pump.inputValue;
-    console.log("hgchfhfhjfj");
-    this.oldPumpService.updateOldPump(this.pump.id, this.pump).subscribe();
+    if (this.pump.isDefective) {
+      if (confirm('Are you sure the pump is repaired?')) {
+        this.pump.isUserInput=true;
+        this.pump.isDefective = false;
+        this.pump.inputValue = !this.pump.inputValue;
+        this.oldPumpService.updateOldPump(this.pump.id, this.pump).subscribe();
+      } else {
+      }
+    } else {
+      this.pump.isUserInput=true;
+      this.pump.isDefective = false;
+      this.pump.inputValue = !this.pump.inputValue;
+      this.oldPumpService.updateOldPump(this.pump.id, this.pump).subscribe();
+    }
   }
 
   ngOnDestroy() {
     clearInterval(this.intervalId);
   }
-
-  // updateInputValue() {
-  //   this.pump.inputValue = this.form.inputValue;
-  //   console.log(this.pump.inputValue)
-  //   console.log(this.pump);
-  //   this.oldPumpService.updateOldPump(this.pump.id, this.pump).subscribe(() => {
-  //     this.ngOnInit();
-  //   });
-  // }
 }

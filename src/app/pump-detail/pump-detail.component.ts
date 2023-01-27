@@ -37,7 +37,7 @@ export class PumpDetailComponent implements OnInit {
       }, 20000);
     }
     this.buildChart();
-    console.log("Builded chart")
+    console.log('Builded chart');
   }
 
   getPumpData(pumpId: number) {
@@ -54,16 +54,34 @@ export class PumpDetailComponent implements OnInit {
   }
 
   buildChart() {
-    this.series = [{ name: 'Milliampere', data: this.pumpChart }];
+    this.series = [{ name: 'Ampere', data: this.pumpChart }];
     this.chart = { type: 'line' };
     this.xaxis = { labels: { show: false } };
   }
 
   updateInputValue() {
-    this.pump.isUserInput=true;
-    this.pumpService.updatePump(this.pump.id, this.pump).subscribe(() => {
-      this.ngOnInit();
-    });
+
+    if (this.pump.isDefective) {
+      if (confirm('Are you sure the pump is repaired?')) {
+        this.pump.isUserInput = true;
+        this.pump.isDefective = false;
+        this.pumpService.updatePump(this.pump.id, this.pump).subscribe(() => {
+          this.ngOnInit();
+        });
+      } else {
+      }
+    } else {
+      this.pump.isUserInput = true;
+      this.pump.isDefective = false;
+      this.pumpService.updatePump(this.pump.id, this.pump).subscribe(() => {
+        this.ngOnInit();
+      });
+    }
+
+    // this.pump.isDefective = false;
+    // this.pumpService.updatePump(this.pump.id, this.pump).subscribe(() => {
+    //   this.ngOnInit();
+    // });
   }
 
   ngOnDestroy() {

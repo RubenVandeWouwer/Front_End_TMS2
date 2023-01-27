@@ -78,11 +78,12 @@
                           pump.oldPumpValues[pump.oldPumpValues.length - 1]
                             .value
                         }}
-                        Milliampere</span
+                        Ampere</span
                       >
                     </div>
                   </div>
-                  <form action="#" *ngIf="!pump.isDefective">
+                  <p *ngIf="pump.isDefective" class="text-red-600 pb-4">Pump is defective and has automatically terminated, Check logs. Only activate the pump if repaired!</p>
+                  <form action="#">
                     <div>
                       <label
                         class="relative inline-flex items-center cursor-pointer"
@@ -103,7 +104,6 @@
                       </label>
                     </div>
                   </form>
-                  <p *ngIf="pump.isDefective" class="text-red-600">Pump is Defective, Check logs.</p>
                 </div>
                 <div *ngIf="!checkButton">
                   <div class="relative overflow-x-auto pt-5">
