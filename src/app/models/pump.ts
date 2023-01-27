@@ -10,6 +10,7 @@ export interface Pump {
   isDefective: Boolean;
   pumpLogs: PumpLog[];
   isUserInput: boolean;
+  repair: boolean;
 }
 
 

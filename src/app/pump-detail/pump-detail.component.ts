@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Pump } from '../models/pump';
-import { PumpService } from '../services/pump.service';
-import { SiteService } from '../services/site.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Pump} from '../models/pump';
+import {PumpService} from '../services/pump.service';
+import {SiteService} from '../services/site.service';
 import * as apex from 'ng-apexcharts';
 
 @Component({
@@ -24,7 +24,8 @@ export class PumpDetailComponent implements OnInit {
   constructor(
     private pumpService: PumpService,
     private route: ActivatedRoute
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     const pumpId = this.route.snapshot.paramMap.get('id');
@@ -32,9 +33,9 @@ export class PumpDetailComponent implements OnInit {
     if (pumpId != null) {
       this.getPumpData(+pumpId);
       this.intervalId = setInterval(() => {
-        this.getPumpData(+pumpId);
+        this.getPumpData(+pumpId)
         this.buildChart();
-      }, 5000);
+      }, 10000);
     }
     this.buildChart();
     console.log('Builded chart');
@@ -49,39 +50,33 @@ export class PumpDetailComponent implements OnInit {
         this.pumpChart.push(x.value);
       });
       console.log(this.pumpChart);
-      this.title = { text: this.pump.name };
+      this.title = {text: this.pump.name};
     });
   }
 
   buildChart() {
-    this.series = [{ name: 'Ampere', data: this.pumpChart }];
-    this.chart = { type: 'line' };
-    this.xaxis = { labels: { show: false } };
+    this.series = [{name: 'Ampere', data: this.pumpChart}];
+    this.chart = {type: 'line'};
+    this.xaxis = {labels: {show: false}};
   }
 
-  updateInputValue() {
-
-    if (this.pump.isDefective) {
-      if (confirm('Are you sure the pump is repaired?')) {
-        this.pump.isUserInput = true;
-        this.pump.isDefective = false;
-        this.pumpService.updatePump(this.pump.id, this.pump).subscribe(() => {
-          this.ngOnInit();
-        });
-      } else {
-      }
-    } else {
-      this.pump.isUserInput = true;
+  repairPump() {
+    if (confirm('Are you sure the pump is repaired?')) {
       this.pump.isDefective = false;
+      this.pump.repair = true;
+      this.pump.inputValue = 0.0;
       this.pumpService.updatePump(this.pump.id, this.pump).subscribe(() => {
         this.ngOnInit();
       });
     }
+  }
 
-    // this.pump.isDefective = false;
-    // this.pumpService.updatePump(this.pump.id, this.pump).subscribe(() => {
-    //   this.ngOnInit();
-    // });
+  updateInputValue() {
+    this.pump.isUserInput = true;
+    this.pump.isDefective = false;
+    this.pumpService.updatePump(this.pump.id, this.pump).subscribe(() => {
+      this.ngOnInit();
+    });
   }
 
   ngOnDestroy() {
