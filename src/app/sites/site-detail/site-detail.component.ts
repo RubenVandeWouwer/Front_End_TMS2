@@ -63,7 +63,7 @@ export class SiteDetailComponent implements OnInit {
       this.intervalId = setInterval(() => {
         this.getSiteData(+siteId);
         this.buildchart()
-      }, 20000);
+      }, 10000);
     }
     this.buildchart();
   }
