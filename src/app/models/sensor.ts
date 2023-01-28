@@ -13,4 +13,6 @@ export interface Sensor {
   sensorLogs: SensorLogs[];
   pumps: Pump[];
   oldPumps: OldPump[];
+  siteChange: boolean;
+  siteDelete: boolean;
 }

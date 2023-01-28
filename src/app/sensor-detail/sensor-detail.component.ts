@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { SensorService } from '../services/sensor.service';
-import { ActivatedRoute } from '@angular/router';
-import { Sensor } from '../models/sensor';
+import {Component, OnInit} from '@angular/core';
+import {SensorService} from '../services/sensor.service';
+import {ActivatedRoute} from '@angular/router';
+import {Sensor} from '../models/sensor';
 import * as apex from 'ng-apexcharts';
-import { PumpService } from '../services/pump.service';
-import { OldPumpService } from '../services/old-pump.service';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { Pump } from '../models/pump';
-import { OldPump } from '../models/oldPump';
+import {PumpService} from '../services/pump.service';
+import {OldPumpService} from '../services/old-pump.service';
+import {IDropdownSettings} from 'ng-multiselect-dropdown';
+import {Pump} from '../models/pump';
+import {OldPump} from '../models/oldPump';
 
 @Component({
   selector: 'app-sensor-detail',
@@ -35,7 +35,8 @@ export class SensorDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private pumpService: PumpService,
     private oldPumpService: OldPumpService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     const sensorId = this.route.snapshot.paramMap.get('id');
@@ -64,6 +65,9 @@ export class SensorDetailComponent implements OnInit {
 
     }
   }
+  testButton(){
+    console.log(this.checkButton)
+  }
 
   getSensorData(sensorId: number) {
     this.sensorChart = [];
@@ -73,14 +77,14 @@ export class SensorDetailComponent implements OnInit {
         this.sensorChart.push(x.value);
       });
       console.log(this.sensorChart);
-      this.title = { text: this.sensor.name };
+      this.title = {text: this.sensor.name};
     });
   }
 
   buildChart() {
-    this.series = [{ name: 'Pressure', data: this.sensorChart }];
-    this.chart = { type: 'line' };
-    this.xaxis = { labels: { show: false } };
+    this.series = [{name: 'Pressure', data: this.sensorChart}];
+    this.chart = {type: 'line'};
+    this.xaxis = {labels: {show: false}};
   }
 
   onPumpSelect(item: any) {
@@ -131,6 +135,7 @@ export class SensorDetailComponent implements OnInit {
     if (this.pumps != []) {
       this.pumps.map((p) => {
         p.sensorId = this.sensor.id;
+        p.siteChange = true;
         this.pumpService.updatePump(p.id, p).subscribe(() => {
           this.ngOnInit();
         });
@@ -139,6 +144,7 @@ export class SensorDetailComponent implements OnInit {
     if (this.oldPumps != []) {
       this.oldPumps.map((p) => {
         p.sensorId = this.sensor.id;
+        p.siteChange = true;
         this.oldPumpService.updateOldPump(p.id, p).subscribe(() => {
           this.ngOnInit();
         });
@@ -149,7 +155,7 @@ export class SensorDetailComponent implements OnInit {
   deleteOldPump(pump: OldPump) {
     if (confirm(`Are you sure you want to delete ${pump.name}`)) {
       this.oldPumpService.getOldPumpById(pump.id).subscribe((x) => {
-        x.sensorId = null;
+        x.siteDelete = true;
         this.oldPumpService.updateOldPump(x.id, x).subscribe(() => {
           this.ngOnInit();
         });
@@ -160,7 +166,7 @@ export class SensorDetailComponent implements OnInit {
   deletePump(pump: Pump) {
     if (confirm(`Are you sure you want to delete ${pump.name}`)) {
       this.pumpService.getPumpById(pump.id).subscribe((x) => {
-        x.sensorId = null;
+        x.siteDelete = true;
         this.pumpService.updatePump(x.id, x).subscribe(() => {
           this.ngOnInit();
         });
