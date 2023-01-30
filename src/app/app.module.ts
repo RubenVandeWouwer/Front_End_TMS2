@@ -50,7 +50,7 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
     ReactiveFormsModule,
     FormsModule,
     SitesModule,
-    NgApexchartsModule
+    NgApexchartsModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
