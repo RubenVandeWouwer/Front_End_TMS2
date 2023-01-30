@@ -10,7 +10,22 @@ import {SitesModule} from "./sites/sites.module";
 import { BackgroundComponent } from './background/background.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { SensorlogComponent } from './sensorlog/sensorlog.component';
+
 import { LogCollComponent } from './log-coll/log-coll.component';
+
+import {AngularFireModule} from "@angular/fire/compat";
+import {environment} from "../environments/environment";
+import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
+import {AngularFireAuthModule} from "@angular/fire/compat/auth";
+import {AngularFireStorageModule} from "@angular/fire/compat/storage";
+import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
+import {AuthService} from "./shared/services/auth.service";
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
+
 
 @NgModule({
   declarations: [
@@ -19,9 +34,22 @@ import { LogCollComponent } from './log-coll/log-coll.component';
     MenuComponent,
     BackgroundComponent,
     SensorlogComponent,
+
     LogCollComponent,
+
+    DashboardComponent,
+    SignInComponent,
+    SignUpComponent,
+    ForgotPasswordComponent,
+    VerifyEmailComponent,
+
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -30,7 +58,7 @@ import { LogCollComponent } from './log-coll/log-coll.component';
     SitesModule,
     NgApexchartsModule,
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
