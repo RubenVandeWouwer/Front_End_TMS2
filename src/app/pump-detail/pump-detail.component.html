@@ -44,7 +44,7 @@
                     </div>
                   </div>
                 </div>
-                <div *ngIf="checkButton && pump.pumpValues.length > 0">
+                <div *ngIf="checkButton &&pump.pumpValues.length > 0">
                   <div class="grid grid-cols-2 items-center mb-5">
                     <div>
                       <label class="block text-gray-700 text-sm font-bold mb-2"
@@ -78,9 +78,25 @@
                       >
                       <span>No readings yet.</span>
                     </div>
+                    <div *ngIf="checkButton" class="flex justify-center">
+                      <button
+                        (click)="checkButton = false"
+                        class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                      >
+                        Check logs
+                      </button>
+                    </div>
+                    <div *ngIf="!checkButton" class="flex justify-center">
+                      <button
+                        (click)="checkButton = true"
+                        class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                      >
+                        Check Pumps
+                      </button>
+                    </div>
                   </div>
                 </div>
-                <div *ngIf="pump.pumpValues.length < 1">
+                <div *ngIf="checkButton &&pump.pumpValues.length < 1">
                   <div class="grid grid-cols-2 items-center mb-5">
                     <div>
                       <label class="block text-gray-700 text-sm font-bold mb-2"

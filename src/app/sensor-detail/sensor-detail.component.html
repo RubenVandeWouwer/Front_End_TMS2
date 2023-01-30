@@ -15,7 +15,6 @@
                     [xaxis]="xaxis"
                   ></apx-chart>
                 </div>
-
                 <div *ngIf="sensor.sensorValues.length > 1">
                   <div class="flex justify-between pb-4">
                     <div class="flex flex-col items-center">
@@ -53,11 +52,20 @@
                       >
                       <span>No readings yet.</span>
                     </div>
-                    <div class="flex justify-center">
+                    <div *ngIf="checkButton" class="flex justify-center">
                       <button
+                        (click)="checkButton = false"
                         class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                       >
                         Check logs
+                      </button>
+                    </div>
+                    <div *ngIf="!checkButton" class="flex justify-center">
+                      <button
+                        (click)="checkButton = true"
+                        class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                      >
+                        Check Pumps
                       </button>
                     </div>
                   </div>
