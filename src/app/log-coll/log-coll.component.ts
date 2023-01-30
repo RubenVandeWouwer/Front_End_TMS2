@@ -46,14 +46,14 @@ export class LogCollComponent implements OnInit {
         this.sensorService.getSensorById(x.id).subscribe((s) => {
           this.sensor = s;
           s.sensorLogs.map((x) => {
-            this.logItem={date: x.date, error: x.error};
+            this.logItem={date: x.date, error: x.error, isDefective: x.isDefective};
             this.logList.push(this.logItem)
           });
         });
         x.pumps.map((p)=>{
           this.pumpService.getPumpById(p.id).subscribe((result) => {
             result.pumpLogs.map((l)=>{
-              this.logItem={date: l.date, error:l.error}
+              this.logItem={date: l.date, error:l.error, isDefective: l.isDefective}
               this.logList.push(this.logItem)
             })
           })
@@ -61,12 +61,13 @@ export class LogCollComponent implements OnInit {
         x.oldPumps.map((op) => {
           this.oldPumpService.getOldPumpById(op.id).subscribe((result) => {
             result.pumpLogs.map((l)=>{
-              this.logItem={date: l.date, error:l.error}
+              this.logItem={date: l.date, error:l.error, isDefective: l.isDefective }
               this.logList.push(this.logItem)
             })
           })
         });
       });
     });
+    this.logList = this.logList.sort((a, b) => (a.date as Date).getTime() - (b.date as Date).getTime());
   }
 }

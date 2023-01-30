@@ -15,6 +15,11 @@
                       type="button" data-modal-toggle="games-modal" (click)="toggleModal = !toggleModal">
                       Edit site
                     </button>
+                    <button
+                      class="text-center w-1/3 m-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2  dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                      type="button" routerLink="/site/{{site.id}}/logcoll">
+                      Check Site Logs
+                    </button>
                   </div>
                 </div>
                 <br/>
@@ -27,7 +32,7 @@
                 ></apx-chart>
 
 
-                <div class="flex justify-between mx-3">
+                <div class="flex justify-between mx-3 pb-5">
                   <div class="flex flex-col items-center m-1">
                     <label
                       class="block text-gray-700 text-sm font-bold mb-2"
@@ -46,24 +51,7 @@
                     <label
                       class="block text-gray-700 text-sm font-bold mb-2"
                       for="drainage"
-                    >Average drainage level (m)</label
-                    >
-                    <input
-                      class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      id="drainage"
-                      type="text"
-                      placeholder="m"
-                      value="Unknown"
-                    />
-                  </div>
-                </div>
-
-                <div class="flex justify-between mx-3">
-                  <div class="flex flex-col items-center m-1">
-                    <label
-                      class="block text-gray-700 text-sm font-bold mb-2"
-                      for="drainage"
-                    >Depth of drainage (m)</label
+                    >Depth of drainage above taw (m)</label
                     >
                     <input
                       class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -73,9 +61,7 @@
                       value="{{ site.drainageDepth }}"
                     />
                   </div>
-
                 </div>
-
                 <div class="grid grid-cols-3">
                   <app-sensor class="mx-2" (onDeleteSensor)="deleteSensor(sensor)"
                     *ngFor="let sensor of site.sensors"
