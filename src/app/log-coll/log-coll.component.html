@@ -1,2 +1,52 @@
-<p>log-coll works!</p>
-
+<section class="h-full gradient-form md:h-full mt-20 flex justify-center">
+  <div class="block rounded-lg">
+    <div class="lg:flex lg:flex-wrap g-0">
+      <div class="px-4 md:px-0">
+        <div class="md:mx-6">
+          <div class="gradient-form">
+            <div class="flex justify-between mx-16 mb-10">
+              <div *ngIf="site; else notassigned" class="w-full mx-5 vw">
+              <div>
+                <div class="relative overflow-x-auto pt-5">
+                  <div class="text-lg pb-4">{{site.name}}</div>
+                  <table class="w-full text-sm text-left text-gray-500">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                      <tr>
+                        <th scope="col" class="px-6 py-3">Message</th>
+                        <th scope="col" class="px-6 py-3">TimeStamp</th>
+                        <th scope="col" class="px-6 py-3">Defect</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let log of logList" class="bg-white border-b">
+                        <th
+                          scope="row"
+                          class="px-6 py-4 font-medium text-gray-700 whitespace-nowrap"
+                        >
+                          {{ log.error }}
+                        </th>
+                        <td class="px-6 py-4">
+                          {{ log.date | date : "dd/MM/yyyy hhumm" }}
+                        </td>
+                        <td class="px-6 py-4">
+                          <div *ngIf="log.isDefective">Defect<i *ngIf="log.isDefective" class="scale-150 fa-solid fa-circle-exclamation"></i></div>
+                          <div *ngIf="!log.isDefective">Not Defect</div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+          <ng-template #notassigned
+            ><h1 class="text-red-600">
+              Error 404: This Site Does Not Exist
+            </h1></ng-template
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

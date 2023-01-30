@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Site} from '../../models/site';
 import {Sensor} from '../../models/sensor';
 import {SiteService} from '../../services/site.service';
@@ -44,7 +44,8 @@ export class SiteDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private sensorService: SensorService,
     private pumpService: PumpService,
-    private oldPumpService: OldPumpService
+    private oldPumpService: OldPumpService,
+    private router: Router
   ) {
   }
 
