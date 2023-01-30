@@ -9,8 +9,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SitesModule} from "./sites/sites.module";
 import { BackgroundComponent } from './background/background.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { PumplogComponent } from './pumplog/pumplog.component';
 import { SensorlogComponent } from './sensorlog/sensorlog.component';
+
+import { LogCollComponent } from './log-coll/log-coll.component';
+
 import {AngularFireModule} from "@angular/fire/compat";
 import {environment} from "../environments/environment";
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
@@ -24,19 +26,23 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     MenuComponent,
     BackgroundComponent,
-    PumplogComponent,
     SensorlogComponent,
+
+    LogCollComponent,
+
     DashboardComponent,
     SignInComponent,
     SignUpComponent,
     ForgotPasswordComponent,
     VerifyEmailComponent,
+
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
