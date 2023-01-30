@@ -9,8 +9,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SitesModule} from "./sites/sites.module";
 import { BackgroundComponent } from './background/background.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { PumplogComponent } from './pumplog/pumplog.component';
 import { SensorlogComponent } from './sensorlog/sensorlog.component';
+import { LogCollComponent } from './log-coll/log-coll.component';
 
 @NgModule({
   declarations: [
@@ -18,8 +18,8 @@ import { SensorlogComponent } from './sensorlog/sensorlog.component';
     HomeComponent,
     MenuComponent,
     BackgroundComponent,
-    PumplogComponent,
     SensorlogComponent,
+    LogCollComponent,
   ],
   imports: [
     BrowserModule,
