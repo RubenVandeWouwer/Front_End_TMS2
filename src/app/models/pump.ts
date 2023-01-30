@@ -11,6 +11,8 @@ export interface Pump {
   pumpLogs: PumpLog[];
   isUserInput: boolean;
   repair: boolean;
+  siteChange: boolean;
+  siteDelete: boolean;
 }
 
 

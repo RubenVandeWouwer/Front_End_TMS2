@@ -168,6 +168,7 @@ export class SitesComponent implements OnInit {
     this.siteService.createSite(this.site).subscribe((x) => {
       if (this.sensors != []) {
         this.sensors.map((s) => {
+          s.siteChange = true;
           s.siteId = x.id;
           this.sensorService.updateSensor(s.id, s).subscribe();
         })

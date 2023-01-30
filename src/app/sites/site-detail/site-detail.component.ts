@@ -1,15 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Site } from '../../models/site';
-import { Sensor } from '../../models/sensor';
-import { SiteService } from '../../services/site.service';
+import {Component, Input, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
+import {Site} from '../../models/site';
+import {Sensor} from '../../models/sensor';
+import {SiteService} from '../../services/site.service';
 import * as apex from 'ng-apexcharts';
-import { SensorService } from '../../services/sensor.service';
-import { DataList } from '../../models/DataList';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { PumpService } from '../../services/pump.service';
-import { OldPumpService } from '../../services/old-pump.service';
+import {SensorService} from '../../services/sensor.service';
+import {DataList} from '../../models/DataList';
+import {IDropdownSettings} from 'ng-multiselect-dropdown';
+import {PumpService} from '../../services/pump.service';
+import {OldPumpService} from '../../services/old-pump.service';
 
 @Component({
   selector: 'app-site-detail',
@@ -46,7 +46,8 @@ export class SiteDetailComponent implements OnInit {
     private sensorService: SensorService,
     private pumpService: PumpService,
     private oldPumpService: OldPumpService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.dataLists = [];
@@ -60,10 +61,10 @@ export class SiteDetailComponent implements OnInit {
     };
     if (siteId != null) {
       this.getSiteData(+siteId);
-      this.intervalId = setInterval(() => {
-        this.getSiteData(+siteId);
-        this.buildchart()
-      }, 10000);
+      // this.intervalId = setInterval(() => {
+      //   this.getSiteData(+siteId);
+      //   this.buildchart()
+      // }, 10000);
     }
     this.buildchart();
   }
@@ -80,14 +81,14 @@ export class SiteDetailComponent implements OnInit {
             this.valueList.push(x.value);
           });
           //object maken
-          this.dataItem = { name: x.name, data: this.valueList };
+          this.dataItem = {name: x.name, data: this.valueList};
           //object in de lijst plaatsen
           this.dataLists.push(this.dataItem);
           // valuelist leegmaken voor de volgende iteratie
           this.valueList = [];
         });
       });
-      this.title = { text: this.site.name };
+      this.title = {text: this.site.name};
       console.log(this.dataLists);
       this.dataLists.map((x) => {
         this.series.push(x);
@@ -96,8 +97,8 @@ export class SiteDetailComponent implements OnInit {
   }
 
   buildchart() {
-    this.chart = { type: 'line' };
-    this.xaxis = { labels: { show: false } };
+    this.chart = {type: 'line'};
+    this.xaxis = {labels: {show: false}};
     this.series = this.dataLists;
   }
 
@@ -127,22 +128,22 @@ export class SiteDetailComponent implements OnInit {
     if (confirm(`Do you want to delete ${sensor.name}?`)) {
       if (sensor.pumps != []) {
         sensor.pumps.map((x) => {
-          x.sensorId = null;
+          x.siteDelete = true;
           this.pumpService.updatePump(x.id, x).subscribe();
         });
       }
       if (sensor.oldPumps != []) {
         sensor.oldPumps.map((x) => {
-          x.sensorId = null;
+          x.siteDelete = true;
           this.oldPumpService.updateOldPump(x.id, x).subscribe();
         });
       }
       setTimeout(() => {
-        sensor.siteId = null;
+        sensor.siteDelete = true;
         this.sensorService.updateSensor(sensor.id, sensor).subscribe(() => {
           this.ngOnInit();
         });
-      }, 700);
+      }, 1000);
     }
   }
 
@@ -164,6 +165,7 @@ export class SiteDetailComponent implements OnInit {
     if (this.sensors != []) {
       this.sensors.map((s) => {
         s.siteId = this.site.id;
+        s.siteChange = true;
         this.sensorService.updateSensor(s.id, s).subscribe();
       });
       this.siteService.updateSite(this.site.id, this.site).subscribe(() => {
