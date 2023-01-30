@@ -46,11 +46,24 @@
                       >
                       <span>No readings yet.</span>
                     </div>
-                    <div class="flex justify-center">
+                    <div *ngIf="checkButton" class="flex justify-center">
+                      <button
+                        (click)="checkButton = false"
+                        class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                      >
+                        Check logs
+                      </button>
+                    </div>
+                    <div *ngIf="!checkButton" class="flex justify-center">
+                      <button
+                        (click)="checkButton = true"
+                        class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                      >
+                        Check Pumps
+                      </button>
                     </div>
                   </div>
                 </div>
-
                 <div *ngIf="checkButton&&pump.oldPumpValues.length > 0">
                   <div class="grid grid-cols-2 items-center mb-5">
                     <div>
@@ -103,6 +116,50 @@
                   </div>
 
                 </div>
+                <div *ngIf="checkButton&&pump.oldPumpValues.length < 1">
+                  <div class="grid grid-cols-2 items-center mb-5">
+                    <div>
+                      <label
+                        class="block text-gray-700 text-sm font-bold mb-2"
+                        for="drainage"
+                      >Current FlowRate (l/min)</label
+                      >
+                      <span
+                      >No reading yet.</span
+                      >
+                    </div>
+                    <div>
+                      <label
+                        class="block text-gray-700 text-sm font-bold mb-2"
+                        for="sensor"
+                      >Current Electricy usage (mA)</label
+                      >
+                      <span
+                      >No readings yet.</span
+                      >
+                    </div>
+                  </div>
+                  <div *ngIf="!pump.isDefective">
+                    <label
+                      class="relative inline-flex items-center cursor-pointer"
+                    >
+                      <input
+                        type="checkbox"
+                        class="sr-only peer"
+                        name="inputValue"
+                        [checked]="pump.inputValue"
+                        (change)="updateInputValue()"
+                      />
+                      <div
+                        class="w-14 h-7 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer bg-gray-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+                      ></div>
+                      <span class="ml-3 text-sm font-medium text-black-400"
+                      >Pump Power On/Off Toggle</span
+                      >
+                    </label>
+                  </div>
+
+                </div>
                 <div *ngIf="checkButton">
                   <div *ngIf="pump.isDefective">
                     <button
@@ -115,10 +172,6 @@
                       activate the pump if repaired!</p>
                   </div>
                 </div>
-
-
-
-
                 <div *ngIf="!checkButton">
                   <div class="relative overflow-x-auto pt-5">
                     <table class="w-full text-sm text-left text-gray-500">

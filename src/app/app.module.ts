@@ -12,7 +12,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { PumplogComponent } from './pumplog/pumplog.component';
 import { SensorlogComponent } from './sensorlog/sensorlog.component';
 
-@NgModule({ 
+@NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
@@ -28,7 +28,7 @@ import { SensorlogComponent } from './sensorlog/sensorlog.component';
     ReactiveFormsModule,
     FormsModule,
     SitesModule,
-    NgApexchartsModule
+    NgApexchartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
