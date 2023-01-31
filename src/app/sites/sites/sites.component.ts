@@ -9,6 +9,8 @@ import {Pump} from "../../models/pump";
 import {PumpService} from "../../services/pump.service";
 import {OldPumpService} from "../../services/old-pump.service";
 import {OldPump} from "../../models/oldPump";
+import {UserData} from "../../models/user";
+import {UserService} from "../../shared/services/user-service.service";
 
 @Component({
   selector: 'app-sites',
@@ -22,7 +24,9 @@ export class SitesComponent implements OnInit {
   dropdownListSensor!: Sensor[];
   dropdownSettingsSensor: IDropdownSettings = {};
   sensors = [] as Sensor[];
-
+  user!: UserData;
+  // admin check
+  isAdmin!: boolean;
 
   form: any = {
     siteName: null,
@@ -31,37 +35,31 @@ export class SitesComponent implements OnInit {
     siteManagerNbr: null,
   };
 
-  constructor(private siteService: SiteService, private sensorService: SensorService, private pumpService: PumpService, private oldPumpService: OldPumpService) {
+  constructor(private siteService: SiteService,
+              private sensorService: SensorService,
+              private pumpService: PumpService,
+              private oldPumpService: OldPumpService,
+              // admin check
+              private userService: UserService) {
   }
 
   site$: Observable<Site[]> = new Observable<Site[]>();
 
   ngOnInit(): void {
+    // admin check
+    this.userService.getUserByEmail(JSON.parse(localStorage.getItem('user')!).email).subscribe((x) => {
+      this.isAdmin = x.isAdmin;
+    })
+
     this.sites$ = this.siteService.getSites();
     this.sensorService.getSensors().subscribe((x) => {
         this.dropdownListSensor = x.filter((x) => x.siteId == null)
       }
     )
-    // this.pumpService.getPumps().subscribe((x) => {
-    //     this.dropdownListPump = x.filter((x) => x.siteId == null)
-    //   }
-    // )
-    // this.oldPumpService.getOldPumps().subscribe((x) => {
-    //     this.dropdownListOldPump = x.filter((x) => x.siteId == null)
-    //   }
-    // )
     this.dropdownSettingsSensor = {
       idField: 'id',
       textField: `name`,
     };
-    // this.dropdownSettingsPump = {
-    //   idField: 'id',
-    //   textField: `name`,
-    // };
-    // this.dropdownSettingsOldPump = {
-    //   idField: 'id',
-    //   textField: `name`,
-    // };
   }
 
   onSensorSelect(item: any) {

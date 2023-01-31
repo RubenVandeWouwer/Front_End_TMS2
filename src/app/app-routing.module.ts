@@ -16,19 +16,20 @@ import {ForgotPasswordComponent} from "./components/forgot-password/forgot-passw
 import {VerifyEmailComponent} from "./components/verify-email/verify-email.component";
 import {AuthGuard} from "./shared/guard/auth.guard";
 import {VerifiedComponent} from "./verified/verified.component";
+import {IsVerifiedGuard} from "./shared/guard/is-verified.guard";
 
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'sites', component: SitesComponent},
+  {path: 'sites', component: SitesComponent, canActivate: [AuthGuard, IsVerifiedGuard]},
   {path: 'verified', component: VerifiedComponent},
-  {path: 'sites/details', component: SiteDetailComponent},
-  {path: 'site/:id', component: SiteDetailComponent},
-  {path: 'pump/:id', component: PumpDetailComponent},
-  {path: 'oldPump/:id', component: OldPumpDetailComponent},
-  {path: 'sensor/:id', component: SensorDetailComponent},
-  {path: 'sensorlog/:id', component: SensorlogComponent},
-  {path: 'site/:id/logcoll', component: LogCollComponent},
+  {path: 'sites/details', component: SiteDetailComponent, canActivate: [AuthGuard, IsVerifiedGuard]},
+  {path: 'site/:id', component: SiteDetailComponent, canActivate: [AuthGuard, IsVerifiedGuard]},
+  {path: 'pump/:id', component: PumpDetailComponent, canActivate: [AuthGuard, IsVerifiedGuard]},
+  {path: 'oldPump/:id', component: OldPumpDetailComponent, canActivate: [AuthGuard, IsVerifiedGuard]},
+  {path: 'sensor/:id', component: SensorDetailComponent, canActivate: [AuthGuard, IsVerifiedGuard]},
+  {path: 'sensorlog/:id', component: SensorlogComponent, canActivate: [AuthGuard, IsVerifiedGuard]},
+  {path: 'site/:id/logcoll', component: LogCollComponent, canActivate: [AuthGuard, IsVerifiedGuard]},
   {path: 'test', redirectTo: '/sign-in', pathMatch: 'full'},
   {path: 'sign-in', component: SignInComponent},
   {path: 'register-user', component: SignUpComponent},

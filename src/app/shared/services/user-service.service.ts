@@ -3,12 +3,13 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Pump} from "../../models/pump";
 import {UserData} from "../../models/user";
+import firebase from "firebase/compat";
+import User = firebase.User;
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
   HTTPOptions = {
     headers: new HttpHeaders({
       'Content-type': 'application/json; charset=UTF-8',
@@ -18,11 +19,20 @@ export class UserService {
   constructor(private httpClient: HttpClient) {
   }
 
-  url: string = "https://localhost:7120/api/user"
+  url: string = "https://hooyberghs-api.azurewebsites.net/api/user/"
 
   getUsers(): Observable<UserData[]> {
     return this.httpClient.get<UserData[]>(this.url);
   }
+
+  getUserForGuard(email: string): Observable<UserData[]> {
+    return this.httpClient.get<UserData[]>(`${this.url}${email}`);
+  }
+
+  getUserByEmail(email: string): Observable<UserData> {
+    return this.httpClient.get<UserData>(`${this.url}${email}`);
+  }
+
 
   // getPumpById(id: number): Observable<Pump> {
   //   return this.httpClient.get<Pump>(`${this.url}${id}`);
