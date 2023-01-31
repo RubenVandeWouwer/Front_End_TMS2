@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Location} from '@angular/common'
+import {AuthService} from "../shared/services/auth.service";
 
 @Component({
   selector: 'app-menu',
@@ -8,7 +9,7 @@ import {Location} from '@angular/common'
 })
 export class MenuComponent implements OnInit {
 
-  constructor(private location: Location) {
+  constructor(private location: Location, public authService: AuthService) {
   }
 
   ngOnInit(): void {

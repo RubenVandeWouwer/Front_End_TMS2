@@ -25,6 +25,7 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
+import { VerifiedComponent } from './verified/verified.component';
 
 
 @NgModule({
@@ -34,14 +35,13 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
     MenuComponent,
     BackgroundComponent,
     SensorlogComponent,
-
     LogCollComponent,
-
     DashboardComponent,
     SignInComponent,
     SignUpComponent,
     ForgotPasswordComponent,
     VerifyEmailComponent,
+    VerifiedComponent,
 
   ],
   imports: [
