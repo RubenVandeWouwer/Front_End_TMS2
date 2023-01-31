@@ -60,7 +60,6 @@ export class LogCollComponent implements OnInit {
               this.logItem = {date: l.date, error: l.error, isDefective: l.isDefective}
               this.logList.push(this.logItem)
             })
-
           })
         });
         x.oldPumps.map((op) => {
@@ -68,7 +67,6 @@ export class LogCollComponent implements OnInit {
             result.pumpLogs.map((l) => {
               this.logItem = {date: l.date, error: l.error, isDefective: l.isDefective}
               this.logList.push(this.logItem)
-
             })
             setTimeout(() => {
               this.logList.forEach((item) => {
