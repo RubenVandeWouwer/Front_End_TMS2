@@ -1,53 +1,49 @@
-<div class="displayTable mt-20">
-  <div class="displayTableCell">
-    <div class="authBlock">
-      <h3>Sign Up</h3>
-      <div class="formGroup">
-        <input
-          type="email"
-          class="formControl"
-          placeholder="Email Address"
-          #userEmail
-          required
-        />
+    <!-- <div class="mx-auto max-w-sm p-11 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8">
+      <form class="space-y-6" action="#">
+          <h5 class="text-xl font-medium text-gray-900 ">Sign up to Hooyberghs bemalings software.</h5>
+          <div class="formGroup">
+              <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">Your email</label>
+              <input type="email" name="email" #userEmail required id="email" class="formControl bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Email Address">
+          </div>
+          <div class="formGroup">
+              <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">Your password</label>
+              <input type="password" name="password" id="password" #userPwd placeholder="••••••••" class="formControl bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required>
+          </div>
+          <div class="formGroup">
+            <button type="submit" (click)="authService.SignUp(userEmail.value, userPwd.value)" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Sign up</button>
+          </div>
+          <div class="text-sm font-medium text-gray-500">
+              Already Registered? <a href="#" routerLink="/" class="text-blue-700 hover:underline">Log In</a>
+          </div>
+      </form>
+    </div> -->
+
+
+    <section>
+      <div class="flex flex-col items-center justify-center px-6 py-10 mx-auto md:h-screen lg:py-0">
+
+          <div class="mx-auto max-w-sm p-11 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8">
+            <form class="space-y-6" action="#">
+                <h5 class="text-xl font-medium text-gray-900 ">Sign up to Hooyberghs bemalings software.</h5>
+                <div class="formGroup">
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">Your email</label>
+                    <input type="email" name="email" #userEmail required id="email" class="formControl bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Email Address">
+                </div>
+                <div class="formGroup">
+                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">Your password</label>
+                    <input type="password" name="password" id="password" #userPwd placeholder="••••••••" class="formControl bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required>
+                </div>
+                <div class="formGroup">
+                  <button type="submit" (click)="authService.SignUp(userEmail.value, userPwd.value)" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Sign up</button>
+                </div>
+                <div class="text-sm font-medium text-gray-500">
+                    Already Registered? <a href="#" routerLink="/" class="text-blue-700 hover:underline">Log In</a>
+                </div>
+            </form>
+          </div>
+  
       </div>
-      <div class="formGroup">
-        <input
-          type="password"
-          class="formControl"
-          placeholder="Password"
-          #userPwd
-          required
-        />
-      </div>
-      <div class="formGroup">
-        <input
-          type="button"
-          class="btn btnPrimary"
-          value="Sign Up"
-          (click)="authService.SignUp(userEmail.value, userPwd.value)"
-        />
-      </div>
-      <div class="formGroup">
-        <span class="or"><span class="orInner">Or</span></span>
-      </div>
-      <!-- Continue with Google -->
-      <div class="formGroup">
-        <button
-          type="button"
-          class="btn googleBtn"
-          (click)="authService.GoogleAuth()"
-        >
-          <i class="fab fa-google-plus-g"></i>
-          Continue with Google
-        </button>
-      </div>
-    </div>
-    <div class="redirectToLogin">
-      <span
-      >Already have an account?
-        <span class="redirect" routerLink="/sign-in">Log In</span></span
-      >
-    </div>
-  </div>
-</div>
+      <button routerLink="/sites"
+              class="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded text-center">Quick login
+      </button>
+    </section>
