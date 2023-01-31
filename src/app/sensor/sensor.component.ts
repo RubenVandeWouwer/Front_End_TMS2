@@ -9,6 +9,7 @@ import {Sensor} from '../models/sensor';
 })
 export class SensorComponent implements OnInit {
   @Input() sensor!: Sensor;
+  @Input() isAdmin!: boolean;
   @Output() onDeleteSensor: EventEmitter<void> = new EventEmitter();
 
   constructor(private router: Router) {

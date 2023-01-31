@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import * as apex from 'ng-apexcharts';
 import {OldPump} from '../models/oldPump';
 import {OldPumpService} from '../services/old-pump.service';
+import { UserService } from '../shared/services/user-service.service';
 
 @Component({
   selector: 'app-pump-detail',
@@ -19,6 +20,7 @@ export class OldPumpDetailComponent implements OnInit {
   isViewed!: number;
   checkButton = true;
   intervalId: any;
+  isAdmin!: boolean;
 
   form: any = {
     inputValue: null,
@@ -26,11 +28,15 @@ export class OldPumpDetailComponent implements OnInit {
 
   constructor(
     private oldPumpService: OldPumpService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userService: UserService
   ) {
   }
 
   ngOnInit(): void {
+    this.userService.getUserByEmail(JSON.parse(localStorage.getItem('user')!).email).subscribe((x) => {
+      this.isAdmin = x.isAdmin;
+    })
     const pumpId = this.route.snapshot.paramMap.get('id');
     if (pumpId != null) {
       this.getOldPumpData(+pumpId)

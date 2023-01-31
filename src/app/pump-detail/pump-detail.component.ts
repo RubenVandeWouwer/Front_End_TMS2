@@ -4,6 +4,7 @@ import {Pump} from '../models/pump';
 import {PumpService} from '../services/pump.service';
 import {SiteService} from '../services/site.service';
 import * as apex from 'ng-apexcharts';
+import { UserService } from '../shared/services/user-service.service';
 
 @Component({
   selector: 'app-pump-detail',
@@ -20,14 +21,19 @@ export class PumpDetailComponent implements OnInit {
   pumpId!: any;
   checkButton = true;
   intervalId: any;
+  isAdmin!: boolean;
 
   constructor(
     private pumpService: PumpService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userService: UserService
   ) {
   }
 
   ngOnInit(): void {
+    this.userService.getUserByEmail(JSON.parse(localStorage.getItem('user')!).email).subscribe((x) => {
+      this.isAdmin = x.isAdmin;
+    })
     const pumpId = this.route.snapshot.paramMap.get('id');
     console.log(this.pumpId);
     if (pumpId != null) {
