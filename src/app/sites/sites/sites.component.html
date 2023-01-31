@@ -1,20 +1,21 @@
 <div class="flex flex-col mt-20">
   <div class="flex justify-between mx-16 mb-10">
     <h1 class="text-3xl mt-2">Sites overview</h1>
-    <button
-      class="text-center w-1/3 m-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2  dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-      type="button" data-modal-toggle="games-modal" (click)="toggleModal = !toggleModal">
+    <button *ngIf="isAdmin"
+            class="text-center w-1/3 m-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2  dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            type="button" data-modal-toggle="games-modal" (click)="toggleModal = !toggleModal">
       Add site
     </button>
   </div>
 </div>
 <div class="flex flex-col items-center">
-  <app-site (onDeleteSite)="onDeleteSite(site)" class="m-5" *ngFor="let site of (sites$ | async)" [site]="site"></app-site>
+  <app-site (onDeleteSite)="onDeleteSite(site)" class="m-5" *ngFor="let site of (sites$ | async)"
+            [site]="site"></app-site>
 </div>
 
 
 <!-- Main modal -->
-<div class="flex justify-center">
+<div class="flex justify-center" *ngIf="isAdmin">
   <div id="authentication-modal" tabindex="-1" aria-hidden="true"
        class="flex justify-center fixed top-0 left-0 z-100 w-full h-full outline-none overflow-x-hidden overflow-y-auto"
        [ngClass]="toggleModal ? 'block' : 'hidden'">

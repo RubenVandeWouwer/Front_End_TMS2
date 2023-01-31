@@ -11,17 +11,14 @@ import {Router} from "@angular/router";
 })
 export class VerifiedComponent implements OnInit {
 
-  constructor(public authService: AuthService, public userService: UserService, private route : Router) {
+  constructor(public authService: AuthService, public userService: UserService, private route: Router) {
   }
 
   ngOnInit(): void {
-    this.userService.getUsers().subscribe((x) => {
-      x.map((user) => {
-        if (user.email === JSON.parse(localStorage.getItem('user')!).email){
-          this.route.navigate(['sites'])
-        }
-      })
+    this.userService.getUserByEmail(JSON.parse(localStorage.getItem('user')!).email).subscribe((x) => {
+      if (x !== null) {
+        this.route.navigate(['sites'])
+      }
     })
   }
-
 }
