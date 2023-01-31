@@ -2,7 +2,7 @@
   <div class="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
     <div class="flex justify-between px-6 pt-6"><h5
       class="text-gray-900 text-xl leading-tight font-medium mb-2">{{sensor.name}}</h5>
-      <button (click)="deleteSensor(); $event.stopPropagation() "><i class="fa-regular fa-circle-xmark fa-xl"></i>
+      <button *ngIf="isAdmin" deleteSensor(); $event.stopPropagation()><i class="fa-regular fa-circle-xmark fa-xl"></i>
       </button>
     </div>
     <br>

@@ -11,6 +11,7 @@ import {OldPump} from "../models/oldPump";
 export class PumpComponent implements OnInit {
   @Input() pump!: Pump;
   @Input() oldPump!: OldPump;
+  @Input() isAdmin!: boolean;
   @Output() onDeletePump: EventEmitter<void> = new EventEmitter();
 
   constructor(private router: Router) {

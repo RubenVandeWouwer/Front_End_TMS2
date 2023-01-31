@@ -12,8 +12,6 @@
   <app-site (onDeleteSite)="onDeleteSite(site)" class="m-5" *ngFor="let site of (sites$ | async)"
             [site]="site"></app-site>
 </div>
-
-
 <!-- Main modal -->
 <div class="flex justify-center" *ngIf="isAdmin">
   <div id="authentication-modal" tabindex="-1" aria-hidden="true"

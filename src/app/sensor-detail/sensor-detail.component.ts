@@ -8,6 +8,7 @@ import {OldPumpService} from '../services/old-pump.service';
 import {IDropdownSettings} from 'ng-multiselect-dropdown';
 import {Pump} from '../models/pump';
 import {OldPump} from '../models/oldPump';
+import { UserService } from '../shared/services/user-service.service';
 
 @Component({
   selector: 'app-sensor-detail',
@@ -29,16 +30,21 @@ export class SensorDetailComponent implements OnInit {
   xaxis!: apex.ApexXAxis;
   checkButton = true;
   intervalId: any;
+  isAdmin!: boolean;
 
   constructor(
     private SensorService: SensorService,
     private route: ActivatedRoute,
     private pumpService: PumpService,
-    private oldPumpService: OldPumpService
+    private oldPumpService: OldPumpService,
+    private userService: UserService
   ) {
   }
 
   ngOnInit(): void {
+    this.userService.getUserByEmail(JSON.parse(localStorage.getItem('user')!).email).subscribe((x) => {
+      this.isAdmin = x.isAdmin;
+    })
     const sensorId = this.route.snapshot.paramMap.get('id');
 
     this.pumpService.getPumps().subscribe((x) => {

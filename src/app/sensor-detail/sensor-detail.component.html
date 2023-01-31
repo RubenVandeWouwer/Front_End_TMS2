@@ -26,21 +26,23 @@
                           | date : "dd/MM/yyyy hhumm"
                       }}</span>
                     </div>
-                    <div *ngIf="checkButton" class="flex justify-center">
-                      <button
-                        (click)="checkButton = false"
-                        class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                      >
-                        Check logs
-                      </button>
-                    </div>
-                    <div *ngIf="!checkButton" class="flex justify-center">
-                      <button
-                        (click)="checkButton = true"
-                        class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                      >
-                        Check Pumps
-                      </button>
+                    <div *ngIf="isAdmin">
+                      <div *ngIf="checkButton" class="flex justify-center">
+                        <button
+                          (click)="checkButton = false"
+                          class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                        >
+                          Check logs
+                        </button>
+                      </div>
+                      <div *ngIf="!checkButton" class="flex justify-center">
+                        <button
+                          (click)="checkButton = true"
+                          class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                        >
+                          Check Pumps
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -52,7 +54,7 @@
                       >
                       <span>No readings yet.</span>
                     </div>
-                    <div *ngIf="checkButton" class="flex justify-center">
+                    <div *ngIf="checkButton && isAdmin" class="flex justify-center">
                       <button
                         (click)="checkButton = false"
                         class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
@@ -60,7 +62,7 @@
                         Check logs
                       </button>
                     </div>
-                    <div *ngIf="!checkButton" class="flex justify-center">
+                    <div *ngIf="!checkButton && isAdmin" class="flex justify-center">
                       <button
                         (click)="checkButton = true"
                         class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 px-5 py-2 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
@@ -70,7 +72,7 @@
                     </div>
                   </div>
                 </div>
-                <div *ngIf="!checkButton">
+                <div *ngIf="!checkButton && isAdmin">
                   <div>
                     <div class="relative overflow-x-auto">
                       <table class="w-full text-sm text-left text-gray-500">
@@ -102,7 +104,7 @@
                     </div>
                   </div>
                 </div>
-                <div *ngIf="checkButton" class="flex mb-5">
+                <div *ngIf="checkButton && isAdmin" class="flex mb-5">
                   <div>
                     <ng-multiselect-dropdown
                       class=""
@@ -141,7 +143,7 @@
                     class="mx-5"
                     (onDeletePump)="deletePump(pump)"
                     *ngFor="let pump of sensor.pumps"
-                    [pump]="pump"
+                    [pump]="pump" [isAdmin]="isAdmin"
                   ></app-pump>
                   <app-pump
                     class="mx-5"

@@ -2,7 +2,7 @@
   <div class="block p-4 rounded-lg shadow-lg bg-white max-w-sm">
     <div class="flex justify-between px-6 pt-6"><h5
       class="text-gray-900 text-xl leading-tight font-medium mb-2">{{pump.name}}</h5>
-      <button (click)="deletePump(); $event.stopPropagation() "><i class="fa-regular fa-circle-xmark fa-xl"></i>
+      <button *ngIf="isAdmin" (click)="deletePump(); $event.stopPropagation() "><i class="fa-regular fa-circle-xmark fa-xl"></i>
       </button>
     </div>
     <button type="button" [routerLink]="['/pump' , pump.id]"
@@ -14,7 +14,7 @@
   <div class="block p-4 rounded-lg shadow-lg bg-white max-w-sm">
     <div class="flex justify-between px-6 pt-6"><h5
       class="text-gray-900 text-xl leading-tight font-medium mb-2">{{oldPump.name}}</h5>
-      <button (click)="deletePump(); $event.stopPropagation() "><i class="fa-regular fa-circle-xmark fa-xl"></i>
+      <button *ngIf="isAdmin" (click)="deletePump(); $event.stopPropagation() "><i class="fa-regular fa-circle-xmark fa-xl"></i>
       </button>
     </div>
     <button type="button" [routerLink]="['/oldPump' , oldPump.id]"
