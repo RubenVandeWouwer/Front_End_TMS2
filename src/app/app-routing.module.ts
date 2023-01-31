@@ -7,19 +7,21 @@ import {SiteDetailComponent} from './sites/site-detail/site-detail.component';
 import {SitesComponent} from './sites/sites/sites.component';
 import {SensorDetailComponent} from './sensor-detail/sensor-detail.component';
 import {OldPumpDetailComponent} from "./oldPump-detail/oldPump-detail.component";
-import { SensorlogComponent } from './sensorlog/sensorlog.component';
-import { LogCollComponent } from './log-coll/log-coll.component';
+import {SensorlogComponent} from './sensorlog/sensorlog.component';
+import {LogCollComponent} from './log-coll/log-coll.component';
 import {SignInComponent} from "./components/sign-in/sign-in.component";
 import {SignUpComponent} from "./components/sign-up/sign-up.component";
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {ForgotPasswordComponent} from "./components/forgot-password/forgot-password.component";
 import {VerifyEmailComponent} from "./components/verify-email/verify-email.component";
 import {AuthGuard} from "./shared/guard/auth.guard";
+import {VerifiedComponent} from "./verified/verified.component";
 
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'sites', component: SitesComponent},
+  {path: 'verified', component: VerifiedComponent},
   {path: 'sites/details', component: SiteDetailComponent},
   {path: 'site/:id', component: SiteDetailComponent},
   {path: 'pump/:id', component: PumpDetailComponent},

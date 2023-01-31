@@ -37,9 +37,9 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
-          console.log("hi mom!")
-          console.log(result)
-          this.router.navigate(['dashboard']);
+          setTimeout(() => {
+            this.router.navigate(['verified']);
+          },200)
         });
         this.SetUserData(result.user);
       })
@@ -129,7 +129,7 @@ export class AuthService {
   SignOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['sign-in']);
+      this.router.navigate(['']);
     });
   }
 }
