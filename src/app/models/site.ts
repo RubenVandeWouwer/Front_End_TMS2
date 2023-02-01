@@ -8,6 +8,7 @@ export interface Site {
   address: string;
   siteManager: string;
   siteManagerNbr: string;
+  email: string;
   drainageDepth: number;
   sensorDepth: number;
   sensors: Sensor[];
