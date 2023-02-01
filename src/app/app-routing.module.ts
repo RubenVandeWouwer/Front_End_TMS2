@@ -17,6 +17,7 @@ import {VerifyEmailComponent} from "./components/verify-email/verify-email.compo
 import {AuthGuard} from "./shared/guard/auth.guard";
 import {VerifiedComponent} from "./verified/verified.component";
 import {IsVerifiedGuard} from "./shared/guard/is-verified.guard";
+import { ManageUsersComponent } from './manage-users/manage-users.component';
 
 
 const routes: Routes = [
@@ -36,6 +37,7 @@ const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   {path: 'forgot-password', component: ForgotPasswordComponent},
   {path: 'verify-email-address', component: VerifyEmailComponent},
+  {path: 'manage-users', component: ManageUsersComponent},
 
 ];
 

@@ -1,0 +1,53 @@
+<section class="h-full gradient-form md:h-full mt-20 flex justify-center">
+  <div class="block rounded-lg">
+    <div class="lg:flex lg:flex-wrap g-0">
+      <div class="px-4 md:px-0">
+        <div class="md:mx-6">
+          <div class="gradient-form">
+            <div class="flex justify-between mx-16 mb-10">
+              <div *ngIf="users; else notassigned" class="w-full mx-5 vw">
+              <div>
+                <div class="relative overflow-x-auto pt-5">
+                  <div class="text-lg pb-4">Manage Users</div>
+                  <table class="w-full text-sm text-left text-gray-500">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                      <tr>
+                        <th scope="col" class="px-6 py-3">Email</th>
+                        <th scope="col" class="px-6 py-3">Admin</th>
+                        <th scope="col" class="px-6 py-3">Verified</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let user of users" class="bg-white border-b">
+                        <th
+                          scope="row"
+                          class="px-6 py-4 font-medium text-gray-700 whitespace-nowrap"
+                        >
+                          {{ user.email }}
+                        </th>
+                        <td class="px-6 py-4">
+                          <div *ngIf="user.isAdmin" (click)="undoAdmin(user.email)"><i class="fa-solid fa-check"></i></div>
+                          <div *ngIf="!user.isAdmin" (click)="makeAdmin(user.email)"><i class="fa-solid fa-xmark"></i></div>
+                        </td>
+                        <td class="px-6 py-4">
+                          <div *ngIf="user.isVerified" (click)="unVerify(user.email)"><i class="fa-solid fa-check"></i></div>
+                          <div *ngIf="!user.isVerified" (click)="verifyUser(user.email)"><i class="fa-solid fa-xmark"></i></div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+          <ng-template #notassigned
+            ><h1 class="text-red-600">
+              Error 404: This Site Does Not Exist
+            </h1></ng-template
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

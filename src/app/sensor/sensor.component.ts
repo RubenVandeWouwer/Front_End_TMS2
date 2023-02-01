@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
 import {Sensor} from '../models/sensor';
+import { UserService } from '../shared/services/user-service.service';
 
 @Component({
   selector: 'app-sensor',
@@ -12,7 +13,7 @@ export class SensorComponent implements OnInit {
   @Input() isAdmin!: boolean;
   @Output() onDeleteSensor: EventEmitter<void> = new EventEmitter();
 
-  constructor(private router: Router) {
+  constructor(private router: Router,private userService: UserService) {
   }
 
   ngOnInit(): void {

@@ -65,7 +65,7 @@
                 <div class="grid grid-cols-3">
                   <app-sensor class="mx-2" (onDeleteSensor)="deleteSensor(sensor)"
                     *ngFor="let sensor of site.sensors"
-                    [sensor]="sensor"  [isAdmin]="isAdmin"
+                    [sensor]="sensor" [isAdmin]="isAdmin"
                   ></app-sensor>
                 </div>
               </div>
