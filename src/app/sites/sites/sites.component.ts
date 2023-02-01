@@ -33,6 +33,9 @@ export class SitesComponent implements OnInit {
     siteAddress: null,
     siteManager: null,
     siteManagerNbr: null,
+    siteEmail: null,
+    depthSensor: null,
+    depthDrainage: null,
   };
 
   constructor(private siteService: SiteService,
@@ -86,53 +89,6 @@ export class SitesComponent implements OnInit {
     this.sensors = [];
   }
 
-
-  // onPumpSelect(item: any) {
-  //   this.pumpService.getPumpById(item.id).subscribe((x) => {
-  //     this.pumps.push(x)
-  //   })
-  //
-  // }
-  //
-  // onPumpDeSelect(item: any) {
-  //   this.pumps = this.pumps.filter((x) => x.id != item.id)
-  // }
-  //
-  // onSelectAllPumps(items: any) {
-  //   items.map((x: Sensor) => {
-  //     this.pumpService.getPumpById(x.id).subscribe((x) => {
-  //       this.pumps.push(x)
-  //     })
-  //   })
-  // }
-  //
-  // onUnSelectAllPumps() {
-  //   this.pumps = [];
-  // }
-  //
-  // onSelectAllOldPumps(items: any) {
-  //   items.map((x: Sensor) => {
-  //     this.oldPumpService.getOldPumpById(x.id).subscribe((x) => {
-  //       this.oldPumps.push(x)
-  //     })
-  //   })
-  // }
-  //
-  // onUnSelectAllOldPumps() {
-  //   this.oldPumps = [];
-  // }
-  //
-  // onOldPumpSelect(item: any) {
-  //   this.oldPumpService.getOldPumpById(item.id).subscribe((x) => {
-  //     this.oldPumps.push(x)
-  //   })
-  //
-  // }
-  //
-  // onOldPumpDeSelect(item: any) {
-  //   this.oldPumps = this.oldPumps.filter((x) => x.id != item.id)
-  // }
-
   onDeleteSite(site: Site) {
 
     site.sensors.map((x) => {
@@ -160,8 +116,9 @@ export class SitesComponent implements OnInit {
     this.site.siteManager = this.form.siteManager;
     this.site.siteManagerNbr = this.form.siteManagerNbr;
     this.site.address = this.form.siteAddress;
-    this.site.drainageDepth = 0;
-    this.site.sensorDepth = 0;
+    this.site.email = this.form.siteEmail;
+    this.site.drainageDepth = this.form.depthDrainage;
+    this.site.sensorDepth = this.form.depthSensor;
 
     this.siteService.createSite(this.site).subscribe((x) => {
       if (this.sensors != []) {

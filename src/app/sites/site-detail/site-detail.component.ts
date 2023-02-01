@@ -39,6 +39,9 @@ export class SiteDetailComponent implements OnInit {
     siteAddress: null,
     siteManager: null,
     siteManagerNbr: null,
+    siteEmail: null,
+    depthSensor: null,
+    depthDrainage: null,
   };
 
   constructor(
@@ -168,6 +171,15 @@ export class SiteDetailComponent implements OnInit {
       : null;
     this.form.siteManagerNbr != null
       ? (this.site.siteManagerNbr = this.form.siteManagerNbr)
+      : null;
+    this.form.email != null
+      ? (this.site.email = this.form.siteEmail)
+      : null;
+    this.form.depthDrainage != null
+      ? (this.site.drainageDepth = this.form.depthDrainage)
+      : null;
+    this.form.depthSensor != null
+      ? (this.site.sensorDepth = this.form.depthSensor)
       : null;
     if (this.sensors != []) {
       this.sensors.map((s) => {

@@ -36,30 +36,17 @@
                   <div class="flex flex-col items-center m-1">
                     <label
                       class="block text-gray-700 text-sm font-bold mb-2"
-                      for="sensor"
-                    >Depth sensor (m)</label
+                    >Depth sensor (cm)</label
                     >
-                    <input
-                      class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      id="sensor"
-                      type="text"
-                      placeholder="m"
-                      value="{{ site.sensorDepth }}"
-                    />
+                    <span class="border-b-2 border-gray-200">  {{ site.sensorDepth }}</span>
                   </div>
                   <div class="flex flex-col items-center m-1">
                     <label
-                      class="block text-gray-700 text-sm font-bold mb-2"
-                      for="drainage"
-                    >Depth of drainage above taw (m)</label
-                    >
-                    <input
-                      class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      id="drainage"
-                      type="text"
-                      placeholder="m"
-                      value="{{ site.drainageDepth }}"
-                    />
+                      class="block text-gray-700 text-sm font-bold mb-2">Depth of drainage above taw (cm)</label>
+                    <span
+                      class="border-b-2 border-gray-200"
+
+                    >{{ site.drainageDepth }}</span>
                   </div>
                 </div>
                 <div class="grid grid-cols-3">
@@ -124,6 +111,29 @@
               <input name="siteManagerNbr" id="siteManagerNbr" [(ngModel)]="form.siteManagerNbr"
                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                      placeholder="{{site.siteManagerNbr}}">
+            </div>
+            <div>
+              <label for="siteManagerNbr" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Manager
+                email</label>
+              <input name="siteEmail" id="siteEmail" [(ngModel)]="form.siteEmail"
+                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                     placeholder="{{site.email}}" required>
+            </div>
+            <div>
+              <label for="siteManagerNbr" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sensor
+                depth
+              </label>
+              <input name="depthSensor" id="depthSensor" [(ngModel)]="form.depthSensor"
+                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                     placeholder="{{site.sensorDepth}}" required>
+            </div>
+            <div>
+              <label for="siteManagerNbr" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Drainage
+                depth
+              </label>
+              <input name="depthDrainage" id="depthDrainage" [(ngModel)]="form.depthDrainage"
+                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                     placeholder="{{site.drainageDepth}}" required>
             </div>
             <div>
               <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Site sensors</p>
