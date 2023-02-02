@@ -33,6 +33,9 @@ export class UserService {
     return this.httpClient.get<UserData>(`${this.url}${email}`);
   }
 
+  updateUser(id: number, user: UserData): Observable<UserData> {
+    return this.httpClient.put<UserData>(`${this.url}${id}`, JSON.stringify(user), this.HTTPOptions);
+  }
 
   // getPumpById(id: number): Observable<Pump> {
   //   return this.httpClient.get<Pump>(`${this.url}${id}`);
@@ -42,9 +45,7 @@ export class UserService {
   //   return this.httpClient.post<Pump>(`${this.url}`, JSON.stringify(pump), this.HTTPOptions);
   // }
   //
-  // updatePump(id: number, pump: Pump): Observable<Pump> {
-  //   return this.httpClient.put<Pump>(`${this.url}${id}`, JSON.stringify(pump), this.HTTPOptions);
-  // }
+
   //
   // deletePump(id: number): Observable<Pump> {
   //   return this.httpClient.delete<Pump>(`${this.url}${id}`);

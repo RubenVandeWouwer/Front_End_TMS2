@@ -58,6 +58,7 @@ export class SiteDetailComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getUserByEmail(JSON.parse(localStorage.getItem('user')!).email).subscribe((x) => {
       this.isAdmin = x.isAdmin;
+      console.log("testing",this.isAdmin)
     })
     this.dataLists = [];
     const siteId = this.route.snapshot.paramMap.get('id');

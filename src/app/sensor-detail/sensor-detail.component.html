@@ -149,7 +149,7 @@
                     class="mx-5"
                     (onDeletePump)="deleteOldPump(pump)"
                     *ngFor="let pump of sensor.oldPumps"
-                    [oldPump]="pump"
+                    [oldPump]="pump" [isAdmin]="isAdmin"
                   ></app-pump>
                 </div>
               </div>
