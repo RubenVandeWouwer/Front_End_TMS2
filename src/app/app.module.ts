@@ -9,10 +9,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SitesModule} from "./sites/sites.module";
 import { BackgroundComponent } from './background/background.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { SensorlogComponent } from './sensorlog/sensorlog.component';
-
 import { LogCollComponent } from './log-coll/log-coll.component';
-
 import {AngularFireModule} from "@angular/fire/compat";
 import {environment} from "../environments/environment";
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
@@ -36,7 +33,6 @@ import { WhitePageComponent } from './white-page/white-page.component';
     HomeComponent,
     MenuComponent,
     BackgroundComponent,
-    SensorlogComponent,
     LogCollComponent,
     DashboardComponent,
     SignInComponent,
