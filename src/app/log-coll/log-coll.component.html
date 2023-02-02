@@ -5,7 +5,7 @@
         <div class="md:mx-6">
           <div class="gradient-form">
             <div class="flex justify-between mx-16 mb-10">
-              <div *ngIf="site; else notassigned" class="w-full mx-5 vw">
+              <div *ngIf="site; else notassigned" class="w-full mx-auto w-full">
               <div>
                 <div class="relative overflow-x-auto pt-5">
                   <div class="text-lg pb-4">{{site.name}}</div>
@@ -19,12 +19,14 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let log of logList" class="bg-white border-b">
-                        <th
+                        <td
                           scope="row"
                           class="px-6 py-4 font-medium text-gray-700 whitespace-nowrap"
                         >
-                          {{ log.error }}
-                        </th>
+                          {{log.error.length > 75 ? (log.error | slice:0:75) : log.error}}
+                          <br>
+                          {{log.error.length > 75 ? (log.error | slice:75:5000) : null}}
+                        </td>
                         <td class="px-6 py-4">
                           {{ log.date | date : "dd/MM/yyyy hhumm" }}
                         </td>

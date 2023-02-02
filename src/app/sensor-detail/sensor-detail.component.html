@@ -93,7 +93,9 @@
                               scope="row"
                               class="px-6 py-4 font-medium text-gray-700 whitespace-nowrap"
                             >
-                              {{ log.error }}
+                              {{log.error.length > 75 ? (log.error | slice:0:75) : log.error}}
+                              <br>
+                              {{log.error.length > 75 ? (log.error | slice:75:5000) : null}}
                             </th>
                             <td class="px-6 py-4">
                               {{ log.date | date : "dd/MM/yyyy hhumm"}}
