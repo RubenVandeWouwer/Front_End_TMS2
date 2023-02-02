@@ -37,15 +37,17 @@ export class UserService {
     return this.httpClient.put<UserData>(`${this.url}${id}`, JSON.stringify(user), this.HTTPOptions);
   }
 
+  createUser(user: UserData): Observable<UserData> {
+    return this.httpClient.post<UserData>(`${this.url}`, JSON.stringify(user), this.HTTPOptions);
+  }
+
+    deleteUser(id: number): Observable<UserData> {
+    return this.httpClient.delete<UserData>(`${this.url}${id}`);
+  }
+
   // getPumpById(id: number): Observable<Pump> {
   //   return this.httpClient.get<Pump>(`${this.url}${id}`);
   // }
-  //
-  // createPump(pump: Pump): Observable<Pump> {
-  //   return this.httpClient.post<Pump>(`${this.url}`, JSON.stringify(pump), this.HTTPOptions);
-  // }
-  //
-
   //
   // deletePump(id: number): Observable<Pump> {
   //   return this.httpClient.delete<Pump>(`${this.url}${id}`);
