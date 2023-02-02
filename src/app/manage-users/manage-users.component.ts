@@ -1,21 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../shared/services/user-service.service';
-import { UserData } from '../models/user'
+import { UserData } from '../models/user';
 
 @Component({
   selector: 'app-manage-users',
   templateUrl: './manage-users.component.html',
-  styleUrls: ['./manage-users.component.css']
+  styleUrls: ['./manage-users.component.css'],
 })
 export class ManageUsersComponent implements OnInit {
+  users = [] as UserData[];
+  user = {} as UserData;
+  email!: string;
+  name!: string;
 
-  users= [] as UserData[];
-  user!: UserData;
-
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.getAllUsers()
+    this.getAllUsers();
   }
 
   getAllUsers() {
@@ -24,19 +25,23 @@ export class ManageUsersComponent implements OnInit {
     });
   }
 
-  verifyUser(email: string){
-    console.log("make user verified.")
-    this.userService.getUserByEmail(email).subscribe((result) => {
-      this.user = result;
-      this.user.isVerified = true;
-      this.userService.updateUser(this.user.id, this.user).subscribe(() => {
-        this.ngOnInit();
-      });
+  verifyNewUser() {
+    alert('Email is being processed. This can take a minute.');
+    console.log('Add User');
+    console.log(this.email);
+    this.user.email = this.email;
+    this.user.isAdmin = false;
+    this.user.name = this.name;
+    console.log(this.user);
+    this.userService.createUser(this.user).subscribe(() => {
+      this.ngOnInit();
+      this.email = '';
+      this.name = '';
     });
   }
 
-  makeAdmin(email: string){
-    console.log("make user admin.")
+  makeAdmin(email: string) {
+    console.log('make user admin.');
     this.userService.getUserByEmail(email).subscribe((result) => {
       this.user = result;
       this.user.isAdmin = true;
@@ -56,14 +61,9 @@ export class ManageUsersComponent implements OnInit {
     });
   }
 
-  unVerify(email: string){
-    this.userService.getUserByEmail(email).subscribe((result) => {
-      this.user = result;
-      this.user.isVerified = false;
-      this.userService.updateUser(this.user.id, this.user).subscribe(() => {
-        this.ngOnInit();
-      });
+  deleteUser(id: number) {
+    this.userService.deleteUser(id).subscribe(() => {
+      this.ngOnInit();
     });
   }
-
 }
