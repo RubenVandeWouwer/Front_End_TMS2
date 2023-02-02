@@ -38,7 +38,7 @@ export class AuthService {
       .then((result) => {
         this.ngZone.run(() => {
           setTimeout(() => {
-            this.router.navigate(['verified']);
+            this.router.navigate(['splashScreen']);
           },200)
         });
         this.SetUserData(result.user);

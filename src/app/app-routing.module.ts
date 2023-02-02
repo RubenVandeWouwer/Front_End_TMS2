@@ -17,12 +17,15 @@ import {VerifyEmailComponent} from "./components/verify-email/verify-email.compo
 import {AuthGuard} from "./shared/guard/auth.guard";
 import {VerifiedComponent} from "./verified/verified.component";
 import {IsVerifiedGuard} from "./shared/guard/is-verified.guard";
-import { ManageUsersComponent } from './manage-users/manage-users.component';
+import {ManageUsersComponent} from './manage-users/manage-users.component';
+import {WhitePageComponent} from "./white-page/white-page.component";
+import {LoginGuard} from "./shared/guard/login.guard";
 
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', component: HomeComponent, canActivate: [LoginGuard]},
   {path: 'sites', component: SitesComponent, canActivate: [AuthGuard, IsVerifiedGuard]},
+  {path: 'splashScreen', component: WhitePageComponent},
   {path: 'verified', component: VerifiedComponent},
   {path: 'sites/details', component: SiteDetailComponent, canActivate: [AuthGuard, IsVerifiedGuard]},
   {path: 'site/:id', component: SiteDetailComponent, canActivate: [AuthGuard, IsVerifiedGuard]},

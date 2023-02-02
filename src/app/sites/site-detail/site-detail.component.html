@@ -42,7 +42,7 @@
                   </div>
                   <div class="flex flex-col items-center m-1">
                     <label
-                      class="block text-gray-700 text-sm font-bold mb-2">Depth of drainage above taw (cm)</label>
+                      class="block text-gray-700 text-sm font-bold mb-2">Drainage depth to reach (cm)</label>
                     <span
                       class="border-b-2 border-gray-200"
 
@@ -51,8 +51,8 @@
                 </div>
                 <div class="grid grid-cols-3">
                   <app-sensor class="mx-2" (onDeleteSensor)="deleteSensor(sensor)"
-                    *ngFor="let sensor of site.sensors"
-                    [sensor]="sensor" [isAdmin]="isAdmin"
+                              *ngFor="let sensor of site.sensors"
+                              [sensor]="sensor" [isAdmin]="isAdmin"
                   ></app-sensor>
                 </div>
               </div>
