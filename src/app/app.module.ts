@@ -27,6 +27,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { VerifiedComponent } from './verified/verified.component';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
+import { WhitePageComponent } from './white-page/white-page.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { ManageUsersComponent } from './manage-users/manage-users.component';
     VerifyEmailComponent,
     VerifiedComponent,
     ManageUsersComponent,
+    WhitePageComponent,
 
   ],
   imports: [
