@@ -24,7 +24,7 @@
        [ngClass]="toggleModal ? 'block' : 'hidden'">
     <div class="relative w-full h-full max-w-md md:h-auto">
       <!-- Modal content -->
-      <div class="relative bg-white rounded-lg shadow">
+      <div class="relative bg-slate-100 rounded-lg shadow">
         <button type="button"
                 class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
                 data-modal-hide="authentication-modal" (click)="toggleModal = !toggleModal">
@@ -41,10 +41,10 @@
           <form class="space-y-6" action="#">
             <div>
               <label for="siteName" class="block mb-2 text-sm font-medium text-gray-900 ">Site
-                name</label>
+                code</label>
               <input name="siteName" id="siteName" [(ngModel)]="form.siteName"
                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                     placeholder="site name" required>
+                     placeholder="site code" required>
             </div>
             <div>
               <label for="siteAddress" class="block mb-2 text-sm font-medium text-gray-900 ">Site
@@ -75,14 +75,14 @@
                      placeholder="manager email" required>
             </div>
             <div>
-              <label for="siteManagerNbr" class="block mb-2 text-sm font-medium text-gray-900 ">Sensor depth
+              <label for="siteManagerNbr" class="block mb-2 text-sm font-medium text-gray-900 ">Sensor depth (cm)
                 </label>
               <input name="depthSensor" id="depthSensor" [(ngModel)]="form.depthSensor"
                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                      placeholder="sensor depth" required>
             </div>
             <div>
-              <label for="siteManagerNbr" class="block mb-2 text-sm font-medium text-gray-900 ">Drainage depth
+              <label for="siteManagerNbr" class="block mb-2 text-sm font-medium text-gray-900 ">Drainage depth above sensor depth (cm)
                 </label>
               <input name="depthDrainage" id="depthDrainage" [(ngModel)]="form.depthDrainage"
                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "

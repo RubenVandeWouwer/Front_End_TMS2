@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import * as apex from 'ng-apexcharts';
 import {OldPump} from '../models/oldPump';
 import {OldPumpService} from '../services/old-pump.service';
-import { UserService } from '../shared/services/user-service.service';
+import {UserService} from '../shared/services/user-service.service';
 
 @Component({
   selector: 'app-pump-detail',
@@ -44,7 +44,7 @@ export class OldPumpDetailComponent implements OnInit {
       this.intervalId = setInterval(() => {
         this.getOldPumpData(+pumpId);
         this.buildChart();
-      }, 10000);
+      }, 20000);
     }
   }
 
@@ -71,7 +71,12 @@ export class OldPumpDetailComponent implements OnInit {
       this.pump.isUserInput = false;
       this.pump.isDefective = false;
       this.pump.repair = true;
-      this.oldPumpService.updateOldPump(this.pump.id, this.pump).subscribe();
+      this.userService.getUserByEmail(JSON.parse(localStorage.getItem('user')!).email).subscribe((user) => {
+        this.pump.user = user.name;
+        this.oldPumpService.updateOldPump(this.pump.id, this.pump).subscribe(() =>
+          this.ngOnInit());
+      })
+
     }
   }
 
@@ -79,7 +84,11 @@ export class OldPumpDetailComponent implements OnInit {
     this.pump.isUserInput = true;
     this.pump.isDefective = false;
     this.pump.inputValue = !this.pump.inputValue;
-    this.oldPumpService.updateOldPump(this.pump.id, this.pump).subscribe();
+    this.userService.getUserByEmail(JSON.parse(localStorage.getItem('user')!).email).subscribe((user) => {
+      this.pump.user = user.name;
+      this.oldPumpService.updateOldPump(this.pump.id, this.pump).subscribe(() =>
+        this.ngOnInit());
+    })
   }
 
   ngOnDestroy() {

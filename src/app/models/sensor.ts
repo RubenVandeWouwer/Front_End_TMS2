@@ -15,4 +15,5 @@ export interface Sensor {
   oldPumps: OldPump[];
   siteChange: boolean;
   siteDelete: boolean;
+  user: string;
 }

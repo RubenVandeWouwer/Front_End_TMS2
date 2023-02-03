@@ -13,6 +13,7 @@ export interface Pump {
   repair: boolean;
   siteChange: boolean;
   siteDelete: boolean;
+  user: string;
 }
 
 

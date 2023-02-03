@@ -90,20 +90,27 @@ export class SitesComponent implements OnInit {
   }
 
   onDeleteSite(site: Site) {
-
-    site.sensors.map((x) => {
-      x.pumps.map((x) => {
-        x.sensorId = null;
-        this.pumpService.updatePump(x.id, x).subscribe();
+    this.userService.getUserByEmail(JSON.parse(localStorage.getItem('user')!).email).subscribe((user) => {
+      site.sensors.map((x) => {
+        if (x.pumps != null) {
+          x.pumps.map((x) => {
+            x.siteDelete = true;
+            x.user = user.name;
+            this.pumpService.updatePump(x.id, x).subscribe();
+          })
+        }
+        if (x.oldPumps != null) {
+          x.oldPumps.map((x) => {
+            x.siteDelete = true;
+            x.user = user.name;
+            this.oldPumpService.updateOldPump(x.id, x).subscribe();
+          })
+        }
+        x.siteDelete = true;
+        x.user = user.name;
+        this.sensorService.updateSensor(x.id, x).subscribe();
       })
-      x.oldPumps.map((x) => {
-        x.sensorId = null;
-        this.oldPumpService.updateOldPump(x.id, x).subscribe();
-      })
-      x.siteId = null;
-      this.sensorService.updateSensor(x.id, x).subscribe();
     })
-
     setTimeout(() => {
       this.siteService.deleteSite(site.id).subscribe(() => {
         this.sites$ = this.siteService.getSites();
@@ -122,10 +129,13 @@ export class SitesComponent implements OnInit {
 
     this.siteService.createSite(this.site).subscribe((x) => {
       if (this.sensors != []) {
-        this.sensors.map((s) => {
-          s.siteChange = true;
-          s.siteId = x.id;
-          this.sensorService.updateSensor(s.id, s).subscribe();
+        this.userService.getUserByEmail(JSON.parse(localStorage.getItem('user')!).email).subscribe((user) => {
+          this.sensors.map((s) => {
+            s.siteChange = true;
+            s.siteId = x.id;
+            s.user = user.name;
+            this.sensorService.updateSensor(s.id, s).subscribe();
+          })
         })
       }
       this.toggleModal = !this.toggleModal;
