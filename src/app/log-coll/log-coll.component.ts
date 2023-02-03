@@ -72,7 +72,7 @@ export class LogCollComponent implements OnInit {
               this.logList.forEach((item) => {
                 item.date = new Date(item.date);
               });
-              this.logList.sort((a, b) => a.date.getTime() - b.date.getTime());
+              this.logList.sort((a, b) => a.date.getTime() - b.date.getTime()).reverse();
             }, 200)
           })
         });
