@@ -41,15 +41,7 @@ export class UserService {
     return this.httpClient.post<UserData>(`${this.url}`, JSON.stringify(user), this.HTTPOptions);
   }
 
-    deleteUser(id: number): Observable<UserData> {
+  deleteUser(id: number): Observable<UserData> {
     return this.httpClient.delete<UserData>(`${this.url}${id}`);
   }
-
-  // getPumpById(id: number): Observable<Pump> {
-  //   return this.httpClient.get<Pump>(`${this.url}${id}`);
-  // }
-  //
-  // deletePump(id: number): Observable<Pump> {
-  //   return this.httpClient.delete<Pump>(`${this.url}${id}`);
-  // }
 }

@@ -9,7 +9,7 @@ import {DataList} from '../../models/DataList';
 import {IDropdownSettings} from 'ng-multiselect-dropdown';
 import {PumpService} from '../../services/pump.service';
 import {OldPumpService} from '../../services/old-pump.service';
-import { UserService } from 'src/app/shared/services/user-service.service';
+import {UserService} from 'src/app/shared/services/user-service.service';
 
 @Component({
   selector: 'app-site-detail',
@@ -17,7 +17,7 @@ import { UserService } from 'src/app/shared/services/user-service.service';
   styleUrls: ['./site-detail.component.css'],
 })
 export class SiteDetailComponent implements OnInit {
-  site!: Site;
+  site = {} as Site;
   series!: apex.ApexAxisChartSeries;
   chart!: apex.ApexChart;
   title!: apex.ApexTitleSubtitle;
@@ -58,7 +58,6 @@ export class SiteDetailComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getUserByEmail(JSON.parse(localStorage.getItem('user')!).email).subscribe((x) => {
       this.isAdmin = x.isAdmin;
-      console.log("testing",this.isAdmin)
     })
     this.dataLists = [];
     const siteId = this.route.snapshot.paramMap.get('id');
@@ -99,7 +98,6 @@ export class SiteDetailComponent implements OnInit {
         });
       });
       this.title = {text: this.site.name};
-      console.log(this.dataLists);
       this.dataLists.map((x) => {
         this.series.push(x);
       });
@@ -137,16 +135,24 @@ export class SiteDetailComponent implements OnInit {
   deleteSensor(sensor: Sensor) {
     if (confirm(`Do you want to delete ${sensor.name}?`)) {
       if (sensor.pumps != []) {
-        sensor.pumps.map((x) => {
-          x.siteDelete = true;
-          this.pumpService.updatePump(x.id, x).subscribe();
-        });
+        this.userService.getUserByEmail(JSON.parse(localStorage.getItem('user')!).email).subscribe((user) => {
+          sensor.pumps.map((x) => {
+            x.siteDelete = true;
+            x.user = user.name;
+            this.pumpService.updatePump(x.id, x).subscribe();
+          });
+        })
+
       }
       if (sensor.oldPumps != []) {
-        sensor.oldPumps.map((x) => {
-          x.siteDelete = true;
-          this.oldPumpService.updateOldPump(x.id, x).subscribe();
-        });
+        this.userService.getUserByEmail(JSON.parse(localStorage.getItem('user')!).email).subscribe((user) => {
+          sensor.oldPumps.map((x) => {
+            x.siteDelete = true;
+            x.user = user.name;
+            this.oldPumpService.updateOldPump(x.id, x).subscribe();
+          });
+        })
+
       }
       setTimeout(() => {
         sensor.siteDelete = true;
@@ -182,11 +188,14 @@ export class SiteDetailComponent implements OnInit {
       ? (this.site.sensorDepth = this.form.depthSensor)
       : null;
     if (this.sensors != []) {
-      this.sensors.map((s) => {
-        s.siteId = this.site.id;
-        s.siteChange = true;
-        this.sensorService.updateSensor(s.id, s).subscribe();
-      });
+      this.userService.getUserByEmail(JSON.parse(localStorage.getItem('user')!).email).subscribe((user) => {
+        this.sensors.map((s) => {
+          s.siteId = this.site.id;
+          s.siteChange = true;
+          s.user = user.name;
+          this.sensorService.updateSensor(s.id, s).subscribe();
+        });
+      })
       this.siteService.updateSite(this.site.id, this.site).subscribe(() => {
         this.ngOnInit();
         this.toggleModal = !this.toggleModal;

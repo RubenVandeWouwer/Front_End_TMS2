@@ -13,6 +13,7 @@ export interface OldPump {
   repair: Boolean;
   siteChange: boolean;
   siteDelete: boolean;
+  user: string;
 }
 
 

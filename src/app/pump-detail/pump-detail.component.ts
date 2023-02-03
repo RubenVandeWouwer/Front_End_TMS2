@@ -4,7 +4,7 @@ import {Pump} from '../models/pump';
 import {PumpService} from '../services/pump.service';
 import {SiteService} from '../services/site.service';
 import * as apex from 'ng-apexcharts';
-import { UserService } from '../shared/services/user-service.service';
+import {UserService} from '../shared/services/user-service.service';
 
 @Component({
   selector: 'app-pump-detail',
@@ -41,7 +41,7 @@ export class PumpDetailComponent implements OnInit {
       this.intervalId = setInterval(() => {
         this.getPumpData(+pumpId)
         this.buildChart();
-      }, 10000);
+      }, 20000);
     }
     this.buildChart();
     console.log('Builded chart');
@@ -71,18 +71,25 @@ export class PumpDetailComponent implements OnInit {
       this.pump.isDefective = false;
       this.pump.repair = true;
       this.pump.inputValue = 0.0;
-      this.pumpService.updatePump(this.pump.id, this.pump).subscribe(() => {
-        this.ngOnInit();
-      });
+      this.userService.getUserByEmail(JSON.parse(localStorage.getItem('user')!).email).subscribe((user) => {
+        this.pump.user = user.name;
+        this.pumpService.updatePump(this.pump.id, this.pump).subscribe(() => {
+          this.ngOnInit();
+        });
+      })
     }
   }
 
   updateInputValue() {
     this.pump.isUserInput = true;
     this.pump.isDefective = false;
-    this.pumpService.updatePump(this.pump.id, this.pump).subscribe(() => {
-      this.ngOnInit();
-    });
+    this.userService.getUserByEmail(JSON.parse(localStorage.getItem('user')!).email).subscribe((user) => {
+      this.pump.user = user.name;
+      this.pumpService.updatePump(this.pump.id, this.pump).subscribe(() => {
+        this.ngOnInit();
+      });
+    })
+
   }
 
   ngOnDestroy() {
