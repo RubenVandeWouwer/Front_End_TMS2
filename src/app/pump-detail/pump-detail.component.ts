@@ -35,7 +35,6 @@ export class PumpDetailComponent implements OnInit {
       this.isAdmin = x.isAdmin;
     })
     const pumpId = this.route.snapshot.paramMap.get('id');
-    console.log(this.pumpId);
     if (pumpId != null) {
       this.getPumpData(+pumpId);
       this.intervalId = setInterval(() => {
@@ -44,7 +43,6 @@ export class PumpDetailComponent implements OnInit {
       }, 20000);
     }
     this.buildChart();
-    console.log('Builded chart');
   }
 
   getPumpData(pumpId: number) {
@@ -55,7 +53,6 @@ export class PumpDetailComponent implements OnInit {
       result.pumpValues.map((x) => {
         this.pumpChart.push(x.value);
       });
-      console.log(this.pumpChart);
       this.title = {text: this.pump.name};
     });
   }

@@ -34,7 +34,6 @@ export class ManageUsersComponent implements OnInit {
     this.user.email = this.form.email;
     this.user.isAdmin = false;
     this.user.name = this.form.name;
-    console.log(this.user)
     this.userService.createUser(this.user).subscribe(() => {
       this.ngOnInit();
       this.form = {};

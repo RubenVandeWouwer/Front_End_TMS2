@@ -55,7 +55,6 @@ export class OldPumpDetailComponent implements OnInit {
       result.oldPumpValues.map((x) => {
         this.pumpChart.push(x.value);
       });
-      console.log(this.pump.name);
       this.title = {text: this.pump.name};
     });
   }
